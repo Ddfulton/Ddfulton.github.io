@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Payments</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <!-- Favicons -->
+    <link href="assets/img/favicon.ico" rel="icon">
+    <link href="assets/img/favicon.ico" rel="apple-touch-icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <!-- =======================================================
+  * Template Name: BizLand - v3.3.0
+  * Template URL: https://bootstrapmade.com/bizland-bootstrap-business-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+    <!-- ======= Top Bar ======= -->
+    <section id="topbar" class="d-flex align-items-center">
+        <div class="container d-flex justify-content-center justify-content-md-between">
+            <!--  <div class="contact-info d-flex align-items-center">
+        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@example.com</a></i>
+        <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i>
+      </div> -->
+            <!--   <div class="social-links d-none d-md-flex align-items-center">
+        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+      </div> -->
+        </div>
+    </section>
+    <!-- ======= Header ======= -->
+    <header id="header" class="d-flex align-items-center">
+        <div class="container d-flex align-items-center justify-content-between">
+            <h1 class="logo"><a href="index.html"> FinTechs and Incumbents<span>.</span></a></h1>
+            <nav id="navbar" class="navbar">
+                <ul id="navbar-master">
+                    <script src="navbar.js"></script>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+        </div>
+    </header>
+    <main id="main" data-aos="fade-up">
+        <!-- ======= Breadcrumbs ======= -->
+        <section class="breadcrumbs">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2>Payments</h2>
+                    <ol>
+                        <li><a href="index.html">Home</a></li>
+                        <li>Business Models</li>
+                        <li>Payments</li>
+                    </ol>
+                </div>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="intro-tab" data-bs-toggle="tab" data-bs-target="#intro" type="button" role="tab" aria-controls="intro" aria-selected="true">Intro</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="second-tab" data-bs-toggle="tab" data-bs-target="#second" type="button" role="tab" aria-controls="second" aria-selected="false">Adyen</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="third-tab" data-bs-toggle="tab" data-bs-target="#third" type="button" role="tab" aria-controls="third" aria-selected="false">Stripe</button>
+                    </li>
+<!--                     <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="fourth-tab" data-bs-toggle="tab" data-bs-target="#fourth" type="button" role="tab" aria-controls="fourth" aria-selected="false">Affirm</button>
+                    </li>
+ -->                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="fifth-tab" data-bs-toggle="tab" data-bs-target="#fifth" type="button" role="tab" aria-controls="fifth" aria-selected="false">Square</button>
+                    </li>
+<!--                     <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="sixth-tab" data-bs-toggle="tab" data-bs-target="#sixth" type="button" role="tab" aria-controls="sixth" aria-selected="false">PayPal</button>
+                    </li>
+ -->                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="seventh-tab" data-bs-toggle="tab" data-bs-target="#seventh" type="button" role="tab" aria-controls="seventh" aria-selected="false">AliPay</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="eighth-tab" data-bs-toggle="tab" data-bs-target="#eighth" type="button" role="tab" aria-controls="eighth" aria-selected="false">Wise</button>
+                    </li>
+<!--                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="verdict-tab" data-bs-toggle="tab" data-bs-target="#verdict" type="button" role="tab" aria-controls="verdict" aria-selected="false">Verdict</button> 
+                        --->
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="intro" role="tabpanel" aria-labelledby="intro-tab">
+                        <h1>Payments</h1>
+                        <div class="row">
+                          <ul>
+                          <li><p>The payment market is divided into two markets: consumer and retail & wholesale and corporate payment.</p></li>
+                          <li><p>Consumer and retail payment involve mobile wallets, peer-to-peer (P2P) mobile payments, foreign exchanges and remittances, real time payments and digital currency solutions.</p></li>
+                          <li><p>Payments are one of the most used retail financial services on a day-to-day basis and one of least regulated financial services</p></li>
+                          <li><p>Improved customer experience: more speed, convenience and multi-channel accessibility.</p></li>
+                          <li><p>Payments are relatively simple compared to other financial products and services: they are able to acquire customers rapidly at lower costs, and are one of the fastest moving in terms of innovation and adoption of new payment capabilities.</p></li>
+                          </ul>  
+                            <img src="assets/img/payments/Fintech 2.0.pptx.jpg" />
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="second" role="tabpanel" aria-labelledby="second-tab">
+                        <img src="assets/img/adyen.png" width="300" />
+                        <div class="row">
+                            <!-- ***CHANGE*** add written content  -->
+                            <div class="col-md-8">
+                                <br>
+                            <table class="table table-primary">
+                                    <thead>
+                                        <tr>
+                                            <td>Capabilities and Tech</td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><b>Capabilities</b></td>
+                                            <td>
+                                                <li>Adyen capabilities</li>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Channels</b></td>
+                                            <td>
+                                                <li>Behind-the-scenes payment processor for </li>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Tech</b></td>
+                                            <td>
+                                                <li>In-house technology (this is perhaps their strongest distinguishing feature)</li>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <br>
+                                <p>Adyen N.V is a payment platform in Europe, North America, the Asia Pacific, Latin America, and internationally. The company’s platform integrates payments stack that include gateway, risk management, processing, issuing, acquiring, and settlement services. Adyen Issuing was launched in 2019 and enables merchants to provide virtual and physical cards to their customers which gives them the ability to issue cards across their various sales channels. In 2017, the company obtained its banking license within the EU and since last year in the US. Also, Adyen offers a back-end infrastructure for authorizing payments across merchants’ sales channels, as well as online, mobile, in-store, and APIs. The company’s platform services a range of merchants across various verticals, connecting them directly to Visa, Mastercard, and other payment methods and providing data insights. Adyen N.V. was incorporated in 2006 and is headquartered in Amsterdam, the Netherlands. The company now has more than 3,500+ clients and is listed on Euronext stock exchange.
+                                     </p>
+
+                                <br>
+                                <img class="mx-auto d-block" src="assets/img/Adyen-VC.png" width="800"/>
+
+                                <br>     
+                                <p>The companies’ revenues grew exponentially since its incorporation in 2006 –counting more than €3.641bn in FY2020 (+700%) and 500% profit growth in the last five years. In H1 2021, Adyen processed a payment volume of over €216bn (67% higher than in the previous year), net sales of €445mn (46% higher than in the previous year), EBITDA of €272mn (65% more than in the previous year) and an EBITDA margin of 61% as a result of strong net sales growth coupled with the operational scalability of the Adyen platform. The free cash flow conversion rate was 90% and capital expenditure was 5% of net sales (in H1 2021). It tremendously profited from rising e-commerce adoption. One of its distinguishing features is that it pursues a single platform strategy and does not rely on any third-party system besides card networks such as Visa and Mastercard. </p>
+                                <p>Not only Adyen recognized the enormous potential of payment processors – Paypal, Square and Stripe, as one of the largest players are increasingly attacking Adyen. One of the drawbacks of Adyen is that the company is 100% reliant on payment processing.</p>
+                            </div>
+                            <div class="col-md-4">
+                                <table class="table table-primary" id="adyen-facts">
+                                    <thead>
+                                        <tr>
+                                            <td>Quick Facts 2020</td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <!--<tbody>
+                                        <tr>
+                                            <td>Valuation</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Net Income</td>
+                                            <td>€261M</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Employees</td>
+                                            <td>2300</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Customers</td>
+                                            <td>3500</td>
+                                        </tr>
+				    </tbody> -->
+                                </table>
+                                <!-- ***CHANGE*** paste website into the href="______"  -->
+                                <a href="https://www.adyen.com/" target="_blank" class="btn btn-dark">Website</a><br><br>
+                                <!-- ***CHANGE***  past annual report link here. We can also set as uploadable file-->
+                                <a href="assets/files/Adyen-Annual-Report-2020.pdf" target="_blank" class="btn btn-dark" download>2020 Annual Report</a>
+
+                                <br><br>
+                                <!-- ***CHANGE***  upload pdf to assets/files and type file name here
+                                <a href="assets/files/" class="btn btn-dark" download>Download Our Full Report</a> -->
+                            </div>
+                            <br><br>
+                            <div class="row">
+                                <!-- ***CHANGE***  if images...upload img to assets/img and type file name here-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="fourth" role="tabpanel" aria-labelledby="fourth-tab">
+                        <img src="assets/img/affirm.jpeg" width="300" />
+                        <div class="row">
+                            <!-- ***CHANGE*** add written content  -->
+                            <div class="col-md-8">
+                                <p>
+                                    N26 was launched as an online digital bank in 2013 offering digital mobile banking solutions. It offers personal and business bank accounts, debit card services, sub accounts, free automated teller machine (ATM) withdrawals, foreign currency payment services, medical coverage, and insurance packages for work and travel. The company also provides biometric identifications, instant push notifications, and customer support services through chat and phone. It offers its services through mobile and web applications. The company was formerly known as Papayer GmbH. N26 GmbH was incorporated in 2013 and is based in Berlin, servicing over 7mn clients (as at January 2021) in 25 countries from eight global offices. It is regulated by the BaFin. N26 raised $470mn in its Series D funding round in 2019 at an implied valuation of $3.5bn. It raised a further $136mn at the same valuation in the first half of 2020. In total, N26 received €818.6mn over the course of its existence </p>
+                                <p>N26 was one of the first Fintech’s in Germany offering its customers a whole new banking experience. The company has a very strong customer growth reaching 7mn+ clients in January 2021. Its main target group consists of millennials and young professionals. Keeping that in mind, the company was quick to leverage its monetization potential by forming integration partnership with, for instance, WeWork, Lime, Zalando and Uber, etc. Early on, the company focused on marketing, branding and a unique and identifiable design. The company also regularly adds new features to the offering, such as insurance and deposits.
+                                </p>
+                                <p>Due to its strong focus on customer acquisition and continued high investments, the company still has not made any profit yet. Although N26 is profitable per customer, the company as a whole is still loss-making (€110mn in 2020 and €217mn in 2019). A large chunk of their income comes from fees from payment transactions and accounts. </p>
+                                <p>
+                                    N26 processes billions of euros in transactions per month, and many customers pay by card, which is a sales driver. However, the company needs to have active clients, now only 30 percent use it as their primary bank and 70 percent still have a free account.</p>
+                                <p>
+                                    N26’s USP definitely lies in its user design and experience. It sources all software externally. Therefore, N26’s risk of being completely reliant on software providers, like Mambu, who provides their core banking platform to them, is particularly high.</p>
+                                <p>
+                                    Moreover, the risk of money laundering and cyber attacks is higher than for traditional banks. One of N26’s founders Valentin Stalf explained in an interview with Handelsblatt: "we are the only German bank that operates across borders in many countries and in some other countries there is a higher level of fraud than in Germany,". At the same time, N26 also has to do more in the fight against criminals. "This year we are investing 25 to 30 million euros in fraud prevention alone."</p>
+                                <p>
+                                    Being one of the best-known neo banks in Germany and one of the largest fintech start-ups, it might not be surprising that the company is especially targeted by fraudsters. In mid-August it became known that criminals allegedly opened and used more than 1,000 accounts with N26. Most were used in so-called fake shops or fraudulent Ebay accounts. </p>
+                                <p>
+                                    In addition, the financial regulator Bafin is considering restricting new business from N26, as the Handelsblatt recently reported. The authority is disgruntled that N26 has still not remedied serious deficiencies in the organization or in the fight against money laundering and other illegal transactions. </p>
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <table class="table table-primary">
+                                    <thead>
+                                        <tr>
+                                            <td>Quick Facts 2020</td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Valuation</td>
+                                            <!-- ***CHANGE*** add valuation  -->
+                                            <td>$3.5B</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Revenue</td>
+                                            <!-- ***CHANGE*** add revenue  -->
+                                            <td>$XXM</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Employees</td>
+                                            <!-- ***CHANGE*** add employees  -->
+                                            <td>XXX</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Profitability</td>
+                                            <!-- ***CHANGE*** add profitability () is negative  -->
+                                            <td>($XXM)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- ***CHANGE*** paste website into the href="______"  -->
+                                <a href="https://www.affirm.com/home" target="_blank" class="btn btn-dark">Website</a><br><br>
+                                <!-- ***CHANGE***  past annual report link here. We can also set as uploadable file
+                                <a href="" class="btn btn-dark" download>2020 Annual Report</a>
+                                <br><br> -->
+                                <!-- ***CHANGE***  upload pdf to assets/files and type file name here
+                                <a href="assets/files/" class="btn btn-dark" download>Download Our Full Report</a> -->
+                            </div>
+                            <br><br>
+                            <div class="row">
+                                <!-- ***CHANGE***  if images...upload img to assets/img and type file name here-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="third" role="tabpanel" aria-labelledby="third-tab">
+                        <img src="assets/img/stripe.png" width="300" />
+                        <div class="row">
+                            <!-- ***CHANGE*** add written content  -->
+                            <div class="col-md-8">
+                                <br>
+                            <table class="table table-primary">
+                                    <thead>
+                                        <tr>
+                                            <td>Capabilities and Tech</td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><b>Capabilities</b></td>
+                                            <td>
+                                                <li>Stripe capabilities</li>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Channels</b></td>
+                                            <td>
+                                                <li>Stripe channels</li>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Tech</b></td>
+                                            <td>
+                                                <li>Stripe tech</li>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <br>
+                                <p>Stripe is a payment processor whose mission is to "increase the GDP of the internet". Basically, they make online payments as seamless as possible for both
+                                the customer and the merchant. In addition to making the online checkout process easy and more secure they have launched tons of products including risk, fraud, tax, invoicing, billing and in-person payments. The linchpin that keeps their entire operation going is the (fluctuating) ~3% transaction fee they take. Note this 3% includes the interchange, merchant and card network fees (part of Stripe's value prop is that they deal with all that stuff for you).</p>
+                                    <img class="mx-auto d-block" src="assets/img/stripe_vs_paypal.png" width="600"/>
+                                <p>Stripe is in many ways, a more modern and sleeker PayPal. If you have ever bought anything online and didn't use PayPal to check out, it is almost guaranteed that you used Stripe under the hood (the same can be said about Adyen). Stripe, with its strong Silicon Valley roots, is focused on innovating the entire payment processing experience for both merchant and customer. Adyen, in contrast, is ruthlessly focused on hyper-optimizing decline rates, card conversion and support for alternative payments. If you want to have a pleasant experience paying or taking payments, use Stripe. If you want to guarantee successful completion of payment and minimize decline rate for international transactions, use Adyen.</p>
+                            </div>
+                            <div class="col-md-4">
+                                <table class="table table-primary" id="stripe-facts">
+                                    <thead>
+                                        <tr>
+                                            <td>Quick Facts 2020</td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <!--<tbody>
+                                        <tr>
+                                            <td>Valuation</td>
+                                            <td>Approx $100B</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Revenue</td>
+                                            <td>$1B+</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Employees</td>
+                                            <td>Approx 5,000</td>
+                                        </tr>
+				    </tbody>-->
+                                </table>
+                                <!-- ***CHANGE*** paste website into the href="______"  -->
+                                <a href="https://stripe.com/" target="_blank" class="btn btn-dark">Website</a><br><br>
+                                <!-- ***CHANGE***  past annual report link here. We can also set as uploadable file
+                                <a href="" class="btn btn-dark" download>2020 Annual Report</a>
+                                <br><br>
+                                 ***CHANGE***  upload pdf to assets/files and type file name here
+                                <a href="" class="btn btn-dark" download>Download Our Full Report</a> -->
+                            </div>
+                            <br><br>
+                            <div class="row">
+                                <!-- ***CHANGE***  if images...upload img to assets/img and type file name here-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="fourth" role="tabpanel" aria-labelledby="fourth-tab">
+                        <img src="assets/img/affirm.png" width="300" />
+                        <div class="row">
+                            <!-- ***CHANGE*** add written content  -->
+                            <div class="col-md-8">
+                                <p>
+                                    N26 was launched as an online digital bank in 2013 offering digital mobile banking solutions. It offers personal and business bank accounts, debit card services, sub accounts, free automated teller machine (ATM) withdrawals, foreign currency payment services, medical coverage, and insurance packages for work and travel. The company also provides biometric identifications, instant push notifications, and customer support services through chat and phone. It offers its services through mobile and web applications. The company was formerly known as Papayer GmbH. N26 GmbH was incorporated in 2013 and is based in Berlin, servicing over 7mn clients (as at January 2021) in 25 countries from eight global offices. It is regulated by the BaFin. N26 raised $470mn in its Series D funding round in 2019 at an implied valuation of $3.5bn. It raised a further $136mn at the same valuation in the first half of 2020. In total, N26 received €818.6mn over the course of its existence </p>
+                                <p>N26 was one of the first Fintech’s in Germany offering its customers a whole new banking experience. The company has a very strong customer growth reaching 7mn+ clients in January 2021. Its main target group consists of millennials and young professionals. Keeping that in mind, the company was quick to leverage its monetization potential by forming integration partnership with, for instance, WeWork, Lime, Zalando and Uber, etc. Early on, the company focused on marketing, branding and a unique and identifiable design. The company also regularly adds new features to the offering, such as insurance and deposits.
+                                </p>
+                                <p>Due to its strong focus on customer acquisition and continued high investments, the company still has not made any profit yet. Although N26 is profitable per customer, the company as a whole is still loss-making (€110mn in 2020 and €217mn in 2019). A large chunk of their income comes from fees from payment transactions and accounts. </p>
+                                <p>
+                                    N26 processes billions of euros in transactions per month, and many customers pay by card, which is a sales driver. However, the company needs to have active clients, now only 30 percent use it as their primary bank and 70 percent still have a free account.</p>
+                                <p>
+                                    N26’s USP definitely lies in its user design and experience. It sources all software externally. Therefore, N26’s risk of being completely reliant on software providers, like Mambu, who provides their core banking platform to them, is particularly high.</p>
+                                <p>
+                                    Moreover, the risk of money laundering and cyber attacks is higher than for traditional banks. One of N26’s founders Valentin Stalf explained in an interview with Handelsblatt: "we are the only German bank that operates across borders in many countries and in some other countries there is a higher level of fraud than in Germany,". At the same time, N26 also has to do more in the fight against criminals. "This year we are investing 25 to 30 million euros in fraud prevention alone."</p>
+                                <p>
+                                    Being one of the best-known neo banks in Germany and one of the largest fintech start-ups, it might not be surprising that the company is especially targeted by fraudsters. In mid-August it became known that criminals allegedly opened and used more than 1,000 accounts with N26. Most were used in so-called fake shops or fraudulent Ebay accounts. </p>
+                                <p>
+                                    In addition, the financial regulator Bafin is considering restricting new business from N26, as the Handelsblatt recently reported. The authority is disgruntled that N26 has still not remedied serious deficiencies in the organization or in the fight against money laundering and other illegal transactions. </p>
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <table class="table table-primary">
+                                    <thead>
+                                        <tr>
+                                            <td>Quick Facts 2020</td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Valuation</td>
+                                            <!-- ***CHANGE*** add valuation  -->
+                                            <td>$3.5B</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Revenue</td>
+                                            <!-- ***CHANGE*** add revenue  -->
+                                            <td>$XXM</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Employees</td>
+                                            <!-- ***CHANGE*** add employees  -->
+                                            <td>XXX</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Profitability</td>
+                                            <!-- ***CHANGE*** add profitability () is negative  -->
+                                            <td>($XXM)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- ***CHANGE*** paste website into the href="______"  -->
+                                <a href="https://www.affirm.com/home" target="_blank" class="btn btn-dark">Website</a><br><br>
+                                <!-- ***CHANGE***  past annual report link here. We can also set as uploadable file-->
+                                <a href="" class="btn btn-dark" download>2020 Annual Report</a>
+                                <br><br>
+                                <!-- ***CHANGE***  upload pdf to assets/files and type file name here-->
+                                <a href="assets/files/" class="btn btn-dark" download>Download Our Full Report</a>
+                            </div>
+                            <br><br>
+                            <div class="row">
+                                <!-- ***CHANGE***  if images...upload img to assets/img and type file name here-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="fifth" role="tabpanel" aria-labelledby="fifth-tab">
+                        <img src="assets/img/square.png" width="300" />
+                        <div class="row">
+                            <!-- ***CHANGE*** add written content  -->
+                            <div class="col-md-8">
+                                <br>
+                            <table class="table table-primary">
+                                    <thead>
+                                        <tr>
+                                            <td>Capabilities and Tech</td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><b>Capabilities</b></td>
+                                            <td>
+                                                <li>Square capabilities</li>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Channels</b></td>
+                                            <td>
+                                                <li>Square channels</li>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Tech</b></td>
+                                            <td>
+                                                <li>Square tech</li>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <br>
+                                <p>
+                                    Square, Inc., together with its subsidiaries, creates tools that enables sellers to accept card payments; also provide reporting and analytics, and next-day settlement. It provides hardware products, including Magstripe reader, which enables swiped transactions of magnetic stripe cards; Contactless and chip reader that accepts Europay, MasterCard, and Visa (EMV) chip cards and Near Field Communication payments; Square Stand, which enables an iPad to be used as a payment terminal or full point of sale solution; Square Register that combines its hardware, point-of-sale software, and payments technology; Square Terminal, a payments device and receipt printer to replace traditional keypad terminals, which accepts tap, dip, and swipe payments. The company also offers various software products, including Square Point of Sale; Square Appointments; Square for Retail; Square for Restaurants; Square Online and Square Online Checkout; Square Invoices; Square Virtual Terminal; Square Team Management; Square Contracts; Square Loyalty, Marketing, and Gift Cards; and Square Dashboard. In addition, it offers a developer platform, which includes application programming interfaces and software development kits. Further, the company provides Cash App, which enables users to send, spend, and store money; and Weebly that offers customers website hosting and domain name registration solutions. Square, Inc. was founded in 2009 and is headquartered in San Francisco, California. It has offices in the United States, Canada and Japan and employs more than 5,477 people as of December 2020. Its board of directors features former U.S. Treasury Secretary and Harvard University President Lawrence Summers, as well as former Goldman Sachs CFO David Viniar. </p>
+
+                                    <br>
+                                    <img class="mx-auto d-block" src="assets/img/Square-device.jpg" width="600"/>
+                                    <br>
+
+
+                                    <p>On Aug. 1st, Square agreed to buy the Australian BNPL company Afterpay in a $29 billion all-stock deal. "The Afterpay deal is the largest acquisition Square has made by nearly two orders of magnitude, representing about 25% of Square's market cap and dwarfing Square's acquisitions of Weebly and Tidal, which had been the company's largest purchases," said Lisa Ellis, a MoffetNathanson analyst, in a report.</p>
+
+                                    <p>Square takes on multiple roles in its own payment ecosystem. By strategically diversifying its portfolio, the company balances out the risks and diminishes the power of its existing and quite large competitors such as Google Wallet, Paypal-owned Venmo and Intuit (just to name a few).</p>
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <table class="table table-primary" id="square-facts">
+                                    <thead>
+                                        <tr>
+                                            <td>Quick Facts 2020</td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <!--<tbody>
+                                        <tr>
+                                            <td>Valuation</td>
+                                            <td>$3.5B</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Net Income</td>
+                                            <td>$213M</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Employees</td>
+                                            <td>5,477</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Customers</td>
+                                            <td>XXM</td>
+                                        </tr>
+				    </tbody>-->
+                                </table>
+                                <!-- ***CHANGE*** paste website into the href="______"  -->
+                                <a href="https://squareup.com/gb/en" target="_blank" class="btn btn-dark">Website</a><br><br>
+                                <!-- ***CHANGE***  past annual report link here. We can also set as uploadable file-->
+                                <a href="assets/files/Square-10K-2020.pdf" target="_blank" class="btn btn-dark" download>2020 Annual Report</a>
+                                <br><br>
+                                <!-- ***CHANGE***  upload pdf to assets/files and type file name here
+                                <a href="assets/files/" class="btn btn-dark" download>Download Our Full Report</a> -->
+                            </div>
+                            <br><br>
+                            <div class="row">
+                                <!-- ***CHANGE***  if images...upload img to assets/img and type file name here-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="sixth" role="tabpanel" aria-labelledby="sixth-tab">
+                        <img src="assets/img/paypal.png" width="300" />
+                        <div class="row">
+                            <!-- ***CHANGE*** add written content  -->
+                            <div class="col-md-8">
+                                <p>
+                                    N26 was launched as an online digital bank in 2013 offering digital mobile banking solutions. It offers personal and business bank accounts, debit card services, sub accounts, free automated teller machine (ATM) withdrawals, foreign currency payment services, medical coverage, and insurance packages for work and travel. The company also provides biometric identifications, instant push notifications, and customer support services through chat and phone. It offers its services through mobile and web applications. The company was formerly known as Papayer GmbH. N26 GmbH was incorporated in 2013 and is based in Berlin, servicing over 7mn clients (as at January 2021) in 25 countries from eight global offices. It is regulated by the BaFin. N26 raised $470mn in its Series D funding round in 2019 at an implied valuation of $3.5bn. It raised a further $136mn at the same valuation in the first half of 2020. In total, N26 received €818.6mn over the course of its existence </p>
+                                <p>N26 was one of the first Fintech’s in Germany offering its customers a whole new banking experience. The company has a very strong customer growth reaching 7mn+ clients in January 2021. Its main target group consists of millennials and young professionals. Keeping that in mind, the company was quick to leverage its monetization potential by forming integration partnership with, for instance, WeWork, Lime, Zalando and Uber, etc. Early on, the company focused on marketing, branding and a unique and identifiable design. The company also regularly adds new features to the offering, such as insurance and deposits.
+                                </p>
+                                <p>Due to its strong focus on customer acquisition and continued high investments, the company still has not made any profit yet. Although N26 is profitable per customer, the company as a whole is still loss-making (€110mn in 2020 and €217mn in 2019). A large chunk of their income comes from fees from payment transactions and accounts. </p>
+                                <p>
+                                    N26 processes billions of euros in transactions per month, and many customers pay by card, which is a sales driver. However, the company needs to have active clients, now only 30 percent use it as their primary bank and 70 percent still have a free account.</p>
+                                <p>
+                                    N26’s USP definitely lies in its user design and experience. It sources all software externally. Therefore, N26’s risk of being completely reliant on software providers, like Mambu, who provides their core banking platform to them, is particularly high.</p>
+                                <p>
+                                    Moreover, the risk of money laundering and cyber attacks is higher than for traditional banks. One of N26’s founders Valentin Stalf explained in an interview with Handelsblatt: "we are the only German bank that operates across borders in many countries and in some other countries there is a higher level of fraud than in Germany,". At the same time, N26 also has to do more in the fight against criminals. "This year we are investing 25 to 30 million euros in fraud prevention alone."</p>
+                                <p>
+                                    Being one of the best-known neo banks in Germany and one of the largest fintech start-ups, it might not be surprising that the company is especially targeted by fraudsters. In mid-August it became known that criminals allegedly opened and used more than 1,000 accounts with N26. Most were used in so-called fake shops or fraudulent Ebay accounts. </p>
+                                <p>
+                                    In addition, the financial regulator Bafin is considering restricting new business from N26, as the Handelsblatt recently reported. The authority is disgruntled that N26 has still not remedied serious deficiencies in the organization or in the fight against money laundering and other illegal transactions. </p>
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <table class="table table-primary">
+                                    <thead>
+                                        <tr>
+                                            <td>Quick Facts 2020</td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Valuation</td>
+                                            <!-- ***CHANGE*** add valuation  -->
+                                            <td>$3.5B</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Revenue</td>
+                                            <!-- ***CHANGE*** add revenue  -->
+                                            <td>$XXM</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Employees</td>
+                                            <!-- ***CHANGE*** add employees  -->
+                                            <td>XXX</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Profitability</td>
+                                            <!-- ***CHANGE*** add profitability () is negative  -->
+                                            <td>($XXM)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- ***CHANGE*** paste website into the href="______"  -->
+                                <a href="https://www.paypal.com/" target="_blank" class="btn btn-dark">Website</a><br><br>
+                                <!-- ***CHANGE***  past annual report link here. We can also set as uploadable file-->
+                                <a href="" class="btn btn-dark" download>2020 Annual Report</a>
+                                <br><br>
+                                <!-- ***CHANGE***  upload pdf to assets/files and type file name here-->
+                                <a href="assets/files/" class="btn btn-dark" download>Download Our Full Report</a>
+                            </div>
+                            <br><br>
+                            <div class="row">
+                                <!-- ***CHANGE***  if images...upload img to assets/img and type file name here-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="seventh" role="tabpanel" aria-labelledby="seventh-tab">
+                        <img src="assets/img/alipay.png" width="300" />
+                        <div class="row">
+                            <!-- ***CHANGE*** add written content  -->
+                            <div class="col-md-8">
+                                <br>
+                            <table class="table table-primary">
+                                    <thead>
+                                        <tr>
+                                            <td>Capabilities and Tech</td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><b>Capabilities</b></td>
+                                            <td>
+                                                <li>Ant capabilities</li>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Channels</b></td>
+                                            <td>
+                                                <li>Ant channels</li>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Tech</b></td>
+                                            <td>
+                                                <li>Ant tech</li>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p>Alipay is a sub-sector of Ant Group headquartered in Hangzhou, China in 2014 by Jack Ma. Alipay is a "financial supermarket" for Chinese citizens, handling payments, loans, and investments. Consumers can purchase with Alipay in most stores and online. Banks, insurance agencies, and asset managers also use the app to lend, escrow services, sell mutual funds, and sell insurance. The data aggregated by Alipay is insurmountable to Ant and the greater Chinese economy. They advertise advanced encryption, risk management, and real time monitoring of payments.</p>
+
+                                <p>Alipay has become a staple for almost all consumers in China. It is utilized by 1bn customers and 80mn merchants annually. Short term tourists (< 90 days) can use Alipay without foreign transaction fees. However, the US banned Alipay in response to tense foreign relations in 2019. In 2019-2020 fiscal year, there were $17tn in transactions, with $3.76bn in revenue in just the first half of 2020. This is more than Visa or Mastercard.</p>
+
+                                <p>The lending platform boasts $300bn credit balance and $590bn in investments through the wealth management platform.</p>
+
+
+                                <br>
+                                <img class="mx-auto d-block" src="assets/img/Alipay-Screenshot.png" width="600"/>
+
+                                <br><br>
+
+                                <p>Ant was supposed to go public at YE 2020, but it was canceled when CEO Jack Ma criticized Chinese regulators. His whereabouts are now unknown. The valuation at the time was $300bn, but has since been demoted by Fidelity to $144bn due to Chinese crackdown on homegrown technology companies and $2.7bn antitrust penalty.</p>
+
+                                <p>In 2021, Chinese Central Bank and Chinese regulators have forced Ant to spinoff Alipay and Ant has to transition to a financial holding company that will curb profit. Regulators are also attempting to prevent Alipay from consuming customer data, which fuels Ant's greater bottom line.</p>
+
+                                <p>Alipay has been able to increase fees at will due to its wide reach and is now engrained in everyday society. In many cases the government cannot even intervene. This market will only increase, personal investable assets projected to be $45.2tn by 2025. up 79% from 2019. Alipay had a monopoly over the Chinese market, but Paypal was allowed entrance in 2019. The Chinese government and regulators are set out to limit growth and power of tech firms. With the spinoff of Alipay and the transformation of Ant Group to a financial holding company, the future remains uncertain. Tense international relations are also cause for concern. </p>
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <table class="table table-primary">
+                                    <thead>
+                                        <tr>
+                                            <td>Quick Facts 2020</td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Payment transactions</td>
+                                            <!-- ***CHANGE*** add valuation  -->
+                                            <td>$18.2T</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Revenue (2019)</td>
+                                            <!-- ***CHANGE*** add revenue  -->
+                                            <td>$17B</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Employees</td>
+                                            <!-- ***CHANGE*** add employees  -->
+                                            <td>2500</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Customers</td>
+                                            <!-- ***CHANGE*** add profitability () is negative  -->
+                                            <td>1.3B</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- ***CHANGE*** paste website into the href="______"  -->
+                                <a href="https://intl.alipay.com/" target="_blank" class="btn btn-dark">Website</a><br><br>
+                                <!-- ***CHANGE***  past annual report link here. We can also set as uploadable file-->
+                                <a href="assets/files/alipay_ar21.pdf" target="_blank" class="btn btn-dark" download>2021 Annual Report</a>
+                                <br><br>
+                                <!-- ***CHANGE***  upload pdf to assets/files and type file name here
+                                <a href="assets/files/" class="btn btn-dark" download>Download Our Full Report</a> -->
+                            </div>
+                            <br><br>
+                            <div class="row">
+                                <!-- ***CHANGE***  if images...upload img to assets/img and type file name here-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="eighth" role="tabpanel" aria-labelledby="eighth-tab">
+                        <img src="assets/img/wise.png" width="300" />
+                        <div class="row">
+                            <div class="col-md-8">
+				    <br>
+                    <table class="table table-primary">
+                                    <thead>
+                                        <tr>
+                                            <td>Capabilities and Tech</td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><b>Capabilities</b></td>
+                                            <td>
+                                                <li>Omni-currency transfers with rates governed by the market, and fees set as low as reasonably possible</li>
+                                                <li>Comparison of competitors' fees directly on landing page where Wise itself is sometimes not even the cheapest</li>
+                                                <li>Not FCA-insured, operate with traditional banking "rails" like most fintechs</li>
+                                                <li>Best-in-class multi-currency and "borderless" accounts</li>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Channels</b></td>
+                                            <td>
+                                                <li>Web and mobile</li>
+                                                <li>Cross-border payments for online merchanges (B2B essentials)</li>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Tech</b></td>
+                                            <td>
+                                                <li>Proprietary Hawala algorithm outputting optimal amount of cash to hold in each currency</li>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+				    <br>
+				    <p>Wise provides cross-border money transfer services for personal and business customers in Europe, the United Kingdom, the Asia-Pacific, North America, and internationally. The company’s payments infrastructure comprise various products, including Wise Transfer to send money abroad; Wise Account to meet multi-currency banking needs for people; Wise Business, an account that provides business customers with international banking features; and Wise Platform that allows banks, including credit unions and financial institutions, and enterprise partners to integrate its payments network into their own mobile applications or online banking. It also offers online currency exchange services. Their business model is simply to pass on wholesale discounts to their customers. The company is able to do this by maintaining liquidity in all their supported currencies, executing forex trades in the biggest chunks possible.</p>
+
+				   <p>The company was formerly known as 456 Newco plc and changed its name to Wise plc in June 2021. Wise plc was founded in 2010 and is based in London, the United Kingdom. What distinguishes them from others is that they have best in class customer support, UX and UI.</p>
+
+
+				   <p>Their biggest risk is simply that they must hold so much cash, making them quite vulnerable to inflationary pressures (Fig 1). In second place comes the fact that they still lack a banking license, a problem that plagues most fintechs, and must store their cash with custodian banks. This makes them unable to lend and forces them to endure historically low (if not negative) interest.</p>
+
+				   <br>
+				   <img class="mx-auto d-block" src="assets/img/wise_bs.png" width="600"/>
+
+				   <br><br>
+
+				   <p>They have around 10 million customers but have incredible room to grow as the vast majority of retail currency exchange volume is still owned by banks, who often charge extortionate fees. Transferwise adds true value by sharing part (but not too much-they are already profitable unlike many other Fintech darlings) of wholesale forex savings with its customers. Wise is a long-term winner in our view, with a first class user experience that all financial services should pay close attention to. At the very least it sure beats the hell out of travelers checks!</p>
+
+                            </div>
+                            <div class="col-md-4">
+                                <table class="table table-primary">
+                                    <thead>
+                                        <tr>
+                                            <td>Quick Facts 2020</td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Valuation</td>
+                                            <td>$11B</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Revenue</td>
+                                            <td>$579.99M</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Employees</td>
+                                            <td>2,200</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Customers</td>
+                                            <td>10M+)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- ***CHANGE*** paste website into the href="______"  -->
+                                <a href="https://wise.com/de/" target="_blank" class="btn btn-dark">Website</a><br><br>
+                                <!-- ***CHANGE***  past annual report link here. We can also set as uploadable file-->
+                                <a href="assets/files/Transferwise-Annual-Report-2020.pdf" target="_blank" class="btn btn-dark" download>2020 Annual Report</a>
+                            </div>
+                            <br><br>
+                            <div class="row">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer id="footer">
+        <!-- <div class="footer-newsletter">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-6">
+            <h4>Join Our Newsletter</h4>
+            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit" value="Subscribe">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <h3>BizLand<span>.</span></h3>
+            <p>
+              A108 Adam Street <br>
+              New York, NY 535022<br>s
+              United States <br><br>
+              <strong>Phone:</strong> +1 5589 55488 55<br>
+              <strong>Email:</strong> info@example.com<br>
+            </p>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Our Social Networks</h4>
+            <p>Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p>
+            <div class="social-links mt-3">
+              <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+              <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+              <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+              <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+              <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+ -->
+        <!-- <div class="container py-4">
+      <div class="copyright">
+        &copy; Copyright <strong><span>BizLand</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits"> -->
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/bizland-bootstrap-business-template/ -->
+        <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer> -->
+        <!-- End Footer -->
+        <div id="preloader"></div>
+        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+        <!-- Vendor JS Files -->
+        <script src="assets/vendor/aos/aos.js"></script>
+        <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+        <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+        <script src="assets/vendor/php-email-form/validate.js"></script>
+        <script src="assets/vendor/purecounter/purecounter.js"></script>
+        <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+        <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+        <!-- Template Main JS File -->
+        <script src="assets/js/main.js"></script>
+        <script src="update.js"></script>
+</body>
+
+</html>
