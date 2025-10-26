@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Carolina Cloud Blog</title>
+    <link>https://carolinacloud.io/tags/</link>
+    <description>Recent content in Tags on Carolina Cloud Blog</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 26 Oct 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://carolinacloud.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Announcement</title>
+      <link>https://carolinacloud.io/tags/announcement/</link>
+      <pubDate>Sun, 26 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>https://carolinacloud.io/tags/announcement/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Cloud</title>
+      <link>https://carolinacloud.io/tags/cloud/</link>
+      <pubDate>Sun, 26 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>https://carolinacloud.io/tags/cloud/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cloud on Carolina Cloud Blog</title>
+    <link>https://carolinacloud.io/tags/cloud/</link>
+    <description>Recent content in Cloud on Carolina Cloud Blog</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 26 Oct 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://carolinacloud.io/tags/cloud/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Welcome to the Carolina Cloud Blog</title>
+      <link>https://carolinacloud.io/hello-world/</link>
+      <pubDate>Sun, 26 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>https://carolinacloud.io/hello-world/</guid>
+      <description>&lt;p&gt;Welcome to the official Carolina Cloud blog! We&amp;rsquo;re excited to share our journey building a family-owned cloud platform that puts transparency, performance, and affordability first.&lt;/p&gt;&#xA;&lt;h2 id=&#34;why-we-built-carolina-cloud&#34;&gt;Why We Built Carolina Cloud&lt;/h2&gt;&#xA;&lt;p&gt;As researchers, we experienced firsthand the frustrations of traditional cloud providers: confusing pricing, long cluster queues, and bills that spiraled out of control. We knew there had to be a better way.&lt;/p&gt;&#xA;&lt;p&gt;Carolina Cloud was born from a simple idea: &lt;strong&gt;what if cloud computing was transparent, affordable, and actually designed for the people who use it?&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

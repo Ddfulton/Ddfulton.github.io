@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to the Carolina Cloud Blog - Carolina Cloud Blog</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              600: '#0284c1',
+              700: '#0369a1'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    pre {
+      padding: 1rem;
+      overflow-x: auto;
+      border-radius: 0.5rem;
+    }
+    code {
+      font-family: 'Monaco', 'Menlo', monospace;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <nav class="bg-white shadow-sm border-b">
+    <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold text-brand-600 hover:text-brand-700">Carolina Cloud</a>
+      <div class="flex items-center gap-6">
+        <a href="/blog/" class="text-gray-600 hover:text-brand-600 font-medium">Blog</a>
+        <a href="/#pricing" class="text-gray-600 hover:text-brand-600 font-medium">Pricing</a>
+        <a href="https://console.carolinacloud.io" target="_blank" class="bg-brand-600 text-white px-4 py-2 rounded-md hover:bg-brand-700 transition-colors">Console</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    
+<article class="max-w-3xl mx-auto px-4 py-16">
+  <header class="mb-8">
+    <div class="flex items-baseline gap-4 mb-4">
+      <time class="text-sm text-gray-500">October 26, 2025</time>
+      
+      <span class="text-xs bg-brand-50 text-brand-700 px-2 py-1 rounded">announcement</span>
+      
+      <span class="text-xs bg-brand-50 text-brand-700 px-2 py-1 rounded">cloud</span>
+      
+    </div>
+    <h1 class="text-5xl font-bold text-gray-900 mb-4">Welcome to the Carolina Cloud Blog</h1>
+    
+    <p class="text-lg text-gray-600">By The Carolina Cloud Team</p>
+    
+  </header>
+
+  <div class="prose prose-lg max-w-none">
+    <p>Welcome to the official Carolina Cloud blog! We&rsquo;re excited to share our journey building a family-owned cloud platform that puts transparency, performance, and affordability first.</p>
+<h2 id="why-we-built-carolina-cloud">Why We Built Carolina Cloud</h2>
+<p>As researchers, we experienced firsthand the frustrations of traditional cloud providers: confusing pricing, long cluster queues, and bills that spiraled out of control. We knew there had to be a better way.</p>
+<p>Carolina Cloud was born from a simple idea: <strong>what if cloud computing was transparent, affordable, and actually designed for the people who use it?</strong></p>
+<h2 id="what-makes-us-different">What Makes Us Different</h2>
+<h3 id="transparent-pricing">Transparent Pricing</h3>
+<p>No hidden fees. No egress charges. No surprise bills at the end of the month. Our pricing is straightforward:</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Calculate your monthly cost</span>
+</span></span><span style="display:flex;"><span>vcpus <span style="color:#f92672">=</span> <span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>ram_gb <span style="color:#f92672">=</span> vcpus <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>  <span style="color:#75715e"># Always 2GB per vCPU</span>
+</span></span><span style="display:flex;"><span>hourly_rate <span style="color:#f92672">=</span> vcpus <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.015</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>monthly_cost <span style="color:#f92672">=</span> hourly_rate <span style="color:#f92672">*</span> <span style="color:#ae81ff">730</span>  <span style="color:#75715e"># ~730 hours/month</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;$</span><span style="color:#e6db74">{</span>monthly_cost<span style="color:#e6db74">:</span><span style="color:#e6db74">.2f</span><span style="color:#e6db74">}</span><span style="color:#e6db74">/month for </span><span style="color:#e6db74">{</span>vcpus<span style="color:#e6db74">}</span><span style="color:#e6db74"> vCPUs&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Output: $175.20/month for 16 vCPUs</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="built-for-science">Built for Science</h3>
+<p>Our infrastructure is optimized for:</p>
+<ul>
+<li><strong>Genomics</strong>: High-RAM instances for sequence analysis</li>
+<li><strong>AI/ML</strong>: GPU instances that actually work</li>
+<li><strong>Data Science</strong>: Fast storage and no bandwidth penalties</li>
+</ul>
+<h3 id="southern-hospitality">Southern Hospitality</h3>
+<p>Need help? Call us. Seriously. Our CTO will pick up the phone.</p>
+<h2 id="whats-next">What&rsquo;s Next</h2>
+<p>We&rsquo;re just getting started. In upcoming posts, we&rsquo;ll share:</p>
+<ul>
+<li>Technical deep-dives into our infrastructure</li>
+<li>Cost comparison studies vs. AWS, Azure, and GCP</li>
+<li>Tips for optimizing cloud workloads</li>
+<li>Customer success stories</li>
+</ul>
+<h2 id="get-started">Get Started</h2>
+<p>Ready to try Carolina Cloud? We&rsquo;re offering <strong>$250 in free credits</strong> for North Carolina startups. No credit card required to start.</p>
+<p><a href="https://console.carolinacloud.io">Get Started →</a></p>
+<hr>
+<p><em>Have questions? Email us at <a href="mailto:hello@carolinacloud.io">hello@carolinacloud.io</a> or call (910) 621-5467.</em></p>
+
+  </div>
+
+  <style>
+    .prose {
+      color: #374151;
+    }
+    .prose h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      color: #111827;
+    }
+    .prose h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: #111827;
+    }
+    .prose p {
+      margin-bottom: 1.25rem;
+      line-height: 1.75;
+    }
+    .prose a {
+      color: #0284c1;
+      text-decoration: none;
+    }
+    .prose a:hover {
+      text-decoration: underline;
+    }
+    .prose code {
+      background: #f3f4f6;
+      padding: 0.2rem 0.4rem;
+      border-radius: 0.25rem;
+      font-size: 0.875em;
+    }
+    .prose pre {
+      background: #1e293b;
+      margin: 1.5rem 0;
+    }
+    .prose pre code {
+      background: transparent;
+      padding: 0;
+      color: #f8fafc;
+    }
+    .prose img {
+      border-radius: 0.5rem;
+      margin: 2rem 0;
+    }
+    .prose ul, .prose ol {
+      margin: 1rem 0;
+      padding-left: 1.5rem;
+    }
+    .prose li {
+      margin: 0.5rem 0;
+    }
+    .prose blockquote {
+      border-left: 4px solid #0284c1;
+      padding-left: 1rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+      color: #6b7280;
+    }
+  </style>
+
+  <footer class="mt-12 pt-8 border-t">
+    <a href="/blog/" class="text-brand-600 hover:text-brand-700 font-medium">
+      ← Back to all posts
+    </a>
+  </footer>
+</article>
+
+  </main>
+
+  <footer class="bg-white border-t mt-16">
+    <div class="max-w-4xl mx-auto px-4 py-8 text-center text-gray-600">
+      <p>&copy; 2025 Carolina Cloud. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
+
