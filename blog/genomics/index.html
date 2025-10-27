@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Genomics Pipeline: Saving 70% Per Month with a Superior Development Experience - Carolina Cloud Blog</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              600: '#0284c1',
+              700: '#0369a1'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    pre {
+      padding: 1rem;
+      overflow-x: auto;
+      border-radius: 0.5rem;
+    }
+    code {
+      font-family: 'Monaco', 'Menlo', monospace;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <nav class="bg-white shadow-sm border-b">
+    <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold text-brand-600 hover:text-brand-700">Carolina Cloud</a>
+      <div class="flex items-center gap-6">
+        <a href="/blog/" class="text-gray-600 hover:text-brand-600 font-medium">Blog</a>
+        <a href="https://console.carolinacloud.io" target="_blank" class="bg-brand-600 text-white px-4 py-2 rounded-md hover:bg-brand-700 transition-colors">Console</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    
+<article class="max-w-3xl mx-auto px-4 py-16">
+  <header class="mb-8">
+    <div class="flex items-baseline gap-4 mb-4">
+      <time class="text-sm text-gray-500">October 26, 2025</time>
+      
+    </div>
+    <h1 class="text-5xl font-bold text-gray-900 mb-4">Genomics Pipeline: Saving 70% Per Month with a Superior Development Experience</h1>
+    
+  </header>
+
+  <div class="prose prose-lg max-w-none">
+    <p>A genomics startup with less than a year of runway needed to build a pipeline for processing cattle genomic data—merging chromosomal data from hundreds of animals to identify genetic markers. They&rsquo;d been using AWS HealthOmics for other genomics tasks, but as they evaluated their options for this greenfield project, two problems emerged: the cost would be prohibitive, and the developer experience would make iteration nearly impossible.</p>
+<p>This is the story of how they built their pipeline on Carolina Cloud&rsquo;s bare metal Threadripper infrastructure and gained the development velocity they desperately needed—with 70% cost savings as a bonus.</p>
+<h2 id="the-setup-a-greenfield-pipeline-challenge">The Setup: A Greenfield Pipeline Challenge</h2>
+<p>Our customer came to us with a problem, not a solution. They needed to process cattle genomic data—merge imputed VCF (Variant Call Format) files for 800+ cows, each with 30 chromosomes worth of genetic data. This was a greenfield project: they knew <em>what</em> they needed to accomplish, but they hadn&rsquo;t built the pipeline yet.</p>
+<blockquote>
+<p><strong>The Pipeline Challenge:</strong></p>
+<ol>
+<li>Start with one VCF file per cow containing all 30 chromosomes</li>
+<li>Split each cow&rsquo;s data by chromosome (24,000 files, ~100MB each, 2.4TB total)</li>
+<li>Use <code>bcftools merge</code> to merge all 800+ cows&rsquo; data for each chromosome</li>
+<li>Concatenate all 30 merged chromosomes into one final compressed VCF</li>
+</ol>
+</blockquote>
+<p>They had been using AWS HealthOmics for other genomics tasks, but HealthOmics is designed for teams with established, production-ready pipelines—not for building and iterating from scratch. They had two options: continue with HealthOmics and fight against slow iteration cycles, or move to regular EC2 instances at 2-4x the cost.</p>
+<p>Neither option was appealing for a startup with limited runway that needed to move fast.</p>
+<hr>
+<h2 id="the-breaking-point-choosing-the-wrong-tool-for-the-job">The Breaking Point: Choosing the Wrong Tool for the Job</h2>
+<p>Looking at their options, the problems became clear:</p>
+<h3 id="development-would-be-challenging">Development Would Be Challenging</h3>
+<p><strong>HealthOmics would make development challenging.</strong> HealthOmics is optimized for running production workloads, not for iterating and debugging on a greenfield pipeline. Each time they needed to test a change, they&rsquo;d face long spin-up times and limited debugging visibility. For a startup with less than a year of runway, this iteration tax would be crushing.</p>
+<h3 id="the-cost-problem">The Cost Problem</h3>
+<p><strong>Costs would be high.</strong> HealthOmics would run ~$2,000/month, and EC2 instances with sufficient CPU power would cost $3,000-5,000/month—neither sustainable for a startup watching every dollar.</p>
+<h3 id="technical-requirements">Technical Requirements</h3>
+<p><strong>The technical requirements were clear.</strong> <code>bcftools merge</code> is the industry-standard tool for merging VCF files, but it&rsquo;s inherently serial—you can&rsquo;t just throw more cores at a single merge operation. The linear nature of chromosomal data means you need strong <em>single-core performance</em>, not GPU parallelization.</p>
+<p>But here&rsquo;s the insight: while you can&rsquo;t parallelize a single chromosome merge, you <em>can</em> run 30 chromosome merges in parallel. The winning strategy would be Python threading orchestrating parallel <code>bcftools</code> command-line calls—one per chromosome. For that, they needed fast single-core performance, enough cores to run ~30 merges simultaneously, fast local disk I/O, and bare metal access to rapidly iterate.</p>
+<p><strong>EC2 was prohibitively expensive.</strong> Regular EC2 instances with the CPU power they needed would run $2,700-4,700/month on-demand, and they couldn&rsquo;t commit to reserved instances while building a pipeline from scratch.</p>
+<hr>
+<h2 id="enter-carolina-cloud-building-the-pipeline-on-bare-metal">Enter Carolina Cloud: Building the Pipeline on Bare Metal</h2>
+<p>When the customer approached us, we knew immediately what they needed: a high-core-count CPU with excellent single-threaded performance, fast local NVMe storage, and bare metal access for maximum development velocity. When you&rsquo;re building a pipeline from scratch and iterating multiple times per day with limited runway, even small performance differences add up—the boost from 4.0 GHz to 5.3 GHz could save up to an hour per iteration cycle.</p>
+<p>We set them up with <strong>Vulcan</strong>: our AMD Threadripper 7975WX server.</p>
+<blockquote>
+<p><strong>Vulcan Specs:</strong></p>
+<ul>
+<li><strong>CPU:</strong> AMD Threadripper 7975WX</li>
+<li><strong>Cores/Threads:</strong> 32 cores / 64 threads</li>
+<li><strong>Clock Speed:</strong> 4.0 GHz base, up to 5.3 GHz boost</li>
+<li><strong>Storage:</strong> Fast local NVMe</li>
+<li><strong>Perfect fit:</strong> 32 cores for 30 chromosomes (one per chromosome + headroom)</li>
+</ul>
+</blockquote>
+<p>The 32-core count was almost perfect for their workload—cattle have 30 chromosomes, so they could process nearly one chromosome per core with room to spare. More importantly, it&rsquo;s bare metal—they could SSH in, install <code>bcftools</code>, write Python scripts, and iterate on their pipeline architecture in real-time.</p>
+<p>Because the startup was based in North Carolina, they qualified for our free credits program—allowing them to build and test their pipeline risk-free. The latency was also unbeatable. Developing in VSCode via SSH felt completely native—no lag, no waiting for remote commands.</p>
+<p><strong>They built their winning architecture on our infrastructure.</strong> Using Python&rsquo;s threading library to orchestrate parallel <code>bcftools</code> command-line calls, they developed a pipeline that ran 30 chromosome merges simultaneously—one per chromosome. Using <code>htop</code> to monitor CPU utilization in real-time, they could see all cores pegged during merge operations, confirming their strategy was working. The local NVMe storage meant no network latency when reading and writing those 24,000 intermediate files.</p>
+<h3 id="key-results">Key Results</h3>
+<p>The results spoke for themselves:</p>
+<ul>
+<li><strong>Built in days, not weeks</strong>: Bare metal access meant rapid iteration from concept to production</li>
+<li><strong>10x faster development cycles</strong>: Testing a change took minutes instead of hours</li>
+<li><strong>Zero-latency development</strong>: NC-based startup connecting to NC infrastructure—VSCode felt native</li>
+<li><strong>Complete control</strong>: Install, test, and debug any tool instantly without fighting managed service constraints</li>
+<li><strong>70% cost reduction</strong>: $1,200/month fixed cost vs $2,000-5,000/month on AWS</li>
+<li><strong>Perfect architecture</strong>: 32 cores for 30 chromosomes with headroom to spare</li>
+<li><strong>Full control</strong>: Direct access enabled both rapid pipeline development and seamless daily production runs—no deployment overhead</li>
+<li><strong>Industry-standard environment</strong>: The genomics industry predominantly uses bare metal Linux schedulers (SLURM, SGE), so their team&rsquo;s existing expertise translated directly</li>
+</ul>
+<p>The pipeline they built processed 24,000 files across 30 chromosomes in parallel, using every core efficiently.</p>
+<hr>
+<h2 id="the-numbers-tell-the-story">The Numbers Tell the Story</h2>
+<p>Here&rsquo;s how the options compared for their genomics pipeline:</p>
+<style>
+.table-bordered th, .table-bordered td {
+  border: 1px solid #ddd!important;
+  padding: 12px;
+  text-align: left;
+}
+.table-bordered {
+  border-collapse: collapse!important;
+  width: 100%;
+  margin: 20px 0;
+}
+.table-bordered thead {
+  background-color: #f8f9fa;
+}
+.table-bordered tbody td:nth-child(4) {
+  background-color: #d4edda;
+  font-weight: bold;
+}
+</style>
+<table class="table-bordered">
+  <thead>
+    <tr>
+      <th>Metric</th>
+      <th>AWS HealthOmics</th>
+      <th>EC2 (c7a.32xlarge)</th>
+      <th>Carolina Cloud (Vulcan)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Monthly Cost</strong></td>
+      <td>~$2,000</td>
+      <td>$3,000-5,000 on-demand</td>
+      <td>$1,200 fixed</td>
+    </tr>
+    <tr>
+      <td><strong>Iteration Speed</strong></td>
+      <td>⚠️ Hours (deployment overhead)</td>
+      <td>Minutes (boot + setup)</td>
+      <td>Seconds (bare metal)</td>
+    </tr>
+    <tr>
+      <td><strong>Development Experience</strong></td>
+      <td>⚠️ Managed service constraints</td>
+      <td>✅ Full Linux control</td>
+      <td>✅ Bare metal + local latency</td>
+    </tr>
+    <tr>
+      <td><strong>Single-Core Performance</strong></td>
+      <td>Limited control</td>
+      <td>Good (AMD EPYC)</td>
+      <td>Excellent (up to 5.3GHz boost)</td>
+    </tr>
+    <tr>
+      <td><strong>Storage I/O</strong></td>
+      <td>S3 network latency</td>
+      <td>EBS network-attached</td>
+      <td>Local NVMe (instant)</td>
+    </tr>
+    <tr>
+      <td><strong>Best For</strong></td>
+      <td>Production genomics pipelines</td>
+      <td>Flexible cloud workloads</td>
+      <td>Fast iteration + cost control</td>
+    </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="building-the-pipeline">Building the Pipeline</h2>
+<p>The development process took under two weeks from first SSH login to production-ready pipeline:</p>
+<ol>
+<li>Set up the Threadripper 7975WX with genomics toolchain (<code>bcftools</code>, <code>samtools</code>, Python environment)</li>
+<li>Configure fast local NVMe storage optimized for 24,000+ small files</li>
+<li>Develop and refine Python orchestration scripts, monitoring performance with <code>htop</code> in real-time</li>
+<li>Test and optimize the complete pipeline end-to-end with production data</li>
+</ol>
+<p>Today, they process daily genomic samples with infrastructure that enables them to iterate and improve rather than constraining them.</p>
+<hr>
+<h2 id="the-bottom-line">The Bottom Line</h2>
+<p>Sometimes managed services create more problems than they solve. Sometimes you need bare metal, fast single-threaded performance, and the freedom to build and iterate quickly.</p>
+<p>For this genomics startup with less than a year of runway, choosing Carolina Cloud&rsquo;s Threadripper infrastructure wasn&rsquo;t primarily about cost—though saving 70% per month ($1,200 vs $2,000-5,000) was a significant bonus. The real win was <strong>the ability to build a production pipeline fast</strong>:</p>
+<ul>
+<li><strong>Built in days, not weeks</strong>: Bare metal access meant rapid iteration from concept to production</li>
+<li><strong>10x faster iteration</strong>: Testing changes took minutes instead of hours</li>
+<li><strong>Zero-latency development</strong>: NC-based team connecting to NC infrastructure—felt completely native</li>
+<li><strong>Complete control</strong>: No fighting with managed service constraints, just build and test</li>
+<li><strong>Perfect architecture fit</strong>: 32 cores for 30 chromosomes, 5.3GHz boost saving an hour per iteration</li>
+<li><strong>Architecture only possible with iteration</strong>: The winning parallel approach emerged from rapid experimentation</li>
+</ul>
+<p>The sophisticated pipeline they built—processing 24,000 files across 30 chromosomes in parallel—was a direct result of being able to iterate rapidly on bare metal. With a managed service optimized for production rather than development, the path to this solution would have taken considerably longer.</p>
+<blockquote>
+<p><strong>The Real Win:</strong> When you&rsquo;re a startup racing against limited runway, the ability to build and iterate 10x faster is worth far more than the 70% cost savings—even though both matter.</p>
+</blockquote>
+<p><strong>Processing genomic data and need to move fast?</strong> <a href="/">Get in touch</a> and let&rsquo;s talk about bare metal.</p>
+<hr>
+<h3 id="a-note-on-this-case-study">A Note on This Case Study</h3>
+<p>This solution worked exceptionally well for this customer because of their specific requirements: high single-threaded CPU performance, local I/O for thousands of small files, and above all, the need to iterate quickly with limited runway. Their genomic workload wasn&rsquo;t GPU-compatible due to the inherently sequential nature of chromosomal merge operations.</p>
+<p>AWS HealthOmics and EC2 both have their place—HealthOmics is excellent for teams running production genomics pipelines, and EC2 offers unmatched flexibility and global scale. We&rsquo;re not saying managed services are bad; we&rsquo;re saying they&rsquo;re not always the right answer, especially for startups that need to move fast.</p>
+<p>We&rsquo;re also not for everyone. If you need global redundancy, automatic scaling, or prefer managed infrastructure, AWS is probably the better choice. But if you&rsquo;re a startup that needs to move fast, control costs, and have complete access to your compute environment, we should talk.</p>
+
+  </div>
+
+  <style>
+    .prose {
+      color: #374151;
+    }
+    .prose h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      color: #111827;
+    }
+    .prose h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: #111827;
+    }
+    .prose p {
+      margin-bottom: 1.25rem;
+      line-height: 1.75;
+    }
+    .prose a {
+      color: #0284c1;
+      text-decoration: none;
+    }
+    .prose a:hover {
+      text-decoration: underline;
+    }
+    .prose code {
+      background: #f3f4f6;
+      padding: 0.2rem 0.4rem;
+      border-radius: 0.25rem;
+      font-size: 0.875em;
+    }
+    .prose pre {
+      background: #1e293b;
+      margin: 1.5rem 0;
+    }
+    .prose pre code {
+      background: transparent;
+      padding: 0;
+      color: #f8fafc;
+    }
+    .prose img {
+      border-radius: 0.5rem;
+      margin: 2rem 0;
+    }
+    .prose ul, .prose ol {
+      margin: 1rem 0;
+      padding-left: 1.5rem;
+    }
+    .prose li {
+      margin: 0.5rem 0;
+    }
+    .prose blockquote {
+      border-left: 4px solid #0284c1;
+      padding-left: 1rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+      color: #6b7280;
+    }
+  </style>
+
+  <footer class="mt-12 pt-8 border-t">
+    <a href="/blog/" class="text-brand-600 hover:text-brand-700 font-medium">
+      ← Back to all posts
+    </a>
+  </footer>
+</article>
+
+  </main>
+
+  <footer class="bg-white border-t mt-16">
+    <div class="max-w-4xl mx-auto px-4 py-8 text-center text-gray-600">
+      <p>&copy; 2025 Carolina Cloud. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
+

@@ -9,18 +9,18 @@
     <lastBuildDate>Sun, 26 Oct 2025 05:54:30 -0400</lastBuildDate>
     <atom:link href="https://carolinacloud.io/blog/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Genomics Pipeline: Saving 70% Per Month with a Superior Development Experience</title>
+      <link>https://carolinacloud.io/blog/genomics/</link>
+      <pubDate>Sun, 26 Oct 2025 05:54:30 -0400</pubDate>
+      <guid>https://carolinacloud.io/blog/genomics/</guid>
+      <description>&lt;p&gt;A genomics startup with less than a year of runway needed to build a pipeline for processing cattle genomic data—merging chromosomal data from hundreds of animals to identify genetic markers. They&amp;rsquo;d been using AWS HealthOmics for other genomics tasks, but as they evaluated their options for this greenfield project, two problems emerged: the cost would be prohibitive, and the developer experience would make iteration nearly impossible.&lt;/p&gt;&#xA;&lt;p&gt;This is the story of how they built their pipeline on Carolina Cloud&amp;rsquo;s bare metal Threadripper infrastructure and gained the development velocity they desperately needed—with 70% cost savings as a bonus.&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>Real-Time Call Center Transcription: Over 90% Cost Reduction with Better Features</title>
       <link>https://carolinacloud.io/blog/transcription/</link>
       <pubDate>Sun, 26 Oct 2025 05:54:30 -0400</pubDate>
       <guid>https://carolinacloud.io/blog/transcription/</guid>
       <description>&lt;p&gt;After six months with Azure OpenAI&amp;rsquo;s Whisper API, a major call center needed a better solution. They were processing hundreds of thousands of minutes of audio per day, and costs were climbing. More importantly, they needed speaker diarization—something the OpenAI API simply didn&amp;rsquo;t offer.&lt;/p&gt;&#xA;&lt;p&gt;Without diarization, they couldn&amp;rsquo;t answer critical performance management questions: What percentage of agents proactively offered a specific solution? What percentage mentioned key product features? Which agents needed coaching on particular topics? These insights were locked behind the technical limitation of not knowing &lt;em&gt;who&lt;/em&gt; said &lt;em&gt;what&lt;/em&gt;.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Welcome to the Carolina Cloud Blog</title>
-      <link>https://carolinacloud.io/blog/hello-world/</link>
-      <pubDate>Sun, 26 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>https://carolinacloud.io/blog/hello-world/</guid>
-      <description>&lt;p&gt;Welcome to the official Carolina Cloud blog! We&amp;rsquo;re excited to share our journey building a family-owned cloud platform that puts transparency, performance, and affordability first.&lt;/p&gt;&#xA;&lt;h2 id=&#34;why-we-built-carolina-cloud&#34;&gt;Why We Built Carolina Cloud&lt;/h2&gt;&#xA;&lt;p&gt;As researchers, we experienced firsthand the frustrations of traditional cloud providers: confusing pricing, long cluster queues, and bills that spiraled out of control. We knew there had to be a better way.&lt;/p&gt;&#xA;&lt;p&gt;Carolina Cloud was born from a simple idea: &lt;strong&gt;what if cloud computing was transparent, affordable, and actually designed for the people who use it?&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
