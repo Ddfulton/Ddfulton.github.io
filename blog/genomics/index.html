@@ -68,8 +68,7 @@
 <li>Concatenate all 30 merged chromosomes into one final compressed VCF</li>
 </ol>
 </blockquote>
-<p>They had been using AWS HealthOmics for other genomics tasks, but HealthOmics is designed for teams with established, production-ready pipelines—not for building and iterating from scratch. They had two options: continue with HealthOmics and fight against slow iteration cycles, or move to regular EC2 instances at 2-4x the cost.</p>
-<p>Neither option was appealing for a startup with limited runway that needed to move fast.</p>
+<p>Their options: continue with AWS HealthOmics at ~$2,000/month, or move to regular EC2 instances at $3,000-5,000/month.</p>
 <hr>
 <h2 id="the-breaking-point-choosing-the-wrong-tool-for-the-job">The Breaking Point: Choosing the Wrong Tool for the Job</h2>
 <p>Looking at their options, the problems became clear:</p>
@@ -112,7 +111,7 @@
 </ul>
 <p>The pipeline they built processed 24,000 files across 30 chromosomes in parallel, using every core efficiently.</p>
 <hr>
-<h2 id="the-numbers-tell-the-story">The Numbers Tell the Story</h2>
+<h2 id="the-bottom-line">The Bottom Line</h2>
 <p>Here&rsquo;s how the options compared for their genomics pipeline:</p>
 <style>
 .table-bordered th, .table-bordered td {
@@ -181,33 +180,6 @@
     </tr>
   </tbody>
 </table>
-<hr>
-<h2 id="building-the-pipeline">Building the Pipeline</h2>
-<p>The development process took under two weeks from first SSH login to production-ready pipeline:</p>
-<ol>
-<li>Set up the Threadripper 7975WX with genomics toolchain (<code>bcftools</code>, <code>samtools</code>, Python environment)</li>
-<li>Configure fast local NVMe storage optimized for 24,000+ small files</li>
-<li>Develop and refine Python orchestration scripts, monitoring performance with <code>htop</code> in real-time</li>
-<li>Test and optimize the complete pipeline end-to-end with production data</li>
-</ol>
-<p>Today, they process daily genomic samples with infrastructure that enables them to iterate and improve rather than constraining them.</p>
-<hr>
-<h2 id="the-bottom-line">The Bottom Line</h2>
-<p>Sometimes managed services create more problems than they solve. Sometimes you need bare metal, fast single-threaded performance, and the freedom to build and iterate quickly.</p>
-<p>For this genomics startup with less than a year of runway, choosing Carolina Cloud&rsquo;s Threadripper infrastructure wasn&rsquo;t primarily about cost—though saving 70% per month ($1,200 vs $2,000-5,000) was a significant bonus. The real win was <strong>the ability to build a production pipeline fast</strong>:</p>
-<ul>
-<li><strong>Built in days, not weeks</strong>: Bare metal access meant rapid iteration from concept to production</li>
-<li><strong>10x faster iteration</strong>: Testing changes took minutes instead of hours</li>
-<li><strong>Zero-latency development</strong>: NC-based team connecting to NC infrastructure—felt completely native</li>
-<li><strong>Complete control</strong>: No fighting with managed service constraints, just build and test</li>
-<li><strong>Perfect architecture fit</strong>: 32 cores for 30 chromosomes, 5.3GHz boost saving an hour per iteration</li>
-<li><strong>Architecture only possible with iteration</strong>: The winning parallel approach emerged from rapid experimentation</li>
-</ul>
-<p>The sophisticated pipeline they built—processing 24,000 files across 30 chromosomes in parallel—was a direct result of being able to iterate rapidly on bare metal. With a managed service optimized for production rather than development, the path to this solution would have taken considerably longer.</p>
-<blockquote>
-<p><strong>The Real Win:</strong> When you&rsquo;re a startup racing against limited runway, the ability to build and iterate 10x faster is worth far more than the 70% cost savings—even though both matter.</p>
-</blockquote>
-<p><strong>Processing genomic data and need to move fast?</strong> <a href="/">Get in touch</a> and let&rsquo;s talk about bare metal.</p>
 <hr>
 <h3 id="a-note-on-this-case-study">A Note on This Case Study</h3>
 <p>This solution worked exceptionally well for this customer because of their specific requirements: high single-threaded CPU performance, local I/O for thousands of small files, and above all, the need to iterate quickly with limited runway. Their genomic workload wasn&rsquo;t GPU-compatible due to the inherently sequential nature of chromosomal merge operations.</p>
