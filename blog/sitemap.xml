@@ -2,8 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://carolinacloud.io/blog/peptides/</loc>
+    <lastmod>2026-02-26T08:00:00-05:00</lastmod>
+  </url><url>
     <loc>https://carolinacloud.io/blog/</loc>
-    <lastmod>2025-10-26T05:54:30-04:00</lastmod>
+    <lastmod>2026-02-26T08:00:00-05:00</lastmod>
+  </url><url>
+    <loc>https://carolinacloud.io/blog/egress/</loc>
+    <lastmod>2026-01-05T08:00:00-05:00</lastmod>
+  </url><url>
+    <loc>https://carolinacloud.io/blog/vibe-coding/</loc>
+    <lastmod>2025-12-14T08:00:00-05:00</lastmod>
   </url><url>
     <loc>https://carolinacloud.io/blog/genomics/</loc>
     <lastmod>2025-10-26T05:54:30-04:00</lastmod>

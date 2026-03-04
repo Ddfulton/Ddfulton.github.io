@@ -6,8 +6,29 @@
     <description>Recent content on Carolina Cloud Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 26 Oct 2025 05:54:30 -0400</lastBuildDate>
+    <lastBuildDate>Thu, 26 Feb 2026 08:00:00 -0500</lastBuildDate>
     <atom:link href="https://carolinacloud.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>30,000 Peptides and a GPU That Wasn&#39;t Trying Hard Enough</title>
+      <link>https://carolinacloud.io/blog/peptides/</link>
+      <pubDate>Thu, 26 Feb 2026 08:00:00 -0500</pubDate>
+      <guid>https://carolinacloud.io/blog/peptides/</guid>
+      <description>&lt;p&gt;A case study in hybrid CPU-GPU optimization and seamless container resizing.&lt;/p&gt;&#xA;&lt;h2 id=&#34;apexomic&#34;&gt;Apexomic&lt;/h2&gt;&#xA;&lt;p&gt;The worst month of the year in the Northern Hemisphere is no doubt February. But this February we got some technical vitamin D as Carolina Cloud collaborated on a project with &lt;a href=&#34;https://apexomic.com&#34;&gt;Apexomic&lt;/a&gt;, a bioinformatics consulting company based in Stevenage UK. They offer bespoke data analytics for the life sciences sector. They bring more than 12 years of experience to the table with expertise in both biology and business. Derek and I felt a connection back to our East Anglian past (where it all began in a number of ways).&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>The Launch of Carolina Cloud Storage and a Deep Dive on Egress Fees</title>
+      <link>https://carolinacloud.io/blog/egress/</link>
+      <pubDate>Mon, 05 Jan 2026 08:00:00 -0500</pubDate>
+      <guid>https://carolinacloud.io/blog/egress/</guid>
+      <description>&lt;p&gt;Data Movement Fees in Cloud Computing&lt;/p&gt;&#xA;&lt;p&gt;After many requests, this week Carolina Cloud launched its own s3-compatible storage. We are starting with 100G free to all users with the ability to scale up rapidly if needed. Coupled with our no egress fee policy, this means our storage is effectively and in practice free! Why free? When we were deliberating pricing, in order to maintain our &amp;lsquo;at most 1/3 AWS&amp;rsquo; value, we would make such little money on storage that it wasn&amp;rsquo;t worth charging.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>When &#34;Vibe Coding&#34; Goes Too Far</title>
+      <link>https://carolinacloud.io/blog/vibe-coding/</link>
+      <pubDate>Sun, 14 Dec 2025 08:00:00 -0500</pubDate>
+      <guid>https://carolinacloud.io/blog/vibe-coding/</guid>
+      <description>&lt;p&gt;When we first launched Carolina Cloud we had a pretty simple console frontend. We started with just VMs and containers so all we needed was four plain html files. Doing two of everything; creation modal, instance list etc was not too much hassle to understand or maintain. And besides, Cursor whipped it up for us and it worked first time!&lt;/p&gt;&#xA;&lt;p&gt;But as the company, software and hardware was progressing so had to the frontend. We began doing what many early-stage teams are doing right now — we &amp;lsquo;vibe coded&amp;rsquo; and to quote myself &amp;lsquo;I don&amp;rsquo;t care how the frontend is coded. If it looks good, it is good&amp;rsquo;.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Genomics Pipeline: Saving 70% Per Month with a Superior Development Experience</title>
       <link>https://carolinacloud.io/blog/genomics/</link>

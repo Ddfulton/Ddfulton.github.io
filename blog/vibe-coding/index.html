@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>When &#34;Vibe Coding&#34; Goes Too Far - Carolina Cloud Blog</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              600: '#0284c1',
+              700: '#0369a1'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    pre {
+      padding: 1rem;
+      overflow-x: auto;
+      border-radius: 0.5rem;
+    }
+    code {
+      font-family: 'Monaco', 'Menlo', monospace;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <nav class="bg-white shadow-sm border-b">
+    <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold text-brand-600 hover:text-brand-700">Carolina Cloud</a>
+      <div class="flex items-center gap-6">
+        <a href="/blog/" class="text-gray-600 hover:text-brand-600 font-medium">Blog</a>
+        <a href="https://console.carolinacloud.io" target="_blank" class="bg-brand-600 text-white px-4 py-2 rounded-md hover:bg-brand-700 transition-colors">Console</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    
+<article class="max-w-3xl mx-auto px-4 py-16">
+  <header class="mb-8">
+    <div class="flex items-baseline gap-4 mb-4">
+      <time class="text-sm text-gray-500">December 14, 2025</time>
+      
+    </div>
+    <h1 class="text-5xl font-bold text-gray-900 mb-4">When &#34;Vibe Coding&#34; Goes Too Far</h1>
+    
+  </header>
+
+  <div class="prose prose-lg max-w-none">
+    <p>When we first launched Carolina Cloud we had a pretty simple console frontend. We started with just VMs and containers so all we needed was four plain html files. Doing two of everything; creation modal, instance list etc was not too much hassle to understand or maintain. And besides, Cursor whipped it up for us and it worked first time!</p>
+<p>But as the company, software and hardware was progressing so had to the frontend. We began doing what many early-stage teams are doing right now — we &lsquo;vibe coded&rsquo; and to quote myself &lsquo;I don&rsquo;t care how the frontend is coded. If it looks good, it is good&rsquo;.</p>
+<p>Over time these four html files grew to six then eight, then a subfolder was made with four more html files and soon we had created such a monster that fixing bugs or adding new features was, while not impossible, such hard work that we continued to default to the AI, which further exacerbated the problem. Digging the proverbial (code) hole!</p>
+<p>And then the cracks started to show with buttons flickering for no reason, pages refreshed when they shouldn&rsquo;t, or needed to be refreshed and strange bugs began to appear. For example, if one made a marimo notebook instance and then tried to make a Rstudio server instance, the button to deploy that Rstudio server instance would not work. You had to go to a new tab, not even a hard page refresh would fix it. When trying to add new features, hundreds of new lines of code were added and a quick, scary scan through revealed nested if statements and other nasty things.</p>
+<p>Something had to change. We made the call to convert to React as so much of our UI was reusable. In fact our UI was a classic React use case. But to not fall into the same trap as we did before we could not simply prompt Cursor — &ldquo;Please convert our frontend to React&rdquo;. We made a brand new frontend folder and rebuilt the interface piece by piece.</p>
+<p>I can&rsquo;t say we didn&rsquo;t use AI at all. That box on the right is hard to put away. But switching from &lsquo;Agent&rsquo; to &lsquo;Ask&rsquo; was like switching from heroin to methadone. It helped us get off the Prompt-Apply cycle and start to actually audit code before dropping it in and testing.</p>
+<p>Now our frontend is fully React and the difference is clear. The new UI is smooth and stable and everything works as expected. Things make sense instead of thousands of lines of repeated code and we have a new found respect for the DOM. Extending our software stack is now easy with reusable components and configurable props. The number of bugs has reduced dramatically and the frontend codebase is about one third the number of lines.</p>
+<p>But most importantly, we understand our frontend again and can work on it without summoning the AI oracle.</p>
+<p><em>BTW this was not written with AI.</em></p>
+
+  </div>
+
+  <style>
+    .prose {
+      color: #374151;
+    }
+    .prose h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      color: #111827;
+    }
+    .prose h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: #111827;
+    }
+    .prose p {
+      margin-bottom: 1.25rem;
+      line-height: 1.75;
+    }
+    .prose a {
+      color: #0284c1;
+      text-decoration: none;
+    }
+    .prose a:hover {
+      text-decoration: underline;
+    }
+    .prose code {
+      background: #f3f4f6;
+      padding: 0.2rem 0.4rem;
+      border-radius: 0.25rem;
+      font-size: 0.875em;
+    }
+    .prose pre {
+      background: #1e293b;
+      margin: 1.5rem 0;
+    }
+    .prose pre code {
+      background: transparent;
+      padding: 0;
+      color: #f8fafc;
+    }
+    .prose img {
+      border-radius: 0.5rem;
+      margin: 2rem 0;
+    }
+    .prose ul, .prose ol {
+      margin: 1rem 0;
+      padding-left: 1.5rem;
+    }
+    .prose li {
+      margin: 0.5rem 0;
+    }
+    .prose blockquote {
+      border-left: 4px solid #0284c1;
+      padding-left: 1rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+      color: #6b7280;
+    }
+  </style>
+
+  <footer class="mt-12 pt-8 border-t">
+    <a href="/blog/" class="text-brand-600 hover:text-brand-700 font-medium">
+      ← Back to all posts
+    </a>
+  </footer>
+</article>
+
+  </main>
+
+  <footer class="bg-white border-t mt-16">
+    <div class="max-w-4xl mx-auto px-4 py-8 text-center text-gray-600">
+      <p>&copy; 2026 Carolina Cloud. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
+

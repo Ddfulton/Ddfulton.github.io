@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Launch of Carolina Cloud Storage and a Deep Dive on Egress Fees - Carolina Cloud Blog</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              600: '#0284c1',
+              700: '#0369a1'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    pre {
+      padding: 1rem;
+      overflow-x: auto;
+      border-radius: 0.5rem;
+    }
+    code {
+      font-family: 'Monaco', 'Menlo', monospace;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <nav class="bg-white shadow-sm border-b">
+    <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold text-brand-600 hover:text-brand-700">Carolina Cloud</a>
+      <div class="flex items-center gap-6">
+        <a href="/blog/" class="text-gray-600 hover:text-brand-600 font-medium">Blog</a>
+        <a href="https://console.carolinacloud.io" target="_blank" class="bg-brand-600 text-white px-4 py-2 rounded-md hover:bg-brand-700 transition-colors">Console</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    
+<article class="max-w-3xl mx-auto px-4 py-16">
+  <header class="mb-8">
+    <div class="flex items-baseline gap-4 mb-4">
+      <time class="text-sm text-gray-500">January 5, 2026</time>
+      
+    </div>
+    <h1 class="text-5xl font-bold text-gray-900 mb-4">The Launch of Carolina Cloud Storage and a Deep Dive on Egress Fees</h1>
+    
+  </header>
+
+  <div class="prose prose-lg max-w-none">
+    <p>Data Movement Fees in Cloud Computing</p>
+<p>After many requests, this week Carolina Cloud launched its own s3-compatible storage. We are starting with 100G free to all users with the ability to scale up rapidly if needed. Coupled with our no egress fee policy, this means our storage is effectively and in practice free! Why free? When we were deliberating pricing, in order to maintain our &lsquo;at most 1/3 AWS&rsquo; value, we would make such little money on storage that it wasn&rsquo;t worth charging.</p>
+<p>This got us thinking about egress fees in general. What is their origin, history and why do they exist now? As far as we can tell the hyperscalers potentially make a non-negligable amount of their profit from egress (although this is hard to quantify from their SEC filings). So in this blog post I&rsquo;m going to take a deeper dive into egress fees and a foray into ingress fees.</p>
+<h2 id="before-the-cloud">Before the Cloud</h2>
+<p>Many cloud users perhaps assume that egress fees reflect true underlying network costs (COGS). But really they are largely a legacy of early internet economics that have since been opportunistically retained as a business strategy.</p>
+<p>In the 1990s to early 2000s, before the modern cloud fully existed, bandwidth was genuinely expensive and capacity was limited. In the early days of the internet when you sent data (an email, a file, a photo) it left your internet provider and travelled across multiple networks to reach its destination. Not unlike the telegram, transit was controlled by a few Tier-1 carriers that charged a lot to move data between networks and the model was &ldquo;Sender Pays&rdquo; i.e they had to be paid by you and the receiver was not charged. The cost to send data would depend on how much data was being sent and how far it had to travel.</p>
+<p>This in very simple terms is the underlying origin of egress fees. While ingress is not truly free the costs were far smaller, so the &ldquo;Sender Pays&rdquo; model explains this egress-ingress asymmetry. These transit costs for egress were orders of magnitude higher than they are today plus transit was less efficient and slower.</p>
+<h2 id="enter-aws-s3">Enter AWS S3</h2>
+<p>In 2006 when AWS launched S3 these were the market conditions and so metered egress fees reflected the real marginal costs of moving data over the internet. That set the precedence for pricey egress and free ingress which was soon followed by GCP and Azure.</p>
+<p>But already things were beginning to change, setting the stage for a massive drop in transit prices. Around 1998-2002 massive amounts of optical fiber cables were laid globally following the dot-com era investment which increased capacity dramatically. However transit remained expensive for a number of reasons; each fiber cable could not carry that much light at one time so speed was still much slower than it is today, routers were expensive and also much of this fiber was simply not utilized and remain &lsquo;dark fiber&rsquo;. This is why even in 2006 AWS were still charging &lsquo;reasonable&rsquo; egress fees.</p>
+<h2 id="innovation-cascade">Innovation Cascade</h2>
+<p>From 2003-2008 came a snowball of innovations that set transit prices tumbling down the mountain. A serious game-changer was Dense Wavelength Division Multiplexing (DWDM). In short, this allowed the same fiber cables to take, not just one beam of light but many different wavelengths at the same time. This meant that all those cables laid years earlier could suddenly take terabits per second, which multiplied the global data transit capacity overnight with no additional fiber laid. As a result the COGS of data transfer dropped sharply.</p>
+<p>Another huge change was the rise of Internet Exchange Points (IXPs). These are physical locations where multiple networks meet and connect directly in a process called &ldquo;peering&rdquo;. The previous architecture meant networks had to buy transit from large Tier-1 carriers so incurring fees whenever data crossed multiple networks. With an IXP networks could connect directly and in many cases agree to settlement-free peering where traffic exchanged for free when both networks benefit. A win-win for the networks (but not for cloud customers).</p>
+<p>Some other notable innovations include cheaper and faster routing hardware and fully private hyperscaler cables i.e in many cases data never actually &rsquo;egresses&rsquo;. Fast forwarding to 2023 we now have the Grace Hopper cable (fully owned by Google) and the Amitié cable (a JV between Aqua Comms, Meta, Microsoft and Vodafone) powering nearly 3/4 the bandwidth (over 500Tbps) between North America and Europe. Amazon finished a 320Tbps cable connecting Maryland and Ireland just two months ago.</p>
+<p>All this led to the commoditization of internet traffic and by 2010 the price had dropped from hundreds per Mbps/month to cents per Mbps/month. Fun fact: this is the same year that Instagram was founded, marking the advent of high-bandwidth transfer of photos and videos to then millions, now billions of smartphones that fuels a non-negligible chunk of all of our 401ks.</p>
+<h2 id="the-disconnect">The Disconnect</h2>
+<p>I think at this point everyone is seeing the disconnect. While the hyperscalers are paying tuppence for data transit, users are still paying arms and legs — clearly we are now a part of a business strategy. They are shaping customer behaviors through user lock-in, migration friction and multi-cloud deterrence, all while netting huge margins. Literally Hotel California.</p>
+<p>But the winds might be changing in the industry. Regulatory push-back in the EU and UK has been strong and with some success. Both cited the anti-competitive nature of the fees, limited customer choice and deterrence of multi-cloud use. As a result GCP and AWS have claimed to waive fees for migration and Azure says they will charge &lsquo;at cost&rsquo; for egress in the EU. But, while partially successful I suspect clawing those promises out of them would involve copious admin and likely waiting for approval from someone who really does not want to approve.</p>
+<h2 id="the-future">The Future</h2>
+<p>Smaller cloud companies are beginning to differentiate themselves by abolishing egress fees entirely and using this as a competitive advantage. Cloudflare has recently launched R2, an egress-free object storage service. We at Carolina Cloud have done the same because we can economically and it is not a business strategy we are going for. We are not yet a multi-trillion dollar, public traded company with an obligation to make as much money as possible. We truly believe that offering free storage is the best long-term value add for our customers.</p>
+<p>You may ask how do you stop being unintentionally used as a free CDN? Maybe that is a question for another blog post.</p>
+<h2 id="a-final-note">A Final Note</h2>
+<p>The Bandwidth Alliance, a consortium led by Cloudflare, is a corporate answer to this and is a network of cloud companies that are &ldquo;committed to discounting or waiving data transfer&rdquo; fees for shared customers. However, I&rsquo;m not sure what to think about this because Google Cloud and Microsoft Azure are somehow in the bandwidth alliance and Google Cloud&rsquo;s egress fees are actually higher than Amazon&rsquo;s.</p>
+
+  </div>
+
+  <style>
+    .prose {
+      color: #374151;
+    }
+    .prose h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      color: #111827;
+    }
+    .prose h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: #111827;
+    }
+    .prose p {
+      margin-bottom: 1.25rem;
+      line-height: 1.75;
+    }
+    .prose a {
+      color: #0284c1;
+      text-decoration: none;
+    }
+    .prose a:hover {
+      text-decoration: underline;
+    }
+    .prose code {
+      background: #f3f4f6;
+      padding: 0.2rem 0.4rem;
+      border-radius: 0.25rem;
+      font-size: 0.875em;
+    }
+    .prose pre {
+      background: #1e293b;
+      margin: 1.5rem 0;
+    }
+    .prose pre code {
+      background: transparent;
+      padding: 0;
+      color: #f8fafc;
+    }
+    .prose img {
+      border-radius: 0.5rem;
+      margin: 2rem 0;
+    }
+    .prose ul, .prose ol {
+      margin: 1rem 0;
+      padding-left: 1.5rem;
+    }
+    .prose li {
+      margin: 0.5rem 0;
+    }
+    .prose blockquote {
+      border-left: 4px solid #0284c1;
+      padding-left: 1rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+      color: #6b7280;
+    }
+  </style>
+
+  <footer class="mt-12 pt-8 border-t">
+    <a href="/blog/" class="text-brand-600 hover:text-brand-700 font-medium">
+      ← Back to all posts
+    </a>
+  </footer>
+</article>
+
+  </main>
+
+  <footer class="bg-white border-t mt-16">
+    <div class="max-w-4xl mx-auto px-4 py-8 text-center text-gray-600">
+      <p>&copy; 2026 Carolina Cloud. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
+

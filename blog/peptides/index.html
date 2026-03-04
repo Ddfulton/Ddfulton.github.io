@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>30,000 Peptides and a GPU That Wasn&#39;t Trying Hard Enough - Carolina Cloud Blog</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              600: '#0284c1',
+              700: '#0369a1'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    pre {
+      padding: 1rem;
+      overflow-x: auto;
+      border-radius: 0.5rem;
+    }
+    code {
+      font-family: 'Monaco', 'Menlo', monospace;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <nav class="bg-white shadow-sm border-b">
+    <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold text-brand-600 hover:text-brand-700">Carolina Cloud</a>
+      <div class="flex items-center gap-6">
+        <a href="/blog/" class="text-gray-600 hover:text-brand-600 font-medium">Blog</a>
+        <a href="https://console.carolinacloud.io" target="_blank" class="bg-brand-600 text-white px-4 py-2 rounded-md hover:bg-brand-700 transition-colors">Console</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    
+<article class="max-w-3xl mx-auto px-4 py-16">
+  <header class="mb-8">
+    <div class="flex items-baseline gap-4 mb-4">
+      <time class="text-sm text-gray-500">February 26, 2026</time>
+      
+    </div>
+    <h1 class="text-5xl font-bold text-gray-900 mb-4">30,000 Peptides and a GPU That Wasn&#39;t Trying Hard Enough</h1>
+    
+  </header>
+
+  <div class="prose prose-lg max-w-none">
+    <p>A case study in hybrid CPU-GPU optimization and seamless container resizing.</p>
+<h2 id="apexomic">Apexomic</h2>
+<p>The worst month of the year in the Northern Hemisphere is no doubt February. But this February we got some technical vitamin D as Carolina Cloud collaborated on a project with <a href="https://apexomic.com">Apexomic</a>, a bioinformatics consulting company based in Stevenage UK. They offer bespoke data analytics for the life sciences sector. They bring more than 12 years of experience to the table with expertise in both biology and business. Derek and I felt a connection back to our East Anglian past (where it all began in a number of ways).</p>
+<p>Apexomic typically operate with on-prem compute so this was a perfect opportunity to collaborate on a small R&amp;D project generating peptide designs using BoltzGen. Briefly, BoltzGen is a molecular design tool that generates novel peptide sequences to bind target proteins; while it can technically run on a CPU, its generative design stage relies on repeated neural network inference so in practice requires a GPU for production-scale performance.</p>
+<p>Apexomic had been running this on a dual 10 core Xeon CPUs with 64Gb of RAM hooked up with two GTX 1080 with 8GiB of VRAM each. This setup was giving around 2000 peptide structure designs per day. But the goal was to do 30k peptide designs over the weekend, ready by Monday morning. This grabbed our attention as this was real scientific AI, not just some LLM benchmark. We were confident our RTX 5090, a far newer chip with over 4x the CUDA core count and double the VRAM at 32GiB, could help out.</p>
+<h2 id="so-to-benchmarking">So to Benchmarking</h2>
+<p>Apexomic provisioned 20 vCPU, 32GiB container on our AMD EPYC 7742 with the GPU. Cheminformatics pipelines are notoriously hybrid CPU-GPU and BoltzGen is no exception. The pipeline consists of five steps, each using varying proportions of CPU and GPU compute. We started initially with just 50 peptide structure designs.</p>
+<ul>
+<li><strong>Local:</strong> 25:17 minutes</li>
+<li><strong>Cloud:</strong> 26:25 minutes</li>
+</ul>
+<p>Disappointing. The 5090 gave no speed up with a little added container overhead. But monitoring the GPU and CPU usage on nvtop and htop showed that, while the 1080s were both maxed out, the 5090 peaked at only 75% compute usage and spent most of the time hanging out at 50%. Lots of capacity was being left on the table.</p>
+<p>So we did some digging. The first BoltzGen step is the Design step and is the most critical, where the GPU does the heavy lifting and when the peptides are actually designed. Clearly this is the step we needed to focus on. Then we noticed the CLI optional flag <code>--diffusion_batch_size</code>. This controls how many peptide diffusion trajectories are generated in parallel per forward pass; essentially increasing it allows the GPU to process bigger batches simultaneously without changing the underlying algorithm. It was defaulting to 1. The GPU had to load all of the weights to just design one peptide at a time which seemed fine for the 1080s but left the 5090 malnourished. We increased it to 25 and benchmarked on 4000 peptide structures. Lo and behold the 5090 utilization in both cores and VRAM improved resulting in a <strong>5x speedup</strong> of the Design step compared to the local machine:</p>
+<p><strong>Local 1080 machine:</strong></p>
+<ul>
+<li>Step 1: Design — 19,839s</li>
+<li>Step 2: Inverse Folding — 754s</li>
+<li>Step 3: Folding — 47,774s</li>
+<li>Step 4: Analysis — 897s</li>
+<li>Step 5: Filtering — 15s</li>
+</ul>
+<p><strong>Cloud 5090 container:</strong></p>
+<ul>
+<li>Step 1: Design — 4,067s</li>
+<li>Step 2: Inverse Folding — 1,004s</li>
+<li>Step 3: Folding — 32,570s</li>
+<li>Step 4: Analysis — 14,118s</li>
+<li>Step 5: Filtering — 13s</li>
+</ul>
+<p>Side note, we guess there exists a <code>--diffusion_batch_size</code> that is too high that would either result in an OOM error where it fills up too much VRAM or time-slicing, where there&rsquo;s too much compute for the GPU to handle but the memory is fine. In this case the slowdown would just become linear with number of peptides. But that&rsquo;s an experiment for another day.</p>
+<h2 id="a-resize">A Resize</h2>
+<p>Those of you waiting for the plot twist might notice that Step 4 Analysis is now lagging on our cloud machine, exposed by our success with Step 1. Step 4 is a CPU dominated step so the immediate thought was the throw more CPU cores at it. The question arose — &ldquo;Can you re-provision my instance with more VCPUs without me having to reinstall everything?&rdquo;. Our answer — <strong>YES!</strong> The latest feature added to Carolina Cloud is the ability to resize your container seamlessly. That means no data loss, no reinstallation of packages, no environment rebuild, just add or remove resources using the UI or API.</p>
+<p>We rescaled the Apexomic container to 64 vCPUs and 36GiB of RAM and reran the 4000 peptides. The Analysis step fell to 4,321s. Dramatically better but still slower than the local Xeons at 897s. However, content with that final boost, we unleashed 30,000 peptide design structures over the weekend and by Monday morning, Apexomic had exactly the results they needed, beamed by sftp right under the Atlantic to their local servers.</p>
+<h2 id="core-takeaways">Core Takeaways</h2>
+<p>Here are my core takeaways about this project in no particular order:</p>
+<p><strong>This is very much NOT an LLM-only, GPU-dominated world.</strong> This project was a true case of scientific AI requiring a balanced system of GPU and CPU usage.</p>
+<p><strong>Live resizing of the container unlocked the last speedup needed</strong> to hit go on the big pipeline run for 30k peptide designs. This ability saved a lot of time we might have spent reinstalling packages and rebuilding the environment in a whole new container. Formulating pipelines is like dating, they rarely reveal the extent of their needs on the first coffee. Carolina Cloud gives you a second chance, resize shamelessly and pretend it was the plan all along.</p>
+<p><strong>Sometimes good enough is… good enough.</strong> We were a bit surprised that the Analysis step was still slower on the cloud machine, even with the more powerful AMD EPYC 7742 and more cores. Our guess is that this comes down to the nature of the workload in BoltzGen. Maybe sustained clock speeds, memory bandwidth under load, and available RAM (36GiB vs 64GiB locally) mattered more than raw core count? The point is we could have spent another week tuning the memory, profiling cache misses and diving into the BoltzGen code to find multiprocessing defaults, all for the last 15% of optimization. But by Friday our 30k peptide run was feasible and so in the end setting it off as is likely got the results sooner. Not waiting for perfect to RSVP before starting the party.</p>
+<p><strong>Our key principles at Carolina Cloud are simplicity, cost and support.</strong> This collaboration especially highlighted our true support capabilities. There was rapid iteration, and direct technical communication between us and the team at Apexomic. No ticket-based abstraction. They brought deep domain expertise, a clear project and performance goals while Derek and I provided hardware-level insight and scientific programming experience. A true recipe for success.</p>
+
+  </div>
+
+  <style>
+    .prose {
+      color: #374151;
+    }
+    .prose h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      color: #111827;
+    }
+    .prose h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: #111827;
+    }
+    .prose p {
+      margin-bottom: 1.25rem;
+      line-height: 1.75;
+    }
+    .prose a {
+      color: #0284c1;
+      text-decoration: none;
+    }
+    .prose a:hover {
+      text-decoration: underline;
+    }
+    .prose code {
+      background: #f3f4f6;
+      padding: 0.2rem 0.4rem;
+      border-radius: 0.25rem;
+      font-size: 0.875em;
+    }
+    .prose pre {
+      background: #1e293b;
+      margin: 1.5rem 0;
+    }
+    .prose pre code {
+      background: transparent;
+      padding: 0;
+      color: #f8fafc;
+    }
+    .prose img {
+      border-radius: 0.5rem;
+      margin: 2rem 0;
+    }
+    .prose ul, .prose ol {
+      margin: 1rem 0;
+      padding-left: 1.5rem;
+    }
+    .prose li {
+      margin: 0.5rem 0;
+    }
+    .prose blockquote {
+      border-left: 4px solid #0284c1;
+      padding-left: 1rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+      color: #6b7280;
+    }
+  </style>
+
+  <footer class="mt-12 pt-8 border-t">
+    <a href="/blog/" class="text-brand-600 hover:text-brand-700 font-medium">
+      ← Back to all posts
+    </a>
+  </footer>
+</article>
+
+  </main>
+
+  <footer class="bg-white border-t mt-16">
+    <div class="max-w-4xl mx-auto px-4 py-8 text-center text-gray-600">
+      <p>&copy; 2026 Carolina Cloud. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
+
