@@ -6,8 +6,22 @@
     <description>Recent content on Carolina Cloud Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 26 Feb 2026 08:00:00 -0500</lastBuildDate>
+    <lastBuildDate>Wed, 12 Aug 2026 09:32:00 -0400</lastBuildDate>
     <atom:link href="https://carolinacloud.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>nf-ccloud Launch: What is it and how is it different?</title>
+      <link>https://carolinacloud.io/blog/nf-ccloud-launch/</link>
+      <pubDate>Wed, 12 Aug 2026 09:32:00 -0400</pubDate>
+      <guid>https://carolinacloud.io/blog/nf-ccloud-launch/</guid>
+      <description>&lt;p&gt;The launch of Carolina Cloud&amp;rsquo;s custom Nextflow executor is around the corner. In this post I share some internal details to convince readers they should at least try it out, and help name it.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Don’t have time to read the full article and just want to try it out? No problem, paste this into your LLM&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Please read https://console.carolinacloud.io/static/nextflow/local-quickstart.md&#xA;and help me get started running a test pipeline (nf-core/rnaseq -profile test)&#xA;and then running a pipeline of my own.&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;But if you actually enjoy reading about this stuff then…&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>nf-ccloud Launch: Benchmarking Deep Dive</title>
+      <link>https://carolinacloud.io/blog/nf-ccloud-benchmarks/</link>
+      <pubDate>Wed, 12 Aug 2026 00:06:30 -0400</pubDate>
+      <guid>https://carolinacloud.io/blog/nf-ccloud-benchmarks/</guid>
+      <description>&lt;p&gt;The launch of Carolina Cloud&amp;rsquo;s custom Nextflow executor is around the corner. In this post I share the hard numbers on speed up against the competition.&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://carolinacloud.io/blog/images/nf-ccloud-benchmarks-1.png&#34; alt=&#34;Most important chart in this entire article&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;Most important chart in this entire article&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;tl;dr&lt;/strong&gt; We benchmarked nf-ccloud vs AWS Healthomics and AWS Batch (via Seqera UI, both on-demand and spot). nf-ccloud finished in 4.5hrs at less than $20. AWS Healthomics finished in 5.5hrs at $45. Batch on-demand ran around 7-8h at $70 and batch spot ran anywhere between 10h and 24h but was the cheapest ad just under $10. You can view the Carolina Cloud run &lt;strong&gt;&lt;a href=&#34;https://console.carolinacloud.io/nextflow/89e4088b-bdaf-4e32-bdac-6178a1179271/&#34;&gt;here&lt;/a&gt;&lt;/strong&gt;. Shout out to &lt;strong&gt;&lt;a href=&#34;https://flockbio.com/&#34;&gt;Flock Bio&lt;/a&gt;&lt;/strong&gt; for helping us benchmark.&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>30,000 Peptides and a GPU That Wasn&#39;t Trying Hard Enough</title>
       <link>https://carolinacloud.io/blog/peptides/</link>

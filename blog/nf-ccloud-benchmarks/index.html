@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>nf-ccloud Launch: Benchmarking Deep Dive - Carolina Cloud Blog</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              600: '#0284c1',
+              700: '#0369a1'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    pre {
+      padding: 1rem;
+      overflow-x: auto;
+      border-radius: 0.5rem;
+    }
+    code {
+      font-family: 'Monaco', 'Menlo', monospace;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <nav class="bg-white shadow-sm border-b">
+    <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold text-brand-600 hover:text-brand-700">Carolina Cloud</a>
+      <div class="flex items-center gap-6">
+        <a href="/blog/" class="text-gray-600 hover:text-brand-600 font-medium">Blog</a>
+        <a href="https://console.carolinacloud.io" target="_blank" class="bg-brand-600 text-white px-4 py-2 rounded-md hover:bg-brand-700 transition-colors">Console</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    
+<article class="max-w-3xl mx-auto px-4 py-16">
+  <header class="mb-8">
+    <div class="flex items-baseline gap-4 mb-4">
+      <time class="text-sm text-gray-500">August 12, 2026</time>
+      
+    </div>
+    <h1 class="text-5xl font-bold text-gray-900 mb-4">nf-ccloud Launch: Benchmarking Deep Dive</h1>
+    
+  </header>
+
+  <div class="prose prose-lg max-w-none">
+    <p>The launch of Carolina Cloud&rsquo;s custom Nextflow executor is around the corner. In this post I share the hard numbers on speed up against the competition.</p>
+<p><img src="/blog/images/nf-ccloud-benchmarks-1.png" alt="Most important chart in this entire article"></p>
+<p><em>Most important chart in this entire article</em></p>
+<p><em><strong>tl;dr</strong> We benchmarked nf-ccloud vs AWS Healthomics and AWS Batch (via Seqera UI, both on-demand and spot). nf-ccloud finished in 4.5hrs at less than $20. AWS Healthomics finished in 5.5hrs at $45. Batch on-demand ran around 7-8h at $70 and batch spot ran anywhere between 10h and 24h but was the cheapest ad just under $10. You can view the Carolina Cloud run <strong><a href="https://console.carolinacloud.io/nextflow/89e4088b-bdaf-4e32-bdac-6178a1179271/">here</a></strong>. Shout out to <strong><a href="https://flockbio.com/">Flock Bio</a></strong> for helping us benchmark.</em></p>
+<p><strong>Introduction and Context</strong></p>
+<p>We just launched nf-ccloud, our own Carolina Cloud native Nextflow executor. After finishing it internally, it was time to exhaustively benchmark it against its biggest competitors.</p>
+<p>The above chart is the boiled down version of those extensive test and shows what users care about most: <strong>speed and cost.</strong> nf-ccloud is the blue dot closest to the origin (fast and cheap). If you don’t make it any further in this post then that’s the take away, and I’m glad we got at least that clear.</p>
+<p><strong>To try it out, simply head to the Carolina Cloud Console, spin up a <a href="https://docs.carolinacloud.io/nextflow/quickstart/">Nextflow Head Container</a>, sign in to Claude Code (which is already installed) and ask it how to run a pipeline on Carolina Cloud.</strong></p>
+<p><strong>Or if you prefer to run it locally, then paste the following message to your AI:</strong></p>
+<pre tabindex="0"><code>Please read https://console.carolinacloud.io/static/nextflow/local-guide.md
+and walk me through how to run my first pipeline
+</code></pre><p>But now let’s break it down. First an overview of the benchmark, then orchestration time, then a deep dive of each product.</p>
+<h3 id="the-benchmark">The Benchmark</h3>
+<p>Let’s lay out the rules of the game before we present any numbers.</p>
+<ul>
+<li>
+<p>RNA-Seq 3.22</p>
+</li>
+<li>
+<p>Profile was test_full</p>
+</li>
+<li>
+<p>Eight human RNA-seq samples (123.3GiB of gzipped FASTQ)</p>
+</li>
+<li>
+<p>GRCh37 reference</p>
+</li>
+<li>
+<p>Pre-built STAR index</p>
+</li>
+<li>
+<p>128 concurrent vCPU limit</p>
+</li>
+</ul>
+<p>Our aim was to pick a representative workload and nf-core/rnaseq, the most popular pipeline on nf-core, was the obvious choice.</p>
+<h3 id="orchestration-time-shout-out-to-flock-bio">Orchestration Time (shout out to <a href="https://flockbio.com/">Flock Bio</a>)</h3>
+<p>First, our strongest result. <em>nf-ccloud’s spin-up and spin-down of tasks is 47x faster than AWS.</em> For a three-day run with only five tasks you won’t notice a difference. However for an nf-core/rnaseq on just one sample (a very common pipeline), you’re paying that spin-up tax on <em>every single task</em>. Hundreds of tasks at 3-minute spin up, even with moderate parallelization, can add substantial time to your pipeline (and substantial money, since AWS both charges for provisioning time). Finally, AWS has a 60s minimum for their instances which may not sound like much but with our rapid spin-up and spin-down time and over 300+ tasks per nf-core/rnaseq, it can add up.</p>
+<p><img src="/blog/images/nf-ccloud-benchmarks-2.png" alt="Carolina Cloud obliterates AWS on task start time"></p>
+<p><em>Carolina Cloud obliterates AWS on task start time</em></p>
+<p><img src="/blog/images/nf-ccloud-benchmarks-3.png" alt="If your job runs for 5 days then you might no longer care about task start time"></p>
+<p><em>If your job runs for 5 days then you might no longer care about task start time</em></p>
+<h3 id="batch-with-on-demand">Batch with On-Demand</h3>
+<p>I’m not going to write much about this because it’s more expensive and slower than both HealthOmics and Carolina Cloud.</p>
+<p><strong>Who should use Batch with On-Demand?</strong> Anyone incentivized to spend more, not less, money with AWS, such as certified AWS partners who receive a kickback for extra spend they induce.</p>
+<h3 id="batch-with-spot">Batch with Spot</h3>
+<p>Batch and spot was both the cheapest and slowest of the bunch. We did several runs — with and without the Seqera Fusion filesystem, intel vs AMD CPUs, etc. We found batch ran from 7h at the fastest to over 24h at the slowest. On-demand batch was over $70 in cost at worst, and spot batch was under $10 at best.</p>
+<p>Why was it slow? Because there is volatility in the spot market (our friends at HMX Labs in London have <a href="https://cloudhpc.news/hpc-on-cloud-cost-optimisation/">written about this extensively</a>). The most common instance type for these tasks, weighted by cost, was the <a href="https://cloudprice.net/aws/ec2/instances/r8a.4xlarge">r8a.4xlarge</a>, which is apparently a popular choice. Our 24h run, as you can probably guess, only took so long because the instance types we requested simply weren’t available when we did our run (which is odd as it was a weekend). So with this 24h run, the majority of the wall clock time was simply spent waiting for the correct spot instance to become available.</p>
+<p>A specific kind of shrewd reader will suggest that we “just switch regions”. The issue with that is egress fees. If you’re using AWS you’re likely using S3. And if you’re using S3 in us-east-2, and you want to tap into the spot liquidity of us-east-1, you must move data from us-east-2 to us-east-1. At $0.02/GiB of egress fees to move between regions and a 123GiB reference genome used in this trial, that would be over $2 per process that requires our FASTQs.</p>
+<p>What if we just replicate our data? We could, but that means paying inter-region egress on your entire bucket once and then paying to store it indefinitely. There’s then the mental overhead of having to keep (and pay for) all data in all regions. So at <a href="https://aws.amazon.com/ec2/pricing/on-demand/#Data_Transfer">$0.02/GiB</a> for inter-region transfer you’re looking at $20/TB for a one-time transfer and then $23/TB/mo thereafter. There’s actually also NAT Gateway to contend with (at $0.045/GiB for workload pulls). It also means managing two buckets, keeping them in sync, new IAM rules, updating the input paths to the samples etc.</p>
+<p>Furthermore, as far as I’m aware, Batch compute environments can span only one region, meaning that you’d be unable to simply &ldquo;just use multiple regions” with one batch compute environment which is what is offered by Seqera for their <a href="https://docs.seqera.io/platform-cloud/compute-envs/aws-batch">AWS Batch Compute Environments</a>.
+So to conclude this section: If your sole goal is to optimize financial cost, and you are able to pay the time cost necessary to properly configure compute environments, then you should use batch on spot. That’s a fact and we’re comfortable admitting it. And in fact, if that’s you, then out of respect for <em>your</em> time, you can stop reading here. Go spend your time on configuring compute environments (you’re going to need it).</p>
+<p><strong>Who should use Batch with Spot?</strong> Scientists who stand to save more against Carolina Cloud or Healthomics than the person who is being paid to configure and troubleshoot Nextflow. For example if you’re spending $500k/yr on Carolina Cloud and cleverly-configured batch with spot setup gets you to around $200k/yr, you’ve saved $300k and so it’s worth paying a cloud engineer up to $150k to claim these cost savings, assuming the pipeline run time variance doesn’t bother you.</p>
+<h3 id="aws-heathomics">AWS HeathOmics</h3>
+<p>HealthOmics was clearly created to spare users the configuration headaches we just discussed. Its wall-clock performance was strong, its configuration complexity was medium and it was in the middle of the pack cost-wise, coming in at $45 (excluding ECR storage costs), or about 2.2x the cost of Carolina Cloud.
+One hidden cost with HealthOmics (both a time and financial cost) is that you must pre-fill your ECR (EC2 Container Registry) with the container images that your pipeline will require. Not only did I find this step excruciating (even with Claude Code and a career using containers in the cloud) but also these stored containers take up storage which is, of course, not free. For this pipeline the stored container cost was $0.04/day in perpetuity which at current interest rates is equal to around $300 of net present value. And <em>at no point</em> was this additional storage cost communicated to us while setting up the container registry.</p>
+<p><strong>nf-ccloud is most comparable with HealthOmics</strong>. They both offer a low-config way to run Nextflow. Setting up the container registry is annoying but it’s nothing compared to the batch config. Aside from that, despite some quality-of-life improvements on Carolina Cloud (for example, our <a href="https://docs.carolinacloud.io/nextflow/quickstart/">head container</a>). If you’ve kept reading, then I think our conclusion is relevant to you and so I will state it plainly:</p>
+<p><em><strong>We sincerely believe that this benchmark proves that nf-ccloud is cheaper, faster and better than HealthOmics.</strong></em>
+<strong>Who should use HealthOmics?</strong> People who are already using HealthOmics and simply can’t be bothered to switch (that sounds sarcastic but it is not). People using batch who are fed up with config and but want to stay on AWS. Companies for whom their genomic compute spend is a small percentage of their overall opex. Anyone on GovCloud (taxpayer is paying anyway, so who cares about cost?). Anyone who has AWS credits already.</p>
+<h3 id="carolina-cloud-public-demo">Carolina Cloud (<a href="https://console.carolinacloud.io/nextflow/89e4088b-bdaf-4e32-bdac-6178a1179271/">public demo</a>)</h3>
+<p>Carolina Cloud came in at 4.5hrs and a total of $19.26. That includes everything except for storage, which will of course depend on how long you keep it there.</p>
+<p>Now with the pipeline complete, what’s the logical next step? To open R or Python with a single click obviously!</p>
+<p><img src="/blog/images/nf-ccloud-benchmarks-4.png" alt="One click and you’re off to the races"></p>
+<p><em>One click and you’re off to the races</em></p>
+<p>We have a whole separate launch post for nf-ccloud so please go read about it <a href="/blog/nf-ccloud-launch/">here</a>.</p>
+<p><strong>Who should use Carolina Cloud?</strong> If you, like my cofounder Alice, experience anaphylaxis when confronted with a maze of cloud configuration standing between you and your scientific pursuits. If you use Claude Code and want a debug log to paste to your LLM for every single run failure. If you want to immediately open your results in R Studio Server with a single click. And if you want a first-class visualization of your pipeline as it runs that can be easily shared with your team.</p>
+<p><strong>Who should not use Carolina Cloud?</strong> If you still have AWS credits (nothing beats free). If you’re a cog in a large institution with zero control over the tools you use, even when they’re in the best interest of the company (as I once was).</p>
+<h3 id="sentieon-star-vs-open-source-star">Sentieon STAR vs open-source STAR?</h3>
+<p>A shrewd reader might notice that we used the Sentieon-accelerated STAR aligner on the Carolina Cloud pipeline but used only open-source on the Healthomics and Batch pipelines. That is a fair assessment so it deserves an explanation, especially because Sentieon is available on the AWS Marketplace.
+Our aim was to compare like-for-like from the user’s perspective. Using Sentieon acceleration on Carolina Cloud is a simple as passing <strong>—use-sentieon-star</strong> to one’s <strong>nextflow run</strong> command. Using it on AWS requires trawling through even more UIs and purchasing a Sentieon license.</p>
+<p>And while you could say it’s not fair to compare Sentieon-accelerated Carolina Cloud vs open-source HealthOmics on performance, you could also say it’s not fair to compare open-source HealthOmics to Sentieon-surcharged Carolina Cloud on cost.</p>
+<p>So the tl;dr of this is: because Sentieon is so seamlessly integrated with Carolina Cloud, <a href="https://docs.carolinacloud.io/containers/genomics/#sentieon-billing-usage-based">process-based billing</a> and all, we felt that it was fair to include since it offers a material upgrade without any extra effort. In other words we benchmarked the “best available with no extra config” on both platforms.</p>
+<p>Also, the Sentieon item on the AWS marketplace looks to cost $2mm USD. This must be a mistake, but the time required to understand why and how this mistake came to be is exactly what you <em>don’t</em> have to spend with nf-ccloud.</p>
+<p><img src="/blog/images/nf-ccloud-benchmarks-5.png" alt="Did someone accidentally put a bottle of tequila on the 0 key while inputting the price here?"></p>
+<p><em>Did someone accidentally put a bottle of tequila on the 0 key while inputting the price here?</em></p>
+<h3 id="the-cost-discovery-overhead">The Cost Discovery Overhead</h3>
+<p>AWS and cost transparency are like oil and water. They don’t mix. Apparently a handful of backend SQL queries such as</p>
+<pre tabindex="0"><code>select cost_usd from usage where user_id = ‘me’ and service = ‘healthomics’ group by ‘date’
+</code></pre><p>is <em>too much to ask</em> for one of the most technologically sophisticated organizations in human history (I’d contend that it’s by design, and one of the reasons I’m a proud holder of AMZN, but that’s a separate discussion).</p>
+<p><img src="/blog/images/nf-ccloud-benchmarks-6.png" alt="$0.02 for cost explorer is like your credit score going down whenever there’s an inquiry"></p>
+<p><em>$0.02 for cost explorer is like your credit score going down whenever there’s an inquiry</em></p>
+<p>So I took a simpler approach: do to only one run per day and then filter cost on that day only. Use no other AWS services on that day (except for lingering S3 storage costs, which thankfully I am able to calculate and subtract manually). I had a lot on my plate while doing this benchmark and I didn’t have time to spend doing open heart surgery on the cost explorer.</p>
+<p>Lastly, I noticed “VPC” creeping in. Biologists do not know or care what this is. But at $0.13/day, that’s $3/mo. What is ECR? It’s what HealthOmics requires you to make (and Carolina Cloud doesn’t) prior to running.
+Why make such a point over $0.13/day? Because despite the low magnitude, there is absolutely zero transparency on this charge. I didn’t know about until I went to the cost explorer. Carolina Cloud puts the full task-level cost on each task as well as the pipeline-level cost in real time, front and center. Cost transparency is very important to us. Check it out on our <a href="https://console.carolinacloud.io/nextflow/89e4088b-bdaf-4e32-bdac-6178a1179271/">public demo</a>.</p>
+<p><img src="/blog/images/nf-ccloud-benchmarks-7.png" alt="Not only can you see how much the full run cost, you can also see how much individual tasks in that run cost"></p>
+<p><em>Not only can you see how much the full run cost, you can also see how much individual tasks in that run cost</em></p>
+<h3 id="conclusion">Conclusion</h3>
+<p>We believe Carolina Cloud is superior to AWS HealthOmics. Its performance and UX is superior to batch, but batch on spot is cheaper than even Carolina Cloud.</p>
+<p>So if you’re running hundreds of thousands of dollars of Nextflow compute per year, your company is not in growth mode and you don’t mind variable times for pipeline completion, then you should use batch with spot.
+There are other Nextflow platforms out there, almost all of whom resell AWS and apply a nontrivial markup, but they shall not be mentioned.</p>
+<h3 id="appendix">Appendix</h3>
+<p><a href="https://github.com/Ddfulton/nextflow-benchmark-appendix">Link to a GitHub repo</a> with even more nitty-gritty details. Go find problems with my numbers. I dare you.</p>
+
+  </div>
+
+  <style>
+    .prose {
+      color: #374151;
+    }
+    .prose h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      color: #111827;
+    }
+    .prose h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: #111827;
+    }
+    .prose p {
+      margin-bottom: 1.25rem;
+      line-height: 1.75;
+    }
+    .prose a {
+      color: #0284c1;
+      text-decoration: none;
+    }
+    .prose a:hover {
+      text-decoration: underline;
+    }
+    .prose code {
+      background: #f3f4f6;
+      padding: 0.2rem 0.4rem;
+      border-radius: 0.25rem;
+      font-size: 0.875em;
+    }
+    .prose pre {
+      background: #1e293b;
+      margin: 1.5rem 0;
+    }
+    .prose pre code {
+      background: transparent;
+      padding: 0;
+      color: #f8fafc;
+    }
+    .prose img {
+      border-radius: 0.5rem;
+      margin: 2rem 0;
+    }
+    .prose ul, .prose ol {
+      margin: 1rem 0;
+      padding-left: 1.5rem;
+    }
+    .prose li {
+      margin: 0.5rem 0;
+    }
+    .prose blockquote {
+      border-left: 4px solid #0284c1;
+      padding-left: 1rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+      color: #6b7280;
+    }
+  </style>
+
+  <footer class="mt-12 pt-8 border-t">
+    <a href="/blog/" class="text-brand-600 hover:text-brand-700 font-medium">
+      ← Back to all posts
+    </a>
+  </footer>
+</article>
+
+  </main>
+
+  <footer class="bg-white border-t mt-16">
+    <div class="max-w-4xl mx-auto px-4 py-8 text-center text-gray-600">
+      <p>&copy; 2026 Carolina Cloud. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
+
