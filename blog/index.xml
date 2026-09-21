@@ -1,60 +1,60 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Carolina Cloud Blog</title>
-    <link>https://carolinacloud.io/blog/</link>
-    <description>Recent content on Carolina Cloud Blog</description>
+    <title>Coalescent Blog</title>
+    <link>https://coalescent.cloud/blog/</link>
+    <description>Recent content on Coalescent Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 12 Aug 2026 09:32:00 -0400</lastBuildDate>
-    <atom:link href="https://carolinacloud.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://coalescent.cloud/blog/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>nf-ccloud Launch: What is it and how is it different?</title>
-      <link>https://carolinacloud.io/blog/nf-ccloud-launch/</link>
+      <link>https://coalescent.cloud/blog/nf-ccloud-launch/</link>
       <pubDate>Wed, 12 Aug 2026 09:32:00 -0400</pubDate>
-      <guid>https://carolinacloud.io/blog/nf-ccloud-launch/</guid>
+      <guid>https://coalescent.cloud/blog/nf-ccloud-launch/</guid>
       <description>&lt;p&gt;The launch of Carolina Cloud&amp;rsquo;s custom Nextflow executor is around the corner. In this post I share some internal details to convince readers they should at least try it out, and help name it.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Don’t have time to read the full article and just want to try it out? No problem, paste this into your LLM&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Please read https://console.carolinacloud.io/static/nextflow/local-quickstart.md&#xA;and help me get started running a test pipeline (nf-core/rnaseq -profile test)&#xA;and then running a pipeline of my own.&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;But if you actually enjoy reading about this stuff then…&lt;/p&gt;</description>
     </item>
     <item>
       <title>nf-ccloud Launch: Benchmarking Deep Dive</title>
-      <link>https://carolinacloud.io/blog/nf-ccloud-benchmarks/</link>
+      <link>https://coalescent.cloud/blog/nf-ccloud-benchmarks/</link>
       <pubDate>Wed, 12 Aug 2026 00:06:30 -0400</pubDate>
-      <guid>https://carolinacloud.io/blog/nf-ccloud-benchmarks/</guid>
-      <description>&lt;p&gt;The launch of Carolina Cloud&amp;rsquo;s custom Nextflow executor is around the corner. In this post I share the hard numbers on speed up against the competition.&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://carolinacloud.io/blog/images/nf-ccloud-benchmarks-1.png&#34; alt=&#34;Most important chart in this entire article&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;Most important chart in this entire article&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;tl;dr&lt;/strong&gt; We benchmarked nf-ccloud vs AWS Healthomics and AWS Batch (via Seqera UI, both on-demand and spot). nf-ccloud finished in 4.5hrs at less than $20. AWS Healthomics finished in 5.5hrs at $45. Batch on-demand ran around 7-8h at $70 and batch spot ran anywhere between 10h and 24h but was the cheapest ad just under $10. You can view the Carolina Cloud run &lt;strong&gt;&lt;a href=&#34;https://console.carolinacloud.io/nextflow/89e4088b-bdaf-4e32-bdac-6178a1179271/&#34;&gt;here&lt;/a&gt;&lt;/strong&gt;. Shout out to &lt;strong&gt;&lt;a href=&#34;https://flockbio.com/&#34;&gt;Flock Bio&lt;/a&gt;&lt;/strong&gt; for helping us benchmark.&lt;/em&gt;&lt;/p&gt;</description>
+      <guid>https://coalescent.cloud/blog/nf-ccloud-benchmarks/</guid>
+      <description>&lt;p&gt;The launch of Carolina Cloud&amp;rsquo;s custom Nextflow executor is around the corner. In this post I share the hard numbers on speed up against the competition.&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://coalescent.cloud/blog/images/nf-ccloud-benchmarks-1.png&#34; alt=&#34;Most important chart in this entire article&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;Most important chart in this entire article&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;tl;dr&lt;/strong&gt; We benchmarked nf-ccloud vs AWS Healthomics and AWS Batch (via Seqera UI, both on-demand and spot). nf-ccloud finished in 4.5hrs at less than $20. AWS Healthomics finished in 5.5hrs at $45. Batch on-demand ran around 7-8h at $70 and batch spot ran anywhere between 10h and 24h but was the cheapest ad just under $10. You can view the Carolina Cloud run &lt;strong&gt;&lt;a href=&#34;https://console.carolinacloud.io/nextflow/89e4088b-bdaf-4e32-bdac-6178a1179271/&#34;&gt;here&lt;/a&gt;&lt;/strong&gt;. Shout out to &lt;strong&gt;&lt;a href=&#34;https://flockbio.com/&#34;&gt;Flock Bio&lt;/a&gt;&lt;/strong&gt; for helping us benchmark.&lt;/em&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>30,000 Peptides and a GPU That Wasn&#39;t Trying Hard Enough</title>
-      <link>https://carolinacloud.io/blog/peptides/</link>
+      <link>https://coalescent.cloud/blog/peptides/</link>
       <pubDate>Thu, 26 Feb 2026 08:00:00 -0500</pubDate>
-      <guid>https://carolinacloud.io/blog/peptides/</guid>
+      <guid>https://coalescent.cloud/blog/peptides/</guid>
       <description>&lt;p&gt;A case study in hybrid CPU-GPU optimization and seamless container resizing.&lt;/p&gt;&#xA;&lt;h2 id=&#34;apexomic&#34;&gt;Apexomic&lt;/h2&gt;&#xA;&lt;p&gt;The worst month of the year in the Northern Hemisphere is no doubt February. But this February we got some technical vitamin D as Carolina Cloud collaborated on a project with &lt;a href=&#34;https://apexomic.com&#34;&gt;Apexomic&lt;/a&gt;, a bioinformatics consulting company based in Stevenage UK. They offer bespoke data analytics for the life sciences sector. They bring more than 12 years of experience to the table with expertise in both biology and business. Derek and I felt a connection back to our East Anglian past (where it all began in a number of ways).&lt;/p&gt;</description>
     </item>
     <item>
       <title>The Launch of Carolina Cloud Storage and a Deep Dive on Egress Fees</title>
-      <link>https://carolinacloud.io/blog/egress/</link>
+      <link>https://coalescent.cloud/blog/egress/</link>
       <pubDate>Mon, 05 Jan 2026 08:00:00 -0500</pubDate>
-      <guid>https://carolinacloud.io/blog/egress/</guid>
+      <guid>https://coalescent.cloud/blog/egress/</guid>
       <description>&lt;p&gt;Data Movement Fees in Cloud Computing&lt;/p&gt;&#xA;&lt;p&gt;After many requests, this week Carolina Cloud launched its own s3-compatible storage. We are starting with 100G free to all users with the ability to scale up rapidly if needed. Coupled with our no egress fee policy, this means our storage is effectively and in practice free! Why free? When we were deliberating pricing, in order to maintain our &amp;lsquo;at most 1/3 AWS&amp;rsquo; value, we would make such little money on storage that it wasn&amp;rsquo;t worth charging.&lt;/p&gt;</description>
     </item>
     <item>
       <title>When &#34;Vibe Coding&#34; Goes Too Far</title>
-      <link>https://carolinacloud.io/blog/vibe-coding/</link>
+      <link>https://coalescent.cloud/blog/vibe-coding/</link>
       <pubDate>Sun, 14 Dec 2025 08:00:00 -0500</pubDate>
-      <guid>https://carolinacloud.io/blog/vibe-coding/</guid>
+      <guid>https://coalescent.cloud/blog/vibe-coding/</guid>
       <description>&lt;p&gt;When we first launched Carolina Cloud we had a pretty simple console frontend. We started with just VMs and containers so all we needed was four plain html files. Doing two of everything; creation modal, instance list etc was not too much hassle to understand or maintain. And besides, Cursor whipped it up for us and it worked first time!&lt;/p&gt;&#xA;&lt;p&gt;But as the company, software and hardware was progressing so had to the frontend. We began doing what many early-stage teams are doing right now — we &amp;lsquo;vibe coded&amp;rsquo; and to quote myself &amp;lsquo;I don&amp;rsquo;t care how the frontend is coded. If it looks good, it is good&amp;rsquo;.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Genomics Pipeline: Saving 70% Per Month with a Superior Development Experience</title>
-      <link>https://carolinacloud.io/blog/genomics/</link>
+      <link>https://coalescent.cloud/blog/genomics/</link>
       <pubDate>Sun, 26 Oct 2025 05:54:30 -0400</pubDate>
-      <guid>https://carolinacloud.io/blog/genomics/</guid>
+      <guid>https://coalescent.cloud/blog/genomics/</guid>
       <description>&lt;p&gt;A genomics startup with less than a year of runway needed to build a pipeline for processing cattle genomic data—merging chromosomal data from hundreds of animals to identify genetic markers. They&amp;rsquo;d been using AWS HealthOmics for other genomics tasks, but as they evaluated their options for this greenfield project, two problems emerged: the cost would be prohibitive, and the developer experience would make iteration nearly impossible.&lt;/p&gt;&#xA;&lt;p&gt;This is the story of how they built their pipeline on Carolina Cloud&amp;rsquo;s bare metal Threadripper infrastructure and gained the development velocity they desperately needed—with 70% cost savings as a bonus.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Real-Time Call Center Transcription: Over 90% Cost Reduction with Better Features</title>
-      <link>https://carolinacloud.io/blog/transcription/</link>
+      <link>https://coalescent.cloud/blog/transcription/</link>
       <pubDate>Sun, 26 Oct 2025 05:54:30 -0400</pubDate>
-      <guid>https://carolinacloud.io/blog/transcription/</guid>
+      <guid>https://coalescent.cloud/blog/transcription/</guid>
       <description>&lt;p&gt;After six months with Azure OpenAI&amp;rsquo;s Whisper API, a major call center needed a better solution. They were processing hundreds of thousands of minutes of audio per day, and costs were climbing. More importantly, they needed speaker diarization—something the OpenAI API simply didn&amp;rsquo;t offer.&lt;/p&gt;&#xA;&lt;p&gt;Without diarization, they couldn&amp;rsquo;t answer critical performance management questions: What percentage of agents proactively offered a specific solution? What percentage mentioned key product features? Which agents needed coaching on particular topics? These insights were locked behind the technical limitation of not knowing &lt;em&gt;who&lt;/em&gt; said &lt;em&gt;what&lt;/em&gt;.&lt;/p&gt;</description>
     </item>
   </channel>

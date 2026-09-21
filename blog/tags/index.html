@@ -3,24 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tags - Carolina Cloud Blog</title>
+  <title>Tags - Coalescent Blog</title>
+  <meta name="theme-color" content="#0B1220">
+  <meta name="color-scheme" content="dark">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
+    
+    
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            brand: {
-              50: '#f0f9ff',
-              600: '#0284c1',
-              700: '#0369a1'
+            brand: { 50: '#0B2A31', 600: '#00C2B8', 700: '#5EEAD4' },
+            ink: '#0B1220',
+            depth: '#121C2C',
+            gray: {
+              50: '#070C16', 100: '#121C2C', 200: '#1C2839', 300: '#2E3F55',
+              400: '#6B7F8C', 500: '#8CA0AD', 600: '#B4C2CB', 700: '#C9D4DA',
+              800: '#DDE7EA', 900: '#E8F1F2'
             }
-          }
+          },
+          borderColor: { DEFAULT: '#1C2839' }
         }
       }
     }
   </script>
   <style>
+    html { background: #0B1220; color-scheme: dark; }
     pre {
       padding: 1rem;
       overflow-x: auto;
@@ -31,13 +40,13 @@
     }
   </style>
 </head>
-<body class="bg-gray-50">
-  <nav class="bg-white shadow-sm border-b">
+<body class="bg-ink text-gray-600">
+  <nav class="bg-depth border-b">
     <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-      <a href="/" class="text-2xl font-bold text-brand-600 hover:text-brand-700">Carolina Cloud</a>
+      <a href="/" class="flex items-center"><img src="/blog/images/coalescent-wordmark.png" alt="Coalescent" style="height:34px;width:auto"></a>
       <div class="flex items-center gap-6">
         <a href="/blog/" class="text-gray-600 hover:text-brand-600 font-medium">Blog</a>
-        <a href="https://console.carolinacloud.io" target="_blank" class="bg-brand-600 text-white px-4 py-2 rounded-md hover:bg-brand-700 transition-colors">Console</a>
+        <a href="https://console.coalescent.cloud" target="_blank" class="bg-brand-600 text-ink font-semibold px-4 py-2 rounded-md hover:bg-brand-700 transition-colors">Console</a>
       </div>
     </div>
   </nav>
@@ -46,7 +55,7 @@
     
 <div class="max-w-4xl mx-auto px-4 py-16">
   <h1 class="text-5xl font-bold text-gray-900 mb-4">Tags</h1>
-  <p class="text-xl text-gray-600 mb-12">Technical insights from the Carolina Cloud team</p>
+  <p class="text-xl text-gray-600 mb-12">Technical insights from the Coalescent team</p>
 
   <div class="space-y-8">
     
@@ -55,9 +64,9 @@
 
   </main>
 
-  <footer class="bg-white border-t mt-16">
+  <footer class="bg-depth border-t mt-16">
     <div class="max-w-4xl mx-auto px-4 py-8 text-center text-gray-600">
-      <p>&copy; 2026 Carolina Cloud. All rights reserved.</p>
+      <p>&copy; 2026 Coalescent. All rights reserved.</p>
     </div>
   </footer>
 </body>

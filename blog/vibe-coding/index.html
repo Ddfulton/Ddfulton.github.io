@@ -3,24 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>When &#34;Vibe Coding&#34; Goes Too Far - Carolina Cloud Blog</title>
+  <title>When &#34;Vibe Coding&#34; Goes Too Far - Coalescent Blog</title>
+  <meta name="theme-color" content="#0B1220">
+  <meta name="color-scheme" content="dark">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
+    
+    
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            brand: {
-              50: '#f0f9ff',
-              600: '#0284c1',
-              700: '#0369a1'
+            brand: { 50: '#0B2A31', 600: '#00C2B8', 700: '#5EEAD4' },
+            ink: '#0B1220',
+            depth: '#121C2C',
+            gray: {
+              50: '#070C16', 100: '#121C2C', 200: '#1C2839', 300: '#2E3F55',
+              400: '#6B7F8C', 500: '#8CA0AD', 600: '#B4C2CB', 700: '#C9D4DA',
+              800: '#DDE7EA', 900: '#E8F1F2'
             }
-          }
+          },
+          borderColor: { DEFAULT: '#1C2839' }
         }
       }
     }
   </script>
   <style>
+    html { background: #0B1220; color-scheme: dark; }
     pre {
       padding: 1rem;
       overflow-x: auto;
@@ -31,13 +40,13 @@
     }
   </style>
 </head>
-<body class="bg-gray-50">
-  <nav class="bg-white shadow-sm border-b">
+<body class="bg-ink text-gray-600">
+  <nav class="bg-depth border-b">
     <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-      <a href="/" class="text-2xl font-bold text-brand-600 hover:text-brand-700">Carolina Cloud</a>
+      <a href="/" class="flex items-center"><img src="/blog/images/coalescent-wordmark.png" alt="Coalescent" style="height:34px;width:auto"></a>
       <div class="flex items-center gap-6">
         <a href="/blog/" class="text-gray-600 hover:text-brand-600 font-medium">Blog</a>
-        <a href="https://console.carolinacloud.io" target="_blank" class="bg-brand-600 text-white px-4 py-2 rounded-md hover:bg-brand-700 transition-colors">Console</a>
+        <a href="https://console.coalescent.cloud" target="_blank" class="bg-brand-600 text-ink font-semibold px-4 py-2 rounded-md hover:bg-brand-700 transition-colors">Console</a>
       </div>
     </div>
   </nav>
@@ -69,41 +78,43 @@
 
   <style>
     .prose {
-      color: #374151;
+      color: #B4C2CB;
     }
     .prose h2 {
       font-size: 2rem;
       font-weight: 700;
       margin-top: 2rem;
       margin-bottom: 1rem;
-      color: #111827;
+      color: #E8F1F2;
     }
     .prose h3 {
       font-size: 1.5rem;
       font-weight: 600;
       margin-top: 1.5rem;
       margin-bottom: 0.75rem;
-      color: #111827;
+      color: #E8F1F2;
     }
     .prose p {
       margin-bottom: 1.25rem;
       line-height: 1.75;
     }
     .prose a {
-      color: #0284c1;
+      color: #00C2B8;
       text-decoration: none;
     }
     .prose a:hover {
       text-decoration: underline;
     }
     .prose code {
-      background: #f3f4f6;
+      background: #121C2C;
+      color: #E8F1F2;
       padding: 0.2rem 0.4rem;
       border-radius: 0.25rem;
       font-size: 0.875em;
     }
     .prose pre {
-      background: #1e293b;
+      background: #070C16;
+      border: 1px solid #1C2839;
       margin: 1.5rem 0;
     }
     .prose pre code {
@@ -123,11 +134,11 @@
       margin: 0.5rem 0;
     }
     .prose blockquote {
-      border-left: 4px solid #0284c1;
+      border-left: 4px solid #00C2B8;
       padding-left: 1rem;
       margin: 1.5rem 0;
       font-style: italic;
-      color: #6b7280;
+      color: #8CA0AD;
     }
   </style>
 
@@ -140,9 +151,9 @@
 
   </main>
 
-  <footer class="bg-white border-t mt-16">
+  <footer class="bg-depth border-t mt-16">
     <div class="max-w-4xl mx-auto px-4 py-8 text-center text-gray-600">
-      <p>&copy; 2026 Carolina Cloud. All rights reserved.</p>
+      <p>&copy; 2026 Coalescent. All rights reserved.</p>
     </div>
   </footer>
 </body>
