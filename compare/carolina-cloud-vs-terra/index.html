@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carolina Cloud vs Terra: Pricing, Egress &amp; Which to Choose</title>
+<meta name="description" content="Carolina Cloud vs Terra (Broad Institute): WDL workspaces on Google Cloud vs Nextflow, notebooks and $0 egress on Carolina Cloud. When each makes sense.">
+<link rel="canonical" href="https://carolinacloud.io/compare/carolina-cloud-vs-terra/">
+<meta name="robots" content="index, follow, max-snippet:-1">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Carolina Cloud">
+<meta property="og:title" content="Carolina Cloud vs Terra: Pricing, Egress &amp; Which to Choose">
+<meta property="og:description" content="Carolina Cloud vs Terra (Broad Institute): WDL workspaces on Google Cloud vs Nextflow, notebooks and $0 egress on Carolina Cloud. When each makes sense.">
+<meta property="og:url" content="https://carolinacloud.io/compare/carolina-cloud-vs-terra/">
+<meta property="og:image" content="https://carolinacloud.io/imessage-preview.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/cloud.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f4f5f3;--paper-2:#fff;--paper-3:#eaece8;--ink:#12171c;--graphite:#4a545c;--muted:#6f7880;--rule:#dce0db;--rule-strong:#c6ccc3;--carolina:#4b9cd3;--carolina-deep:#1f5c87;--carolina-wash:#e4eff7;--good:#0f6b4f;--good-wash:#e3f0ea;--r:7px;--r-lg:14px;
+--font-display:"Space Grotesk","Inter",system-ui,sans-serif;--font-body:"Public Sans","Inter",system-ui,sans-serif;--font-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#070b12;--paper-2:#0d1522;--paper-3:#0a1019;--ink:#eef3f8;--graphite:#a6b1be;--muted:#8693a3;--rule:rgb(255 255 255/.08);--rule-strong:rgb(255 255 255/.16);--carolina:#1a9ad6;--carolina-deep:#6cc3ee;--carolina-wash:#0b2133;--good:#5fd3a5;--good-wash:#0b2a22}}
+:root[data-theme="dark"]{--paper:#070b12;--paper-2:#0d1522;--paper-3:#0a1019;--ink:#eef3f8;--graphite:#a6b1be;--muted:#8693a3;--rule:rgb(255 255 255/.08);--rule-strong:rgb(255 255 255/.16);--carolina:#1a9ad6;--carolina-deep:#6cc3ee;--carolina-wash:#0b2133;--good:#5fd3a5;--good-wash:#0b2a22}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--graphite);font:16px/1.65 var(--font-body)}
+a{color:var(--carolina-deep)}a:hover{text-decoration-thickness:2px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+.narrow{max-width:760px}
+header.top{border-bottom:1px solid var(--rule);background:var(--paper)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:60px}
+.brand{font:700 18px var(--font-display);color:var(--ink);text-decoration:none;letter-spacing:-.01em}
+.navlinks{display:flex;gap:18px;align-items:center;font-size:14.5px}
+.navlinks a{color:var(--graphite);text-decoration:none}.navlinks a:hover{color:var(--ink)}
+.btn{display:inline-block;background:var(--carolina-deep);color:var(--paper)!important;padding:9px 16px;border-radius:var(--r);text-decoration:none;font-weight:600;font-size:14.5px}
+.btn.ghost{background:transparent;color:var(--ink)!important;border:1px solid var(--rule-strong)}
+.crumbs{font:13px var(--font-mono);color:var(--muted);padding-top:28px}.crumbs a{color:var(--muted)}
+h1,h2,h3{font-family:var(--font-display);color:var(--ink);letter-spacing:-.02em;line-height:1.15}
+h1{font-size:clamp(32px,5vw,52px);margin:14px 0 16px}
+h2{font-size:clamp(23px,3vw,30px);margin:56px 0 14px}
+h3{font-size:19px;margin:0 0 8px}
+.lede{font-size:clamp(17px,2vw,19.5px);color:var(--graphite);max-width:62ch}
+.kicker{font:500 12px var(--font-mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.verdict{background:var(--paper-2);border:1px solid var(--rule);border-left:4px solid var(--carolina);border-radius:var(--r-lg);padding:20px 22px;margin:20px 0 24px}
+.verdict h2{font-size:clamp(18px,2.2vw,21px);margin:0}
+.verdict p{margin:8px 0 0;font-size:clamp(16.5px,1.9vw,18.5px);color:var(--ink)}
+.tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:var(--r-lg);background:var(--paper-2)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:14.5px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--rule);vertical-align:top}
+tr:last-child td{border-bottom:0}
+thead th{font:600 13px var(--font-mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);background:var(--paper-3)}
+tbody th{font-weight:600;color:var(--ink);width:24%}
+td.num{font-family:var(--font-mono);font-size:13.5px}
+.note{font-size:13.5px;color:var(--muted);margin-top:10px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+@media (max-width:720px){.two{grid-template-columns:1fr}}
+.panel{background:var(--paper-2);border:1px solid var(--rule);border-radius:var(--r-lg);padding:20px 22px}
+.panel.cc{border-top:3px solid var(--carolina)}.panel.them{border-top:3px solid var(--rule-strong)}
+.panel ul{margin:8px 0 0;padding-left:20px}.panel li{margin:7px 0}
+.prose p{max-width:68ch}
+details{border-bottom:1px solid var(--rule);padding:14px 0}
+summary{cursor:pointer;font-weight:600;color:var(--ink);font-size:16.5px}
+details p{margin:10px 0 0;max-width:68ch}
+.cta{margin:64px 0 0;padding:28px;border-radius:var(--r-lg);background:var(--carolina-wash);border:1px solid var(--rule)}
+.cta h2{margin-top:0}.cta .row{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;margin-top:24px}
+.card{display:flex;flex-direction:column;gap:10px;background:var(--paper-2);border:1px solid var(--rule);border-radius:var(--r-lg);padding:20px;text-decoration:none;color:var(--graphite);transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--carolina);transform:translateY(-2px)}
+.card h3{margin:0;font-size:20px}.card .cat{font:500 11.5px var(--font-mono);text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.card p{margin:0;font-size:14.5px}.card .go{margin-top:auto;font-weight:600;color:var(--carolina-deep);font-size:14.5px}
+.rate{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:var(--r-lg);overflow:hidden;margin-top:20px}
+.rate div{background:var(--paper-2);padding:14px 16px}.rate b{display:block;font:600 18px var(--font-mono);color:var(--ink)}.rate span{font-size:13px;color:var(--muted)}
+.related{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.related a{font-size:14px;border:1px solid var(--rule-strong);border-radius:999px;padding:5px 12px;text-decoration:none;color:var(--graphite)}
+.related a:hover{border-color:var(--carolina);color:var(--ink)}
+footer.bot{margin-top:72px;border-top:1px solid var(--rule);padding:28px 0 40px;font-size:13.5px;color:var(--muted)}
+footer.bot .wrap{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between}footer.bot a{color:var(--muted)}
+@media (max-width:560px){.navlinks .hide-sm{display:none}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Carolina Cloud vs Terra: Pricing, Egress & Which to Choose","url":"https://carolinacloud.io/compare/carolina-cloud-vs-terra/","description":"Carolina Cloud vs Terra (Broad Institute): WDL workspaces on Google Cloud vs Nextflow, notebooks and $0 egress on Carolina Cloud. When each makes sense.","dateModified":"2026-11-25","about":[{"@type":"Organization","name":"Carolina Cloud","url":"https://carolinacloud.io"},{"@type":"Organization","name":"Terra"}],"publisher":{"@type":"Organization","name":"Carolina Cloud","url":"https://carolinacloud.io"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://carolinacloud.io/"},{"@type":"ListItem","position":2,"name":"Compare","item":"https://carolinacloud.io/compare/"},{"@type":"ListItem","position":3,"name":"Carolina Cloud vs Terra","item":"https://carolinacloud.io/compare/carolina-cloud-vs-terra/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Should you use Carolina Cloud or Terra for genomics analysis?","acceptedAnswer":{"@type":"Answer","text":"If your work depends on NIH consortium data in AnVIL or BioData Catalyst, or on WDL best-practice workflows like GATK and WARP, Terra is the natural home, and its platform layer is free. If you run Nextflow pipelines, want $0 egress, or want predictable prices without managing a Google Cloud billing account, Carolina Cloud fits better."}},{"@type":"Question","name":"Is Terra free?","acceptedAnswer":{"@type":"Answer","text":"Terra charges no platform fee, but you pay Google Cloud for compute, storage and egress through your own billing account."}},{"@type":"Question","name":"Can I run Nextflow on Terra?","acceptedAnswer":{"@type":"Answer","text":"Terra's native workflow language is WDL. Nextflow support has been announced as upcoming; check Terra's current documentation. On Carolina Cloud, Nextflow runs today via nf-ccloud."}},{"@type":"Question","name":"Does Carolina Cloud charge egress?","acceptedAnswer":{"@type":"Answer","text":"No. Egress is $0."}}]}</script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="/">Carolina Cloud</a>
+  <nav class="navlinks">
+    <a href="/compare/">Compare</a>
+    <a class="hide-sm" href="/blog/">Blog</a>
+    <a class="btn" href="https://console.carolinacloud.io">Console</a>
+  </nav>
+</div></header>
+<main>
+
+<div class="wrap narrow">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/compare/">Compare</a> / vs Terra</nav>
+  <p class="kicker" style="margin-top:22px">Genomics &amp; data platforms · prices checked November 2026</p>
+  <h1>Carolina Cloud vs Terra</h1>
+  <div class="verdict"><h2 id="short-answer">Should you use Carolina Cloud or Terra for genomics analysis?</h2><p>If your work depends on NIH consortium data in AnVIL or BioData Catalyst, or on WDL best-practice workflows like GATK and WARP, Terra is the natural home, and its platform layer is free. If you run Nextflow pipelines, want $0 egress, or want predictable prices without managing a Google Cloud billing account, Carolina Cloud fits better.</p></div>
+  <p class="lede">Terra is a research workspace platform from the Broad Institute, widely used in academia and NIH consortia such as AnVIL and BioData Catalyst. It runs WDL workflows with Cromwell and notebooks on Google Cloud, billed to your own Google billing account. Carolina Cloud runs Nextflow pipelines, notebooks and genomics tools on our own hardware.</p>
+</div>
+
+<div class="wrap">
+  <h2 id="at-a-glance">At a glance</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th scope="col"></th><th scope="col">Carolina Cloud</th><th scope="col">Terra</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">What it is</th><td>Cloud with a built-in Nextflow executor, notebooks, genomics containers and storage</td><td>Research workspaces with data tables, workflows and notebooks</td></tr>
+      <tr><th scope="row">Workflow engines</th><td>Nextflow via nf-ccloud</td><td>WDL (Cromwell) natively; Nextflow support announced as upcoming, check Terra's current docs</td></tr>
+      <tr><th scope="row">Notebooks</th><td>JupyterLab, RStudio Server with Bioconductor, genomics shell</td><td>Jupyter, RStudio, Galaxy</td></tr>
+      <tr><th scope="row">Pricing</th><td>Published rate card, no platform fee</td><td>No platform fee; Google Cloud compute and storage at list price, billed to your Google account</td></tr>
+      <tr><th scope="row">Egress</th><td><strong>$0</strong></td><td>Google Cloud egress rates apply</td></tr>
+      <tr><th scope="row">Data access</th><td>Bring your data; S3-compatible storage</td><td>Direct access to NIH and consortium datasets (AnVIL, BioData Catalyst)</td></tr>
+      <tr><th scope="row">Underlying cloud</th><td>Carolina Cloud's own hardware, North Carolina</td><td>Google Cloud</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">Terra pricing from Terra's support documentation. Carolina Cloud prices are from our public rate card: $0.005/vCPU/hr general-purpose, $0.01/vCPU/hr high-performance, $0.005/GiB RAM/hr, $0.0001/GiB NVMe/hr, $0 egress. Monthly figures assume 730 hours. Competitor prices are list, on-demand, and change often; check their pricing page before deciding. <a href="https://support.terra.bio/hc/en-us/articles/360048632271" rel="nofollow noopener">Terra pricing source</a>.</p>
+
+  <h2 id="which-to-choose">Which one should you choose?</h2>
+  <div class="two">
+    <div class="panel cc"><h3>Choose Carolina Cloud if…</h3><ul><li>Your pipelines are written in Nextflow, including nf-core</li><li>You want $0 egress when you download results or share data</li><li>You want lower compute prices than Google Cloud list</li><li>You don't want to set up and manage a Google Cloud billing account</li></ul></div>
+    <div class="panel them"><h3>Choose Terra if…</h3><ul><li>You need NIH controlled-access or consortium data in AnVIL or BioData Catalyst</li><li>Your pipelines are WDL, such as GATK or WARP best-practice workflows</li><li>Your lab or consortium already collaborates in Terra workspaces</li><li>You want a free platform layer and are fine paying Google Cloud directly</li></ul></div>
+  </div>
+</div>
+
+<div class="wrap narrow prose">
+
+
+  <h2 id="faq">Frequently asked questions</h2>
+  <details><summary>Is Terra free?</summary><p>Terra charges no platform fee, but you pay Google Cloud for compute, storage and egress through your own billing account.</p></details>
+  <details><summary>Can I run Nextflow on Terra?</summary><p>Terra's native workflow language is WDL. Nextflow support has been announced as upcoming; check Terra's current documentation. On Carolina Cloud, Nextflow runs today via nf-ccloud.</p></details>
+  <details><summary>Does Carolina Cloud charge egress?</summary><p>No. Egress is $0.</p></details>
+
+  <section class="cta">
+  <h2>Try Carolina Cloud alongside Terra</h2>
+  <p>Spin up a dedicated-core VM, container, or notebook in seconds and benchmark your own workload. Questions go straight to the founders who run the hardware.</p>
+  <div class="row">
+    <a class="btn" href="https://console.carolinacloud.io">Open the console</a>
+    <a class="btn ghost" href="mailto:hello@carolinacloud.io">Talk to an engineer</a>
+  </div>
+</section>
+
+  <h2 style="font-size:20px">Other comparisons</h2>
+  <div class="related"><a href="/compare/carolina-cloud-vs-aws/">vs AWS</a><a href="/compare/carolina-cloud-vs-azure/">vs Microsoft Azure</a><a href="/compare/carolina-cloud-vs-google-cloud/">vs Google Cloud</a><a href="/compare/carolina-cloud-vs-oracle-cloud/">vs Oracle Cloud (OCI)</a><a href="/compare/carolina-cloud-vs-digitalocean/">vs DigitalOcean</a><a href="/compare/carolina-cloud-vs-linode/">vs Linode (Akamai Cloud)</a><a href="/compare/carolina-cloud-vs-vultr/">vs Vultr</a><a href="/compare/carolina-cloud-vs-hetzner/">vs Hetzner</a><a href="/compare/carolina-cloud-vs-ovhcloud/">vs OVHcloud</a><a href="/compare/carolina-cloud-vs-scaleway/">vs Scaleway</a><a href="/compare/carolina-cloud-vs-latitude-sh/">vs Latitude.sh</a><a href="/compare/carolina-cloud-vs-lambda/">vs Lambda</a><a href="/compare/carolina-cloud-vs-runpod/">vs RunPod</a><a href="/compare/carolina-cloud-vs-coreweave/">vs CoreWeave</a><a href="/compare/carolina-cloud-vs-vast-ai/">vs Vast.ai</a><a href="/compare/carolina-cloud-vs-latch-bio/">vs LatchBio</a><a href="/compare/carolina-cloud-vs-seqera/">vs Seqera Platform</a><a href="/compare/carolina-cloud-vs-dnanexus/">vs DNAnexus</a><a href="/compare/carolina-cloud-vs-form-bio/">vs Form Bio</a><a href="/compare/carolina-cloud-vs-aws-healthomics/">vs AWS HealthOmics</a><a href="/compare/carolina-cloud-vs-databricks/">vs Databricks</a></div>
+</div>
+</main>
+<footer class="bot"><div class="wrap">
+  <span>© 2026 Carolina Cloud · Chapel Hill, North Carolina</span>
+  <span><a href="/">Home</a> · <a href="/compare/">All comparisons</a> · <a href="mailto:hello@carolinacloud.io">hello@carolinacloud.io</a> · <a href="tel:+19106215467">(910) 621-5467</a></span>
+</div></footer>
+</body>
+</html>

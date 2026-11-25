@@ -42,8 +42,9 @@ h2{font-size:clamp(23px,3vw,30px);margin:56px 0 14px}
 h3{font-size:19px;margin:0 0 8px}
 .lede{font-size:clamp(17px,2vw,19.5px);color:var(--graphite);max-width:62ch}
 .kicker{font:500 12px var(--font-mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
-.verdict{background:var(--paper-2);border:1px solid var(--rule);border-left:4px solid var(--carolina);border-radius:var(--r-lg);padding:20px 22px;margin:28px 0}
-.verdict p{margin:6px 0 0}
+.verdict{background:var(--paper-2);border:1px solid var(--rule);border-left:4px solid var(--carolina);border-radius:var(--r-lg);padding:20px 22px;margin:20px 0 24px}
+.verdict h2{font-size:clamp(18px,2.2vw,21px);margin:0}
+.verdict p{margin:8px 0 0;font-size:clamp(16.5px,1.9vw,18.5px);color:var(--ink)}
 .tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:var(--r-lg);background:var(--paper-2)}
 table{border-collapse:collapse;width:100%;min-width:560px;font-size:14.5px}
 th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--rule);vertical-align:top}
@@ -79,7 +80,7 @@ footer.bot .wrap{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Carolina Cloud vs Scaleway: Pricing, Egress & Which to Choose","url":"https://carolinacloud.io/compare/carolina-cloud-vs-scaleway/","description":"Carolina Cloud vs Scaleway: compare compute instance prices, egress and GPUs, and when Scaleway's European data sovereignty is the deciding factor.","dateModified":"2026-11-25","about":[{"@type":"Organization","name":"Carolina Cloud","url":"https://carolinacloud.io"},{"@type":"Organization","name":"Scaleway"}],"publisher":{"@type":"Organization","name":"Carolina Cloud","url":"https://carolinacloud.io"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://carolinacloud.io/"},{"@type":"ListItem","position":2,"name":"Compare","item":"https://carolinacloud.io/compare/"},{"@type":"ListItem","position":3,"name":"Carolina Cloud vs Scaleway","item":"https://carolinacloud.io/compare/carolina-cloud-vs-scaleway/"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is Carolina Cloud cheaper than Scaleway?","acceptedAnswer":{"@type":"Answer","text":"For comparable dedicated compute instances, yes."}},{"@type":"Question","name":"Does Scaleway have US regions?","acceptedAnswer":{"@type":"Answer","text":"No. Scaleway's regions are in Europe."}},{"@type":"Question","name":"Where is Carolina Cloud located?","acceptedAnswer":{"@type":"Answer","text":"In a Tier 3 datacenter in North Carolina, USA."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Should you use Carolina Cloud or Scaleway?","acceptedAnswer":{"@type":"Answer","text":"If your data must stay in the EU, choose Scaleway. If you're US-based or simply want lower-cost dedicated compute with unmetered egress, Carolina Cloud is cheaper and closer to North American users."}},{"@type":"Question","name":"Is Carolina Cloud cheaper than Scaleway?","acceptedAnswer":{"@type":"Answer","text":"For comparable dedicated compute instances, yes."}},{"@type":"Question","name":"Does Scaleway have US regions?","acceptedAnswer":{"@type":"Answer","text":"No. Scaleway's regions are in Europe."}},{"@type":"Question","name":"Where is Carolina Cloud located?","acceptedAnswer":{"@type":"Answer","text":"In a Tier 3 datacenter in North Carolina, USA."}}]}</script>
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -96,8 +97,8 @@ footer.bot .wrap{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space
   <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/compare/">Compare</a> / vs Scaleway</nav>
   <p class="kicker" style="margin-top:22px">Developer clouds &amp; VPS · prices checked November 2026</p>
   <h1>Carolina Cloud vs Scaleway</h1>
+  <div class="verdict"><h2 id="short-answer">Should you use Carolina Cloud or Scaleway?</h2><p>If your data must stay in the EU, choose Scaleway. If you're US-based or simply want lower-cost dedicated compute with unmetered egress, Carolina Cloud is cheaper and closer to North American users.</p></div>
   <p class="lede">Scaleway is a French cloud with a strong European sovereignty story, a wide instance range and GPUs. Carolina Cloud is US-based, focused on dedicated-core compute, GPUs and research environments.</p>
-  <div class="verdict"><span class="kicker">Short answer</span><p>If your data must stay in the EU, choose Scaleway. If you're US-based or simply want lower-cost dedicated compute with unmetered egress, Carolina Cloud is cheaper and closer to North American users.</p></div>
 </div>
 
 <div class="wrap">
@@ -143,7 +144,7 @@ footer.bot .wrap{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space
 </section>
 
   <h2 style="font-size:20px">Other comparisons</h2>
-  <div class="related"><a href="/compare/carolina-cloud-vs-aws/">vs AWS</a><a href="/compare/carolina-cloud-vs-azure/">vs Microsoft Azure</a><a href="/compare/carolina-cloud-vs-google-cloud/">vs Google Cloud</a><a href="/compare/carolina-cloud-vs-oracle-cloud/">vs Oracle Cloud (OCI)</a><a href="/compare/carolina-cloud-vs-digitalocean/">vs DigitalOcean</a><a href="/compare/carolina-cloud-vs-linode/">vs Linode (Akamai Cloud)</a><a href="/compare/carolina-cloud-vs-vultr/">vs Vultr</a><a href="/compare/carolina-cloud-vs-hetzner/">vs Hetzner</a><a href="/compare/carolina-cloud-vs-ovhcloud/">vs OVHcloud</a><a href="/compare/carolina-cloud-vs-latitude-sh/">vs Latitude.sh</a><a href="/compare/carolina-cloud-vs-lambda/">vs Lambda</a><a href="/compare/carolina-cloud-vs-runpod/">vs RunPod</a><a href="/compare/carolina-cloud-vs-coreweave/">vs CoreWeave</a><a href="/compare/carolina-cloud-vs-vast-ai/">vs Vast.ai</a><a href="/compare/carolina-cloud-vs-aws-healthomics/">vs AWS HealthOmics</a><a href="/compare/carolina-cloud-vs-databricks/">vs Databricks</a></div>
+  <div class="related"><a href="/compare/carolina-cloud-vs-aws/">vs AWS</a><a href="/compare/carolina-cloud-vs-azure/">vs Microsoft Azure</a><a href="/compare/carolina-cloud-vs-google-cloud/">vs Google Cloud</a><a href="/compare/carolina-cloud-vs-oracle-cloud/">vs Oracle Cloud (OCI)</a><a href="/compare/carolina-cloud-vs-digitalocean/">vs DigitalOcean</a><a href="/compare/carolina-cloud-vs-linode/">vs Linode (Akamai Cloud)</a><a href="/compare/carolina-cloud-vs-vultr/">vs Vultr</a><a href="/compare/carolina-cloud-vs-hetzner/">vs Hetzner</a><a href="/compare/carolina-cloud-vs-ovhcloud/">vs OVHcloud</a><a href="/compare/carolina-cloud-vs-latitude-sh/">vs Latitude.sh</a><a href="/compare/carolina-cloud-vs-lambda/">vs Lambda</a><a href="/compare/carolina-cloud-vs-runpod/">vs RunPod</a><a href="/compare/carolina-cloud-vs-coreweave/">vs CoreWeave</a><a href="/compare/carolina-cloud-vs-vast-ai/">vs Vast.ai</a><a href="/compare/carolina-cloud-vs-latch-bio/">vs LatchBio</a><a href="/compare/carolina-cloud-vs-seqera/">vs Seqera Platform</a><a href="/compare/carolina-cloud-vs-dnanexus/">vs DNAnexus</a><a href="/compare/carolina-cloud-vs-terra/">vs Terra</a><a href="/compare/carolina-cloud-vs-form-bio/">vs Form Bio</a><a href="/compare/carolina-cloud-vs-aws-healthomics/">vs AWS HealthOmics</a><a href="/compare/carolina-cloud-vs-databricks/">vs Databricks</a></div>
 </div>
 </main>
 <footer class="bot"><div class="wrap">
