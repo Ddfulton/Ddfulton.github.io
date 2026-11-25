@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carolina Cloud vs Other Clouds: Honest Price &amp; Feature Comparisons</title>
+<meta name="description" content="How Carolina Cloud compares with AWS, Azure, Google Cloud, Hetzner, DigitalOcean, Vultr, Linode and 10 more providers on price, egress, and fit. Honest about when the other option is better.">
+<link rel="canonical" href="https://carolinacloud.io/compare/">
+<meta name="robots" content="index, follow, max-snippet:-1">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Carolina Cloud">
+<meta property="og:title" content="Carolina Cloud vs Other Clouds: Honest Price &amp; Feature Comparisons">
+<meta property="og:description" content="How Carolina Cloud compares with AWS, Azure, Google Cloud, Hetzner, DigitalOcean, Vultr, Linode and 10 more providers on price, egress, and fit. Honest about when the other option is better.">
+<meta property="og:url" content="https://carolinacloud.io/compare/">
+<meta property="og:image" content="https://carolinacloud.io/imessage-preview.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/cloud.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f4f5f3;--paper-2:#fff;--paper-3:#eaece8;--ink:#12171c;--graphite:#4a545c;--muted:#6f7880;--rule:#dce0db;--rule-strong:#c6ccc3;--carolina:#4b9cd3;--carolina-deep:#1f5c87;--carolina-wash:#e4eff7;--good:#0f6b4f;--good-wash:#e3f0ea;--r:7px;--r-lg:14px;
+--font-display:"Space Grotesk","Inter",system-ui,sans-serif;--font-body:"Public Sans","Inter",system-ui,sans-serif;--font-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#070b12;--paper-2:#0d1522;--paper-3:#0a1019;--ink:#eef3f8;--graphite:#a6b1be;--muted:#8693a3;--rule:rgb(255 255 255/.08);--rule-strong:rgb(255 255 255/.16);--carolina:#1a9ad6;--carolina-deep:#6cc3ee;--carolina-wash:#0b2133;--good:#5fd3a5;--good-wash:#0b2a22}}
+:root[data-theme="dark"]{--paper:#070b12;--paper-2:#0d1522;--paper-3:#0a1019;--ink:#eef3f8;--graphite:#a6b1be;--muted:#8693a3;--rule:rgb(255 255 255/.08);--rule-strong:rgb(255 255 255/.16);--carolina:#1a9ad6;--carolina-deep:#6cc3ee;--carolina-wash:#0b2133;--good:#5fd3a5;--good-wash:#0b2a22}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--graphite);font:16px/1.65 var(--font-body)}
+a{color:var(--carolina-deep)}a:hover{text-decoration-thickness:2px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+.narrow{max-width:760px}
+header.top{border-bottom:1px solid var(--rule);background:var(--paper)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:60px}
+.brand{font:700 18px var(--font-display);color:var(--ink);text-decoration:none;letter-spacing:-.01em}
+.navlinks{display:flex;gap:18px;align-items:center;font-size:14.5px}
+.navlinks a{color:var(--graphite);text-decoration:none}.navlinks a:hover{color:var(--ink)}
+.btn{display:inline-block;background:var(--carolina-deep);color:var(--paper)!important;padding:9px 16px;border-radius:var(--r);text-decoration:none;font-weight:600;font-size:14.5px}
+.btn.ghost{background:transparent;color:var(--ink)!important;border:1px solid var(--rule-strong)}
+.crumbs{font:13px var(--font-mono);color:var(--muted);padding-top:28px}.crumbs a{color:var(--muted)}
+h1,h2,h3{font-family:var(--font-display);color:var(--ink);letter-spacing:-.02em;line-height:1.15}
+h1{font-size:clamp(32px,5vw,52px);margin:14px 0 16px}
+h2{font-size:clamp(23px,3vw,30px);margin:56px 0 14px}
+h3{font-size:19px;margin:0 0 8px}
+.lede{font-size:clamp(17px,2vw,19.5px);color:var(--graphite);max-width:62ch}
+.kicker{font:500 12px var(--font-mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.verdict{background:var(--paper-2);border:1px solid var(--rule);border-left:4px solid var(--carolina);border-radius:var(--r-lg);padding:20px 22px;margin:28px 0}
+.verdict p{margin:6px 0 0}
+.tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:var(--r-lg);background:var(--paper-2)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:14.5px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--rule);vertical-align:top}
+tr:last-child td{border-bottom:0}
+thead th{font:600 13px var(--font-mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);background:var(--paper-3)}
+tbody th{font-weight:600;color:var(--ink);width:24%}
+td.num{font-family:var(--font-mono);font-size:13.5px}
+.note{font-size:13.5px;color:var(--muted);margin-top:10px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+@media (max-width:720px){.two{grid-template-columns:1fr}}
+.panel{background:var(--paper-2);border:1px solid var(--rule);border-radius:var(--r-lg);padding:20px 22px}
+.panel.cc{border-top:3px solid var(--carolina)}.panel.them{border-top:3px solid var(--rule-strong)}
+.panel ul{margin:8px 0 0;padding-left:20px}.panel li{margin:7px 0}
+.prose p{max-width:68ch}
+details{border-bottom:1px solid var(--rule);padding:14px 0}
+summary{cursor:pointer;font-weight:600;color:var(--ink);font-size:16.5px}
+details p{margin:10px 0 0;max-width:68ch}
+.cta{margin:64px 0 0;padding:28px;border-radius:var(--r-lg);background:var(--carolina-wash);border:1px solid var(--rule)}
+.cta h2{margin-top:0}.cta .row{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;margin-top:24px}
+.card{display:flex;flex-direction:column;gap:10px;background:var(--paper-2);border:1px solid var(--rule);border-radius:var(--r-lg);padding:20px;text-decoration:none;color:var(--graphite);transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--carolina);transform:translateY(-2px)}
+.card h3{margin:0;font-size:20px}.card .cat{font:500 11.5px var(--font-mono);text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.card p{margin:0;font-size:14.5px}.card .go{margin-top:auto;font-weight:600;color:var(--carolina-deep);font-size:14.5px}
+.rate{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:var(--r-lg);overflow:hidden;margin-top:20px}
+.rate div{background:var(--paper-2);padding:14px 16px}.rate b{display:block;font:600 18px var(--font-mono);color:var(--ink)}.rate span{font-size:13px;color:var(--muted)}
+.related{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.related a{font-size:14px;border:1px solid var(--rule-strong);border-radius:999px;padding:5px 12px;text-decoration:none;color:var(--graphite)}
+.related a:hover{border-color:var(--carolina);color:var(--ink)}
+footer.bot{margin-top:72px;border-top:1px solid var(--rule);padding:28px 0 40px;font-size:13.5px;color:var(--muted)}
+footer.bot .wrap{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between}footer.bot a{color:var(--muted)}
+@media (max-width:560px){.navlinks .hide-sm{display:none}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Carolina Cloud vs Other Clouds: Honest Price & Feature Comparisons","url":"https://carolinacloud.io/compare/","description":"How Carolina Cloud compares with AWS, Azure, Google Cloud, Hetzner, DigitalOcean, Vultr, Linode and 10 more providers on price, egress, and fit. Honest about when the other option is better.","dateModified":"2026-11-25","hasPart":[{"@type":"WebPage","name":"Carolina Cloud vs AWS","url":"https://carolinacloud.io/compare/carolina-cloud-vs-aws/"},{"@type":"WebPage","name":"Carolina Cloud vs Microsoft Azure","url":"https://carolinacloud.io/compare/carolina-cloud-vs-azure/"},{"@type":"WebPage","name":"Carolina Cloud vs Google Cloud","url":"https://carolinacloud.io/compare/carolina-cloud-vs-google-cloud/"},{"@type":"WebPage","name":"Carolina Cloud vs Oracle Cloud (OCI)","url":"https://carolinacloud.io/compare/carolina-cloud-vs-oracle-cloud/"},{"@type":"WebPage","name":"Carolina Cloud vs DigitalOcean","url":"https://carolinacloud.io/compare/carolina-cloud-vs-digitalocean/"},{"@type":"WebPage","name":"Carolina Cloud vs Linode (Akamai Cloud)","url":"https://carolinacloud.io/compare/carolina-cloud-vs-linode/"},{"@type":"WebPage","name":"Carolina Cloud vs Vultr","url":"https://carolinacloud.io/compare/carolina-cloud-vs-vultr/"},{"@type":"WebPage","name":"Carolina Cloud vs Hetzner","url":"https://carolinacloud.io/compare/carolina-cloud-vs-hetzner/"},{"@type":"WebPage","name":"Carolina Cloud vs OVHcloud","url":"https://carolinacloud.io/compare/carolina-cloud-vs-ovhcloud/"},{"@type":"WebPage","name":"Carolina Cloud vs Scaleway","url":"https://carolinacloud.io/compare/carolina-cloud-vs-scaleway/"},{"@type":"WebPage","name":"Carolina Cloud vs Latitude.sh","url":"https://carolinacloud.io/compare/carolina-cloud-vs-latitude-sh/"},{"@type":"WebPage","name":"Carolina Cloud vs Lambda","url":"https://carolinacloud.io/compare/carolina-cloud-vs-lambda/"},{"@type":"WebPage","name":"Carolina Cloud vs RunPod","url":"https://carolinacloud.io/compare/carolina-cloud-vs-runpod/"},{"@type":"WebPage","name":"Carolina Cloud vs CoreWeave","url":"https://carolinacloud.io/compare/carolina-cloud-vs-coreweave/"},{"@type":"WebPage","name":"Carolina Cloud vs Vast.ai","url":"https://carolinacloud.io/compare/carolina-cloud-vs-vast-ai/"},{"@type":"WebPage","name":"Carolina Cloud vs AWS HealthOmics","url":"https://carolinacloud.io/compare/carolina-cloud-vs-aws-healthomics/"},{"@type":"WebPage","name":"Carolina Cloud vs Databricks","url":"https://carolinacloud.io/compare/carolina-cloud-vs-databricks/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://carolinacloud.io/"},{"@type":"ListItem","position":2,"name":"Compare","item":"https://carolinacloud.io/compare/"}]}</script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="/">Carolina Cloud</a>
+  <nav class="navlinks">
+    <a href="/compare/">Compare</a>
+    <a class="hide-sm" href="/blog/">Blog</a>
+    <a class="btn" href="https://console.carolinacloud.io">Console</a>
+  </nav>
+</div></header>
+<main>
+
+<div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / Compare</nav>
+  <h1>Carolina Cloud compared with other clouds</h1>
+  <p class="lede">Carolina Cloud is a founder-operated cloud in a Tier 3 datacenter in North Carolina: dedicated AMD EPYC cores, NVMe, GPUs, notebooks, and S3-compatible storage, with no egress fees. These pages compare us with 17 other providers on list price and on fit. Where another provider is the better choice, we say so.</p>
+
+  <h2 style="margin-top:36px">Our rate card</h2>
+  <div class="rate">
+    <div><b>$0.005/vCPU/hr</b><span>General-purpose AMD EPYC vCPU</span></div>
+    <div><b>$0.01/vCPU/hr</b><span>High-performance vCPU (5 GHz+ class)</span></div>
+    <div><b>$0.005/GiB/hr</b><span>RAM</span></div>
+    <div><b>$0.0001/GiB/hr</b><span>Hot NVMe storage</span></div>
+    <div><b>$0.009/GiB/mo</b><span>Warm S3-compatible storage</span></div>
+    <div><b>$1.55/TB/mo</b><span>Cold storage</span></div>
+    <div><b>$1.75/hr</b><span>RTX PRO 6000 Blackwell GPU</span></div>
+    <div><b>$0</b><span>Data egress, always</span></div>
+  </div>
+  <p class="note">An 8 vCPU / 16 GiB general-purpose instance is $0.12/hr (about $88/month). Prices checked November 2026.</p>
+
+  <h2>Hyperscalers</h2>
+  <div class="grid">
+    <a class="card" href="/compare/carolina-cloud-vs-aws/">
+      <span class="cat">Hyperscalers</span>
+      <h3>Carolina Cloud vs AWS</h3>
+      <p>Roughly a third of on-demand EC2 prices for dedicated compute, and no egress fees. AWS wins on breadth of services and global scale.</p>
+      <span class="go">Read the comparison →</span>
+    </a>
+    <a class="card" href="/compare/carolina-cloud-vs-azure/">
+      <span class="cat">Hyperscalers</span>
+      <h3>Carolina Cloud vs Microsoft Azure</h3>
+      <p>Well under Azure pay-as-you-go for dedicated compute, with no egress. Azure wins if you live in the Microsoft ecosystem.</p>
+      <span class="go">Read the comparison →</span>
+    </a>
+    <a class="card" href="/compare/carolina-cloud-vs-google-cloud/">
+      <span class="cat">Hyperscalers</span>
+      <h3>Carolina Cloud vs Google Cloud</h3>
+      <p>Lower prices than GCP's AMD instances and no $0.12/GB egress. GCP wins on BigQuery, GKE, TPUs and global reach.</p>
+      <span class="go">Read the comparison →</span>
+    </a>
+    <a class="card" href="/compare/carolina-cloud-vs-oracle-cloud/">
+      <span class="cat">Hyperscalers</span>
+      <h3>Carolina Cloud vs Oracle Cloud (OCI)</h3>
+      <p>OCI is the cheapest hyperscaler, and the total is close to ours. We charge less per vCPU; OCI charges less for RAM. The difference is fit.</p>
+      <span class="go">Read the comparison →</span>
+    </a>
+  </div>
+  <h2>Developer clouds &amp; VPS</h2>
+  <div class="grid">
+    <a class="card" href="/compare/carolina-cloud-vs-digitalocean/">
+      <span class="cat">Developer clouds &amp; VPS</span>
+      <h3>Carolina Cloud vs DigitalOcean</h3>
+      <p>Dedicated cores for about half the price of CPU-Optimized Droplets. DigitalOcean wins for small web apps and managed app hosting.</p>
+      <span class="go">Read the comparison →</span>
+    </a>
+    <a class="card" href="/compare/carolina-cloud-vs-linode/">
+      <span class="cat">Developer clouds &amp; VPS</span>
+      <h3>Carolina Cloud vs Linode (Akamai Cloud)</h3>
+      <p>Dedicated cores for less than Linode's Dedicated CPU plans. Akamai wins on global edge network and managed services.</p>
+      <span class="go">Read the comparison →</span>
+    </a>
+    <a class="card" href="/compare/carolina-cloud-vs-vultr/">
+      <span class="cat">Developer clouds &amp; VPS</span>
+      <h3>Carolina Cloud vs Vultr</h3>
+      <p>Lower prices than Vultr Optimized Cloud for dedicated cores, with no transfer caps. Vultr wins on 30+ global locations.</p>
+      <span class="go">Read the comparison →</span>
+    </a>
+    <a class="card" href="/compare/carolina-cloud-vs-hetzner/">
+      <span class="cat">Developer clouds &amp; VPS</span>
+      <h3>Carolina Cloud vs Hetzner</h3>
+      <p>Hetzner is hard to beat on price in Europe, and we say so. In the US the gap narrows, and Carolina Cloud adds unmetered egress and research tooling.</p>
+      <span class="go">Read the comparison →</span>
+    </a>
+    <a class="card" href="/compare/carolina-cloud-vs-ovhcloud/">
+      <span class="cat">Developer clouds &amp; VPS</span>
+      <h3>Carolina Cloud vs OVHcloud</h3>
+      <p>Both include egress. Carolina Cloud is lower per hour for compute instances; OVHcloud has more regions and cheap monthly bare metal.</p>
+      <span class="go">Read the comparison →</span>
+    </a>
+    <a class="card" href="/compare/carolina-cloud-vs-scaleway/">
+      <span class="cat">Developer clouds &amp; VPS</span>
+      <h3>Carolina Cloud vs Scaleway</h3>
+      <p>Lower instance prices and a US location. Scaleway wins when you need European data sovereignty.</p>
+      <span class="go">Read the comparison →</span>
+    </a>
+  </div>
+  <h2>Bare metal</h2>
+  <div class="grid">
+    <a class="card" href="/compare/carolina-cloud-vs-latitude-sh/">
+      <span class="cat">Bare metal</span>
+      <h3>Carolina Cloud vs Latitude.sh</h3>
+      <p>Latitude.sh is great for monthly bare metal across many cities. Carolina Cloud is better for hourly, elastic compute and research environments.</p>
+      <span class="go">Read the comparison →</span>
+    </a>
+  </div>
+  <h2>GPU clouds</h2>
+  <div class="grid">
+    <a class="card" href="/compare/carolina-cloud-vs-lambda/">
+      <span class="cat">GPU clouds</span>
+      <h3>Carolina Cloud vs Lambda</h3>
+      <p>Lambda is built for H100/B200 training. Carolina Cloud pairs RTX PRO Blackwell GPUs with cheap dedicated CPUs, notebooks and storage.</p>
+      <span class="go">Read the comparison →</span>
+    </a>
+    <a class="card" href="/compare/carolina-cloud-vs-runpod/">
+      <span class="cat">GPU clouds</span>
+      <h3>Carolina Cloud vs RunPod</h3>
+      <p>RunPod is great for cheap, bursty GPU pods and serverless inference. Carolina Cloud is a full compute cloud: CPUs, GPUs, notebooks and storage together.</p>
+      <span class="go">Read the comparison →</span>
+    </a>
+    <a class="card" href="/compare/carolina-cloud-vs-coreweave/">
+      <span class="cat">GPU clouds</span>
+      <h3>Carolina Cloud vs CoreWeave</h3>
+      <p>CoreWeave is built for AI labs running thousands of GPUs. Carolina Cloud is for teams that want simple, single-node GPU and CPU compute.</p>
+      <span class="go">Read the comparison →</span>
+    </a>
+    <a class="card" href="/compare/carolina-cloud-vs-vast-ai/">
+      <span class="cat">GPU clouds</span>
+      <h3>Carolina Cloud vs Vast.ai</h3>
+      <p>Vast.ai is the cheapest way to rent a GPU from a marketplace. Carolina Cloud trades that for known hardware, one secure datacenter and human support.</p>
+      <span class="go">Read the comparison →</span>
+    </a>
+  </div>
+  <h2>Genomics &amp; data platforms</h2>
+  <div class="grid">
+    <a class="card" href="/compare/carolina-cloud-vs-aws-healthomics/">
+      <span class="cat">Genomics &amp; data platforms</span>
+      <h3>Carolina Cloud vs AWS HealthOmics</h3>
+      <p>In our benchmark, nf-core/rnaseq ran faster and for less than half the cost. HealthOmics wins if you need to stay inside AWS.</p>
+      <span class="go">Read the comparison →</span>
+    </a>
+    <a class="card" href="/compare/carolina-cloud-vs-databricks/">
+      <span class="cat">Genomics &amp; data platforms</span>
+      <h3>Carolina Cloud vs Databricks</h3>
+      <p>Notebooks and big compute without DBU fees on top of VM costs. Databricks wins for Spark, Unity Catalog and governed data platforms.</p>
+      <span class="go">Read the comparison →</span>
+    </a>
+  </div>
+
+  <div class="narrow"><section class="cta">
+  <h2>Try Carolina Cloud</h2>
+  <p>Spin up a dedicated-core VM, container, or notebook in seconds and benchmark your own workload. Questions go straight to the founders who run the hardware.</p>
+  <div class="row">
+    <a class="btn" href="https://console.carolinacloud.io">Open the console</a>
+    <a class="btn ghost" href="mailto:hello@carolinacloud.io">Talk to an engineer</a>
+  </div>
+</section></div>
+</div>
+</main>
+<footer class="bot"><div class="wrap">
+  <span>© 2026 Carolina Cloud · Chapel Hill, North Carolina</span>
+  <span><a href="/">Home</a> · <a href="/compare/">All comparisons</a> · <a href="mailto:hello@carolinacloud.io">hello@carolinacloud.io</a> · <a href="tel:+19106215467">(910) 621-5467</a></span>
+</div></footer>
+</body>
+</html>
