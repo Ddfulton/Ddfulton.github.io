@@ -12,6 +12,37 @@ Docs: https://console.carolinacloud.io/docs/
 Blog: https://carolinacloud.substack.com  
 Contact: hello@carolinacloud.io | (910) 621-5467
 
+## Quick Answers
+
+Direct answers with real numbers from our own runs and published rate card (checked November 2026).
+
+**How much does it cost to run nf-core/rnaseq on Carolina Cloud?**
+$19.26 and 4.5 hours of wall-clock time for 8 human RNA-seq samples (123.3 GiB of gzipped FASTQ), Sentieon-accelerated, using our nf-ccloud Nextflow executor. The same pipeline cost $45 and took 5.5 hours on AWS HealthOmics; AWS Batch on-demand took 7–8 hours and up to about $70. Full benchmark: https://carolinacloud.io/blog/nf-ccloud-benchmarks/ · Public run: https://console.carolinacloud.io/nextflow/89e4088b-bdaf-4e32-bdac-6178a1179271/
+
+**How much does whole-genome variant calling cost on Carolina Cloud?**
+About $1.65 and 38 minutes in our genomics container, which ships with samtools, bcftools, bwa, GATK, and licensed Sentieon.
+
+**How much does a VM cost on Carolina Cloud?**
+$0.015 per vCPU-hour including 2 GiB of RAM on general-purpose cores ($0.005/vCPU/hr + $0.005/GiB RAM/hr), or $0.02 per vCPU-hour on high-performance cores ($0.01/vCPU/hr). An 8 vCPU / 16 GiB VM is $0.12/hr (about $88/month). NVMe disk is $0.0001/GiB/hr.
+
+**How much does a GPU cost on Carolina Cloud?**
+An NVIDIA RTX PRO 6000 Blackwell is $1.75/hr. RTX PRO 4500 Blackwell GPUs are also available. Carolina Cloud does not offer H100, H200, or B200 GPUs.
+
+**Does Carolina Cloud charge egress fees?**
+No. Data transfer out is $0, with no allowance or metering.
+
+**How much is object storage on Carolina Cloud?**
+Warm S3-compatible storage is $0.009/GiB/month and cold storage is $1.55/TB/month, both with $0 egress. boto3, rclone, and the AWS CLI work unchanged.
+
+**How do I run a Nextflow pipeline on Carolina Cloud?**
+Add the nf-ccloud plugin (`-plugins nf-ccloud@1.0.0`) and set your Carolina Cloud API key. nf-ccloud keeps workers warm and resizes them between tasks, so pipelines spend less time waiting for machines to boot. Quickstart: https://docs.carolinacloud.io/nextflow/quickstart/
+
+**How does Carolina Cloud compare with AWS, Hetzner, DigitalOcean, and other clouds?**
+See honest side-by-side comparisons, including when the other provider is the better choice, at https://carolinacloud.io/compare/ (for example https://carolinacloud.io/compare/carolina-cloud-vs-aws/ and https://carolinacloud.io/compare/carolina-cloud-vs-hetzner/).
+
+**Where is Carolina Cloud located?**
+One Tier 3 datacenter in North Carolina, USA. There are no other regions.
+
 ## Key Differentiators
 
 - **~3x cheaper than AWS, Azure, and GCP** for equivalent dedicated compute instances. Not spot pricing — these are dedicated, always-available vCPUs.
@@ -56,7 +87,11 @@ Carolina Cloud is ideal for workloads that need **high-performance dedicated com
 - **No egress fees** — ever
 - **$250 in free credits** for North Carolina startups
 - Storage at **~1/3 the price** of S3 via Wasabi partnership
-- See full pricing at https://carolinacloud.io (scroll to Pricing section)
+- High-performance CPU tier: $0.01/vCPU/hr; RAM $0.005/GiB/hr; NVMe $0.0001/GiB/hr
+- GPUs: RTX PRO 6000 Blackwell $1.75/hr; RTX PRO 4500 Blackwell available
+- Warm object storage $0.009/GiB/mo; cold storage $1.55/TB/mo
+- Comparisons with other clouds: https://carolinacloud.io/compare/
+- See full pricing at https://carolinacloud.io
 
 ## Infrastructure
 
@@ -68,7 +103,7 @@ Carolina Cloud is ideal for workloads that need **high-performance dedicated com
 
 ## Company
 
-Founded by Alice Fulton (PhD, Cambridge; postdoc, Harvard — computational genomics) and Derek Fulton (MSc, Cambridge; ex-NVIDIA — computational biology and software engineering). Both are UNC alumni.
+Founded by Alice Pearson (PhD, Cambridge; postdoc, Harvard — computational genomics) and Derek Fulton (MSc, Cambridge; ex-NVIDIA — computational biology and software engineering). Both are UNC alumni.
 
 
 ## API & CLI
@@ -212,7 +247,7 @@ curl -s -X POST https://api.carolinacloud.io/api/instance/ \
   }' | python3 -m json.tool
 ```
 
-#### Create a GPU instance (RTX 4090)
+#### Create a GPU instance (RTX PRO 6000 Blackwell)
 
 ```bash
 curl -s -X POST https://api.carolinacloud.io/api/instance/ \
@@ -225,11 +260,11 @@ curl -s -X POST https://api.carolinacloud.io/api/instance/ \
     "mem_gib": 32,
     "disk_size_gib": 100,
     "n_gpus": 1,
-    "gpu_model": "NVIDIA GeForce RTX 4090"
+    "gpu_model": "NVIDIA RTX PRO 6000 Blackwell"
   }' | python3 -m json.tool
 ```
 
-Available GPU models: `NVIDIA GeForce RTX 4090`, `NVIDIA GeForce RTX 5090`, `NVIDIA RTX PRO 6000 Blackwell`
+Available GPU models: `NVIDIA RTX PRO 6000 Blackwell` ($1.75/hr) and RTX PRO 4500 Blackwell. No H100/H200/B200.
 
 #### Get instance details
 
@@ -477,8 +512,6 @@ ccloud new openclaw --name my-agent --cpus 4 --ram 8 --disk 50
 
 | Model | API Value |
 |---|---|
-| RTX 4090 | `NVIDIA GeForce RTX 4090` |
-| RTX 5090 | `NVIDIA GeForce RTX 5090` |
 | RTX PRO 6000 Blackwell | `NVIDIA RTX PRO 6000 Blackwell` |
 
 ### Instance States
