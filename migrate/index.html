@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Migrate from AWS to Carolina Cloud: Data Migration Tool, Cost Comparison and Guide</title>
+<meta name="description" content="Move data from S3 or SFTP with Carolina Cloud's Data Migration Tool (about 1.5 hours per TiB), compare your monthly bill against AWS, and map EC2, S3, IAM and CloudWatch to their Carolina Cloud equivalents.">
+<link rel="canonical" href="https://carolinacloud.io/migrate/">
+<meta name="robots" content="index, follow, max-snippet:-1">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Carolina Cloud">
+<meta property="og:title" content="Migrate from AWS to Carolina Cloud: Data Migration Tool, Cost Comparison and Guide">
+<meta property="og:description" content="Move data from S3 or SFTP with Carolina Cloud's Data Migration Tool (about 1.5 hours per TiB), compare your monthly bill against AWS, and map EC2, S3, IAM and CloudWatch to their Carolina Cloud equivalents.">
+<meta property="og:url" content="https://carolinacloud.io/migrate/">
+<meta property="og:image" content="https://carolinacloud.io/imessage-preview.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/cloud.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f4f5f3;--paper-2:#fff;--paper-3:#eaece8;--ink:#12171c;--graphite:#4a545c;--muted:#6f7880;--rule:#dce0db;--rule-strong:#c6ccc3;--carolina:#4b9cd3;--carolina-deep:#1f5c87;--carolina-wash:#e4eff7;--good:#0f6b4f;--good-wash:#e3f0ea;--r:7px;--r-lg:14px;
+--font-display:"Space Grotesk","Inter",system-ui,sans-serif;--font-body:"Public Sans","Inter",system-ui,sans-serif;--font-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#070b12;--paper-2:#0d1522;--paper-3:#0a1019;--ink:#eef3f8;--graphite:#a6b1be;--muted:#8693a3;--rule:rgb(255 255 255/.08);--rule-strong:rgb(255 255 255/.16);--carolina:#1a9ad6;--carolina-deep:#6cc3ee;--carolina-wash:#0b2133;--good:#5fd3a5;--good-wash:#0b2a22}}
+:root[data-theme="dark"]{--paper:#070b12;--paper-2:#0d1522;--paper-3:#0a1019;--ink:#eef3f8;--graphite:#a6b1be;--muted:#8693a3;--rule:rgb(255 255 255/.08);--rule-strong:rgb(255 255 255/.16);--carolina:#1a9ad6;--carolina-deep:#6cc3ee;--carolina-wash:#0b2133;--good:#5fd3a5;--good-wash:#0b2a22}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--graphite);font:16px/1.65 var(--font-body)}
+a{color:var(--carolina-deep)}a:hover{text-decoration-thickness:2px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+.narrow{max-width:760px}
+header.top{border-bottom:1px solid var(--rule);background:var(--paper)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:60px}
+.brand{font:700 18px var(--font-display);color:var(--ink);text-decoration:none;letter-spacing:-.01em}
+.navlinks{display:flex;gap:18px;align-items:center;font-size:14.5px}
+.navlinks a{color:var(--graphite);text-decoration:none}.navlinks a:hover{color:var(--ink)}
+.btn{display:inline-block;background:var(--carolina-deep);color:var(--paper)!important;padding:9px 16px;border-radius:var(--r);text-decoration:none;font-weight:600;font-size:14.5px}
+.btn.ghost{background:transparent;color:var(--ink)!important;border:1px solid var(--rule-strong)}
+.crumbs{font:13px var(--font-mono);color:var(--muted);padding-top:28px}.crumbs a{color:var(--muted)}
+h1,h2,h3{font-family:var(--font-display);color:var(--ink);letter-spacing:-.02em;line-height:1.15}
+h1{font-size:clamp(32px,5vw,52px);margin:14px 0 16px}
+h2{font-size:clamp(23px,3vw,30px);margin:56px 0 14px}
+h3{font-size:19px;margin:0 0 8px}
+.lede{font-size:clamp(17px,2vw,19.5px);color:var(--graphite);max-width:62ch}
+.kicker{font:500 12px var(--font-mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.verdict{background:var(--paper-2);border:1px solid var(--rule);border-left:4px solid var(--carolina);border-radius:var(--r-lg);padding:20px 22px;margin:20px 0 24px}
+.verdict h2{font-size:clamp(18px,2.2vw,21px);margin:0}
+.verdict p{margin:8px 0 0;font-size:clamp(16.5px,1.9vw,18.5px);color:var(--ink)}
+.tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:var(--r-lg);background:var(--paper-2)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:14.5px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--rule);vertical-align:top}
+tr:last-child td{border-bottom:0}
+thead th{font:600 13px var(--font-mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);background:var(--paper-3)}
+tbody th{font-weight:600;color:var(--ink);width:24%}
+td.num{font-family:var(--font-mono);font-size:13.5px}
+.note{font-size:13.5px;color:var(--muted);margin-top:10px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+@media (max-width:720px){.two{grid-template-columns:1fr}}
+.panel{background:var(--paper-2);border:1px solid var(--rule);border-radius:var(--r-lg);padding:20px 22px}
+.panel.cc{border-top:3px solid var(--carolina)}.panel.them{border-top:3px solid var(--rule-strong)}
+.panel ul{margin:8px 0 0;padding-left:20px}.panel li{margin:7px 0}
+.prose p{max-width:68ch}
+details{border-bottom:1px solid var(--rule);padding:14px 0}
+summary{cursor:pointer;font-weight:600;color:var(--ink);font-size:16.5px}
+details p{margin:10px 0 0;max-width:68ch}
+.cta{margin:64px 0 0;padding:28px;border-radius:var(--r-lg);background:var(--carolina-wash);border:1px solid var(--rule)}
+.cta h2{margin-top:0}.cta .row{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;margin-top:24px}
+.card{display:flex;flex-direction:column;gap:10px;background:var(--paper-2);border:1px solid var(--rule);border-radius:var(--r-lg);padding:20px;text-decoration:none;color:var(--graphite);transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--carolina);transform:translateY(-2px)}
+.card h3{margin:0;font-size:20px}.card .cat{font:500 11.5px var(--font-mono);text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.card p{margin:0;font-size:14.5px}.card .go{margin-top:auto;font-weight:600;color:var(--carolina-deep);font-size:14.5px}
+.rate{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:var(--r-lg);overflow:hidden;margin-top:20px}
+.rate div{background:var(--paper-2);padding:14px 16px}.rate b{display:block;font:600 18px var(--font-mono);color:var(--ink)}.rate span{font-size:13px;color:var(--muted)}
+.related{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.related a{font-size:14px;border:1px solid var(--rule-strong);border-radius:999px;padding:5px 12px;text-decoration:none;color:var(--graphite)}
+.related a:hover{border-color:var(--carolina);color:var(--ink)}
+footer.bot{margin-top:72px;border-top:1px solid var(--rule);padding:28px 0 40px;font-size:13.5px;color:var(--muted)}
+footer.bot .wrap{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between}footer.bot a{color:var(--muted)}
+@media (max-width:560px){.navlinks .hide-sm{display:none}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Migrate from AWS to Carolina Cloud: Data Migration Tool, Cost Comparison and Guide","url":"https://carolinacloud.io/migrate/","description":"Move data from S3 or SFTP with Carolina Cloud's Data Migration Tool (about 1.5 hours per TiB), compare your monthly bill against AWS, and map EC2, S3, IAM and CloudWatch to their Carolina Cloud equivalents.","dateModified":"2026-11-25","publisher":{"@type":"Organization","name":"Carolina Cloud","url":"https://carolinacloud.io"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://carolinacloud.io/"},{"@type":"ListItem","position":2,"name":"Migrate from AWS","item":"https://carolinacloud.io/migrate/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I move my data from AWS S3 to Carolina Cloud?","acceptedAnswer":{"@type":"Answer","text":"Use the Data Migration Tool under Storage → Migrate in the console. It copies from any S3-compatible bucket (AWS S3, Wasabi, Backblaze B2, Cloudflare R2, DigitalOcean Spaces, MinIO, Ceph) or an SFTP server, runs on our infrastructure, and is parallel and resumable at roughly 1.5 hours per TiB."}},{"@type":"Question","name":"Do I have to rewrite code to leave AWS?","acceptedAnswer":{"@type":"Answer","text":"Usually not. Object storage is S3-compatible, so existing AWS CLI, boto3, rclone and s3cmd usage keeps working with one endpoint change."}},{"@type":"Question","name":"Are my source credentials stored?","acceptedAnswer":{"@type":"Answer","text":"No. Source secrets pass to the worker once and are discarded, never written to our database. For SFTP we generate the keypair, so you paste one public key into authorized_keys."}},{"@type":"Question","name":"Are there migration credits?","acceptedAnswer":{"@type":"Answer","text":"Yes. Email hello@carolinacloud.io with your AWS bill and a sketch of the workload, and we will reply with a like-for-like quote and a migration plan."}}]}</script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="/">Carolina Cloud</a>
+  <nav class="navlinks">
+    <a class="hide-sm" href="/products/">Products</a>
+    <a class="hide-sm" href="/nextflow/">Nextflow</a>
+    <a href="/pricing/">Pricing</a>
+    <a href="/compare/">Compare</a>
+    <a class="hide-sm" href="/blog/">Blog</a>
+    <a class="btn" href="https://console.carolinacloud.io">Console</a>
+  </nav>
+</div></header>
+<main>
+
+<div class="wrap narrow">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / Migrate from AWS</nav>
+  <h1>Coming from AWS?</h1>
+  <p class="lede">Three things to get you across. The Data Migration Tool moves your data, whether it lives in an S3 bucket or on an SFTP server. The cost comparison tells you what you will pay once it lands. The migration guide covers what changes in your workflow.</p>
+  <p class="note">Prefer the interactive version with the cost calculator? <a href="/#/migrate">Open it here</a>.</p>
+
+  <h2 id="data-migration-tool">Data Migration Tool</h2>
+  <p>Copy your data in from an S3-compatible bucket or straight off an SFTP server. The transfer runs on our infrastructure, not yours: fill in a short form, hit start, and close the tab. It keeps going overnight, across reconnects, and well past the multi-terabyte mark without you writing a single transfer script.</p>
+  <ul>
+    <li><strong>S3-compatible sources:</strong> AWS S3, Wasabi, Backblaze B2, Cloudflare R2, DigitalOcean Spaces, MinIO, self-hosted Ceph. A whole bucket, one prefix, or a single object.</li>
+    <li><strong>SFTP sources:</strong> any Linux server reachable over the internet, by password or SSH key. Useful for HPC scratch and sequencer drop folders.</li>
+    <li><strong>Roughly 1.5 hours per TiB:</strong> parallel and resumable, with a live log and progress you can watch or walk away from.</li>
+    <li><strong>Credentials are never stored:</strong> source secrets pass to the worker once and are discarded.</li>
+  </ul>
+  <p>Find it under Storage → Migrate in the console.</p>
+</div>
+
+<div class="wrap">
+  <h2 id="cost">What a typical workload costs, side by side</h2>
+  <p style="max-width:68ch">Example: one always-on 32 vCPU / 64 GiB instance with 1,000 GiB of disk, 10 TB of warm object storage, 50 TB of cold archive, and 5 TB of internet egress a month.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th scope="col">Monthly line item</th><th scope="col">Carolina Cloud</th><th scope="col">AWS (us-east-1, on-demand)</th><th scope="col">Notes</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Compute (32 vCPU, always on)</th><td class="num">$116.80</td><td class="num">$988.13</td><td>EC2 vCPU</td></tr>
+      <tr><th scope="row">RAM (64 GiB)</th><td class="num">$233.60</td><td class="num">$196.22</td><td>EC2 RAM</td></tr>
+      <tr><th scope="row">Instance disk (1,000 GiB)</th><td class="num">$73.00</td><td class="num">$80.00</td><td>Hot NVMe vs EBS gp3</td></tr>
+      <tr><th scope="row">Warm object storage (10 TB)</th><td class="num">$92.16</td><td class="num">$235.52</td><td>vs S3 Standard</td></tr>
+      <tr><th scope="row">Cold archive (50 TB)</th><td class="num">$77.50</td><td class="num">$50.69</td><td>vs S3 Glacier Deep Archive</td></tr>
+      <tr><th scope="row">Internet egress (5 TB)</th><td class="num">$0.00</td><td class="num">$460.80</td><td>Carolina Cloud egress is always $0</td></tr>
+      <tr><th scope="row"><strong>Total per month</strong></th><td class="num"><strong>$593.06</strong></td><td class="num"><strong>$2,011.36</strong></td><td>Carolina Cloud is 71% less</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">Estimates only. AWS compute is decomposed into per-vCPU and per-GiB rates fit across c7a, m7a and r7a on-demand list prices in us-east-1; disk is EBS gp3; storage uses S3 Standard and Glacier Deep Archive list rates; egress is standard internet egress. Savings Plans, Reserved Instances, Spot and enterprise discounts can lower AWS cost; cross-AZ transfer, NAT Gateway and S3 request fees can raise it. Carolina Cloud prices are flat list rates with no commitment, no egress charges, and no minimum spend. <a href="/#/migrate">Try your own numbers in the calculator</a>.</p>
+
+  <h2 id="guide">What you swap, and what you keep</h2>
+  <p style="max-width:68ch">Most AWS workloads port over without rewriting code. Object storage is S3-compatible, so existing AWS CLI, boto3, rclone, and s3cmd usage keeps working with one configuration change.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th scope="col">AWS</th><th scope="col">Carolina Cloud</th><th scope="col">Notes</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">EC2 instance</th><td>Carolina Cloud instance</td><td>Dedicated AMD EPYC cores. Full root, static IP, persistent disk.</td></tr>
+      <tr><th scope="row">S3 Standard</th><td>Warm Storage</td><td>S3-compatible API. Same SDKs and CLIs, different endpoint.</td></tr>
+      <tr><th scope="row">S3 Glacier Deep Archive</th><td>Cold Storage</td><td>S3-compatible API. Lower per-TB price for archival data.</td></tr>
+      <tr><th scope="row">Internet egress fees</th><td>$0 egress</td><td>Always free, no caps, no thresholds.</td></tr>
+      <tr><th scope="row">VPC, security groups</th><td>Per-instance isolation</td><td>Each instance is isolated by default. UI port control on the VM.</td></tr>
+      <tr><th scope="row">IAM users, roles, policies</th><td>API key per account</td><td>No policy graphs to debug.</td></tr>
+      <tr><th scope="row">Cost Explorer (next-day data)</th><td>Billing summary</td><td>Hourly costs in the console, in real time. No 24 hour lag, no extra service to enable.</td></tr>
+      <tr><th scope="row">EC2 Auto Scaling</th><td>Live resize</td><td>Resize CPU and RAM up or down without rebuilding the instance.</td></tr>
+      <tr><th scope="row">CloudWatch (5 min default, 1 min paid)</th><td>Live usage monitor</td><td>Per-second CPU, RAM, disk, and network in the console at no extra cost.</td></tr>
+    </tbody>
+  </table></div>
+</div>
+
+<div class="wrap narrow prose">
+  <h2 id="faq">Migration questions</h2>
+  <details><summary>How do I move my data from AWS S3 to Carolina Cloud?</summary><p>Use the Data Migration Tool under Storage → Migrate in the console. It copies from any S3-compatible bucket (AWS S3, Wasabi, Backblaze B2, Cloudflare R2, DigitalOcean Spaces, MinIO, Ceph) or an SFTP server, runs on our infrastructure, and is parallel and resumable at roughly 1.5 hours per TiB.</p></details>
+  <details><summary>Do I have to rewrite code to leave AWS?</summary><p>Usually not. Object storage is S3-compatible, so existing AWS CLI, boto3, rclone and s3cmd usage keeps working with one endpoint change.</p></details>
+  <details><summary>Are my source credentials stored?</summary><p>No. Source secrets pass to the worker once and are discarded, never written to our database. For SFTP we generate the keypair, so you paste one public key into authorized_keys.</p></details>
+  <details><summary>Are there migration credits?</summary><p>Yes. Email <a href="mailto:hello@carolinacloud.io">hello@carolinacloud.io</a> with your AWS bill and a sketch of the workload, and we will reply with a like-for-like quote and a migration plan.</p></details>
+  <section class="cta">
+  <h2>Try Carolina Cloud</h2>
+  <p>Spin up a dedicated-core VM, container, or notebook in seconds and benchmark your own workload. Questions go straight to the founders who run the hardware.</p>
+  <div class="row">
+    <a class="btn" href="https://console.carolinacloud.io">Open the console</a>
+    <a class="btn ghost" href="mailto:hello@carolinacloud.io">Talk to an engineer</a>
+  </div>
+</section>
+</div>
+</main>
+<footer class="bot"><div class="wrap">
+  <span>© 2026 Carolina Cloud · Chapel Hill, North Carolina</span>
+  <span><a href="/">Home</a> · <a href="/products/">Products</a> · <a href="/pricing/">Pricing</a> · <a href="/nextflow/">Nextflow</a> · <a href="/migrate/">Migrate</a> · <a href="/compare/">All comparisons</a> · <a href="mailto:hello@carolinacloud.io">hello@carolinacloud.io</a> · <a href="tel:+19106215467">(910) 621-5467</a></span>
+</div></footer>
+</body>
+</html>

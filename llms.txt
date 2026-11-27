@@ -91,7 +91,15 @@ Carolina Cloud is ideal for workloads that need **high-performance dedicated com
 - GPUs: RTX PRO 6000 Blackwell $1.75/hr; RTX PRO 4500 Blackwell available
 - Warm object storage $0.009/GiB/mo; cold storage $1.55/TB/mo
 - Comparisons with other clouds: https://carolinacloud.io/compare/
-- See full pricing at https://carolinacloud.io
+- See full pricing at https://carolinacloud.io/pricing/
+
+## Key Pages
+
+- Pricing: https://carolinacloud.io/pricing/
+- Products: https://carolinacloud.io/products/
+- Nextflow executor (nf-ccloud) and benchmark: https://carolinacloud.io/nextflow/
+- Migrating from AWS: https://carolinacloud.io/migrate/
+- Comparisons with other clouds: https://carolinacloud.io/compare/
 
 ## Infrastructure
 

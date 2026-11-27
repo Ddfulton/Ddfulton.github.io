@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>nf-ccloud: Run Nextflow and nf-core Pipelines on Carolina Cloud (Benchmark vs AWS Batch and HealthOmics)</title>
+<meta name="description" content="nf-ccloud is Carolina Cloud's Nextflow executor: a warm, resizable worker pool with 3.6 s median task start. nf-core/rnaseq ran in 4.5 hours for under $20, versus $45 on AWS HealthOmics and about $70 on AWS Batch.">
+<link rel="canonical" href="https://carolinacloud.io/nextflow/">
+<meta name="robots" content="index, follow, max-snippet:-1">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Carolina Cloud">
+<meta property="og:title" content="nf-ccloud: Run Nextflow and nf-core Pipelines on Carolina Cloud (Benchmark vs AWS Batch and HealthOmics)">
+<meta property="og:description" content="nf-ccloud is Carolina Cloud's Nextflow executor: a warm, resizable worker pool with 3.6 s median task start. nf-core/rnaseq ran in 4.5 hours for under $20, versus $45 on AWS HealthOmics and about $70 on AWS Batch.">
+<meta property="og:url" content="https://carolinacloud.io/nextflow/">
+<meta property="og:image" content="https://carolinacloud.io/imessage-preview.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/cloud.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f4f5f3;--paper-2:#fff;--paper-3:#eaece8;--ink:#12171c;--graphite:#4a545c;--muted:#6f7880;--rule:#dce0db;--rule-strong:#c6ccc3;--carolina:#4b9cd3;--carolina-deep:#1f5c87;--carolina-wash:#e4eff7;--good:#0f6b4f;--good-wash:#e3f0ea;--r:7px;--r-lg:14px;
+--font-display:"Space Grotesk","Inter",system-ui,sans-serif;--font-body:"Public Sans","Inter",system-ui,sans-serif;--font-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#070b12;--paper-2:#0d1522;--paper-3:#0a1019;--ink:#eef3f8;--graphite:#a6b1be;--muted:#8693a3;--rule:rgb(255 255 255/.08);--rule-strong:rgb(255 255 255/.16);--carolina:#1a9ad6;--carolina-deep:#6cc3ee;--carolina-wash:#0b2133;--good:#5fd3a5;--good-wash:#0b2a22}}
+:root[data-theme="dark"]{--paper:#070b12;--paper-2:#0d1522;--paper-3:#0a1019;--ink:#eef3f8;--graphite:#a6b1be;--muted:#8693a3;--rule:rgb(255 255 255/.08);--rule-strong:rgb(255 255 255/.16);--carolina:#1a9ad6;--carolina-deep:#6cc3ee;--carolina-wash:#0b2133;--good:#5fd3a5;--good-wash:#0b2a22}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--graphite);font:16px/1.65 var(--font-body)}
+a{color:var(--carolina-deep)}a:hover{text-decoration-thickness:2px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+.narrow{max-width:760px}
+header.top{border-bottom:1px solid var(--rule);background:var(--paper)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:60px}
+.brand{font:700 18px var(--font-display);color:var(--ink);text-decoration:none;letter-spacing:-.01em}
+.navlinks{display:flex;gap:18px;align-items:center;font-size:14.5px}
+.navlinks a{color:var(--graphite);text-decoration:none}.navlinks a:hover{color:var(--ink)}
+.btn{display:inline-block;background:var(--carolina-deep);color:var(--paper)!important;padding:9px 16px;border-radius:var(--r);text-decoration:none;font-weight:600;font-size:14.5px}
+.btn.ghost{background:transparent;color:var(--ink)!important;border:1px solid var(--rule-strong)}
+.crumbs{font:13px var(--font-mono);color:var(--muted);padding-top:28px}.crumbs a{color:var(--muted)}
+h1,h2,h3{font-family:var(--font-display);color:var(--ink);letter-spacing:-.02em;line-height:1.15}
+h1{font-size:clamp(32px,5vw,52px);margin:14px 0 16px}
+h2{font-size:clamp(23px,3vw,30px);margin:56px 0 14px}
+h3{font-size:19px;margin:0 0 8px}
+.lede{font-size:clamp(17px,2vw,19.5px);color:var(--graphite);max-width:62ch}
+.kicker{font:500 12px var(--font-mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.verdict{background:var(--paper-2);border:1px solid var(--rule);border-left:4px solid var(--carolina);border-radius:var(--r-lg);padding:20px 22px;margin:20px 0 24px}
+.verdict h2{font-size:clamp(18px,2.2vw,21px);margin:0}
+.verdict p{margin:8px 0 0;font-size:clamp(16.5px,1.9vw,18.5px);color:var(--ink)}
+.tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:var(--r-lg);background:var(--paper-2)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:14.5px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--rule);vertical-align:top}
+tr:last-child td{border-bottom:0}
+thead th{font:600 13px var(--font-mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);background:var(--paper-3)}
+tbody th{font-weight:600;color:var(--ink);width:24%}
+td.num{font-family:var(--font-mono);font-size:13.5px}
+.note{font-size:13.5px;color:var(--muted);margin-top:10px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+@media (max-width:720px){.two{grid-template-columns:1fr}}
+.panel{background:var(--paper-2);border:1px solid var(--rule);border-radius:var(--r-lg);padding:20px 22px}
+.panel.cc{border-top:3px solid var(--carolina)}.panel.them{border-top:3px solid var(--rule-strong)}
+.panel ul{margin:8px 0 0;padding-left:20px}.panel li{margin:7px 0}
+.prose p{max-width:68ch}
+details{border-bottom:1px solid var(--rule);padding:14px 0}
+summary{cursor:pointer;font-weight:600;color:var(--ink);font-size:16.5px}
+details p{margin:10px 0 0;max-width:68ch}
+.cta{margin:64px 0 0;padding:28px;border-radius:var(--r-lg);background:var(--carolina-wash);border:1px solid var(--rule)}
+.cta h2{margin-top:0}.cta .row{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;margin-top:24px}
+.card{display:flex;flex-direction:column;gap:10px;background:var(--paper-2);border:1px solid var(--rule);border-radius:var(--r-lg);padding:20px;text-decoration:none;color:var(--graphite);transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--carolina);transform:translateY(-2px)}
+.card h3{margin:0;font-size:20px}.card .cat{font:500 11.5px var(--font-mono);text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.card p{margin:0;font-size:14.5px}.card .go{margin-top:auto;font-weight:600;color:var(--carolina-deep);font-size:14.5px}
+.rate{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:var(--r-lg);overflow:hidden;margin-top:20px}
+.rate div{background:var(--paper-2);padding:14px 16px}.rate b{display:block;font:600 18px var(--font-mono);color:var(--ink)}.rate span{font-size:13px;color:var(--muted)}
+.related{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.related a{font-size:14px;border:1px solid var(--rule-strong);border-radius:999px;padding:5px 12px;text-decoration:none;color:var(--graphite)}
+.related a:hover{border-color:var(--carolina);color:var(--ink)}
+footer.bot{margin-top:72px;border-top:1px solid var(--rule);padding:28px 0 40px;font-size:13.5px;color:var(--muted)}
+footer.bot .wrap{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between}footer.bot a{color:var(--muted)}
+@media (max-width:560px){.navlinks .hide-sm{display:none}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"nf-ccloud: Run Nextflow and nf-core Pipelines on Carolina Cloud (Benchmark vs AWS Batch and HealthOmics)","url":"https://carolinacloud.io/nextflow/","description":"nf-ccloud is Carolina Cloud's Nextflow executor: a warm, resizable worker pool with 3.6 s median task start. nf-core/rnaseq ran in 4.5 hours for under $20, versus $45 on AWS HealthOmics and about $70 on AWS Batch.","dateModified":"2026-11-25","publisher":{"@type":"Organization","name":"Carolina Cloud","url":"https://carolinacloud.io"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://carolinacloud.io/"},{"@type":"ListItem","position":2,"name":"Nextflow","item":"https://carolinacloud.io/nextflow/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"nf-ccloud","applicationCategory":"DeveloperApplication","operatingSystem":"Linux, macOS","softwareVersion":"1.0.0","description":"Nextflow executor plugin that runs pipelines on a warm, resizable pool of Carolina Cloud workers.","url":"https://carolinacloud.io/nextflow/","publisher":{"@type":"Organization","name":"Carolina Cloud","url":"https://carolinacloud.io"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does it cost to run nf-core/rnaseq on Carolina Cloud?","acceptedAnswer":{"@type":"Answer","text":"$19.26 and 4.5 hours of wall-clock time for 8 human RNA-seq samples (123.3 GiB of gzipped FASTQ), Sentieon-accelerated, using the nf-ccloud executor. The same pipeline cost $45 and took 5.5 hours on AWS HealthOmics; AWS Batch on-demand took 7 to 8 hours and about $70. See the public run."}},{"@type":"Question","name":"How do I run a Nextflow pipeline on Carolina Cloud?","acceptedAnswer":{"@type":"Answer","text":"Add the nf-ccloud plugin (-plugins nf-ccloud@1.0.0), set process.executor = 'ccloud', and provide your Carolina Cloud API key. The plugin is in the official Nextflow plugin registry, so there is nothing to download. Quickstart."}},{"@type":"Question","name":"Do I need to change my pipelines?","acceptedAnswer":{"@type":"Answer","text":"No. Same pipelines, same nf-core commands. Each task runs in a container sized to that process's own cpus, memory and disk directives."}},{"@type":"Question","name":"Where does the Nextflow head run?","acceptedAnswer":{"@type":"Answer","text":"Anywhere Nextflow runs: a browser-based head container in our console, your laptop, an HPC login node, or a CI runner. The head only runs the Nextflow JVM; the heavy tasks never run locally."}},{"@type":"Question","name":"What happens if my laptop dies mid-run?","acceptedAnswer":{"@type":"Answer","text":"Workers are reaped by the platform, not by the orchestrator, so they still tear down and billing still stops within a few minutes."}},{"@type":"Question","name":"Are there egress fees on Nextflow buckets?","acceptedAnswer":{"@type":"Answer","text":"No. Nextflow buckets have no minimum retention, consistent read and write speeds, and $0 egress. You can also bring your own S3-compatible bucket."}}]}</script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="/">Carolina Cloud</a>
+  <nav class="navlinks">
+    <a class="hide-sm" href="/products/">Products</a>
+    <a class="hide-sm" href="/nextflow/">Nextflow</a>
+    <a href="/pricing/">Pricing</a>
+    <a href="/compare/">Compare</a>
+    <a class="hide-sm" href="/blog/">Blog</a>
+    <a class="btn" href="https://console.carolinacloud.io">Console</a>
+  </nav>
+</div></header>
+<main>
+
+<div class="wrap narrow">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / Nextflow</nav>
+  <p class="kicker" style="margin-top:22px">nf-ccloud v1.0.0 · on the Nextflow plugin registry</p>
+  <h1>Your pipeline spends more time booting machines than running</h1>
+  <div class="verdict"><h2 id="short-answer">What is nf-ccloud?</h2><p>nf-ccloud is Carolina Cloud's Nextflow executor. It holds a warm pool of workers and resizes them between tasks instead of building and destroying a machine for every process. Same pipelines, same nf-core commands, a fraction of the overhead: nf-core/rnaseq in 4.5 hours for under $20.</p></div>
+  <div class="rate">
+    <div><b>4.5 h</b><span>nf-core/rnaseq, under $20</span></div>
+    <div><b>3.6 s</b><span>median task start, vs about 180 s on AWS Batch</span></div>
+    <div><b>$0</b><span>egress on Nextflow buckets</span></div>
+  </div>
+  <p class="note">Task-start latency measured by Flock Bio, an independent beta tester, against AWS Batch on the same pipeline.</p>
+  <p class="note">Prefer the interactive version with the live timeline and benchmark chart? <a href="/#/nextflow">Open it here</a>.</p>
+</div>
+
+<div class="wrap narrow prose">
+  <h2 id="how-it-works">How it works: one small driver, and a pool that reshapes itself around your DAG</h2>
+  <p>A run has two roles and they live on different machines. Nothing about this changes how you write a pipeline.</p>
+  <p><strong>The head runs Nextflow, and nothing else.</strong> It runs the Nextflow JVM and the plugin, builds the DAG, submits tasks, and publishes your outdir. It never runs your tools, so it stays small and cheap. Use one of our browser-based head containers, or drive from your own laptop, HPC login node, or CI runner.</p>
+  <p><strong>The pool sizes workers to the task, not to a menu.</strong> Each task is dispatched into a container sized to that process's own cpus, memory, and disk directives. Ask for 6 vCPU and you get 6, and you pay for 6. No rounding up to the nearest instance type, and no standing cluster to keep alive between runs.</p>
+
+  <h2 id="overhead">The overhead is the whole problem, so we went after the overhead</h2>
+  <p>Most cloud batch systems treat a task in isolation: pick an instance, boot it, run one task, throw it away. On a 300-task nf-core pipeline you pay that tax 300 times.</p>
+  <p><strong>Resize, don't rebuild.</strong> When a process finishes, the worker is not destroyed. It is resized in milliseconds for the next task. A 16 to 64 to 8 vCPU chain is one worker resized twice, with no cold start in between. Between tasks a worker shrinks to a 1 vCPU, 1 GiB idle floor, which is why the pool can afford to stay warm.</p>
+  <p><strong>Data that is already there.</strong> Every worker keeps a persistent local NVMe cache. When a downstream task lands on the worker that produced its inputs, those files are hard-linked in with zero network transfer.</p>
+  <p><strong>Staging that keeps up.</strong> When a file does have to move, s5cmd pulls it in parallel hard enough to saturate our 10 GbE NICs, often around 1 GiB/s.</p>
+</div>
+
+<div class="wrap">
+  <h2 id="benchmark">Benchmark: one pipeline, four backends</h2>
+  <p style="max-width:68ch">nf-core/rnaseq on 8 human RNA-seq samples (123.3 GiB of gzipped FASTQ), run on nf-ccloud, AWS HealthOmics, and AWS Batch through the Seqera UI on both on-demand and spot, with multiple trials each. Cost is compute only.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th scope="col">Backend</th><th scope="col">Wall-clock time</th><th scope="col">Compute cost</th><th scope="col">Notes</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">nf-ccloud (Carolina Cloud)</th><td class="num">4.5 h</td><td class="num">under $20 ($19.26)</td><td>Sentieon-accelerated STAR, enabled with a single run flag</td></tr>
+      <tr><th scope="row">AWS HealthOmics</th><td class="num">5.5 h</td><td class="num">$45</td><td>Plus ECR storage you have to prefill and keep paying for</td></tr>
+      <tr><th scope="row">AWS Batch, on-demand</th><td class="num">7 to 8 h</td><td class="num">about $70</td><td>Run through the Seqera UI</td></tr>
+      <tr><th scope="row">AWS Batch, spot</th><td class="num">10 to 24 h</td><td class="num">under $10 at best</td><td>Runtime depends on spot availability on the day</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">One disclosure on method: the Carolina Cloud run used Sentieon-accelerated STAR, because turning it on here means adding one flag to your run command. On AWS the same acceleration means buying a separate license and wiring it up yourself, so we benchmarked the best each platform offers with no extra work. <a href="https://console.carolinacloud.io/nextflow/89e4088b-bdaf-4e32-bdac-6178a1179271/">See the run in our console</a> · <a href="https://carolinacloud.io/blog/nf-ccloud-benchmarks/">Benchmark write-up</a> · <a href="https://github.com/Ddfulton/nextflow-benchmark-appendix">Benchmark appendix on GitHub</a></p>
+</div>
+
+<div class="wrap narrow prose">
+  <h2 id="observability">See inside every run</h2>
+  <p>Every run appears in the console the moment it opens, and the graph fills in live. Nodes repaint as tasks land, the compute cost ticks up in the header, and any task is two clicks from its logs.</p>
+  <ul>
+    <li><strong>The live DAG.</strong> The graph Nextflow builds internally, rendered as it runs. Click a node for its task list.</li>
+    <li><strong>Allocated against peak.</strong> Every task reports the vCPU, RAM, and disk it was given next to what it actually used, so you can find the process asking for 6 GiB and touching 2.</li>
+    <li><strong>The work dir in the browser.</strong> Script, stdout, and stderr pinned at the top; reports and plots preview inline.</li>
+    <li><strong>When it fails, the console tells you why.</strong> It names the process, the task, and the error, and jumps straight to that task's stderr. "Debug log for LLM" copies a full markdown report (launch command, requested versus peak resources with an OOM flag, staged input sizes, control-file excerpts) to paste into Claude. It never includes your credentials.</li>
+    <li><strong>Cost, live, per task.</strong> A ticking compute cost on the DAG header and a cost on every task.</li>
+    <li><strong>A pool that always cleans itself up.</strong> Workers are reaped by the platform, so even if the laptop driving the run dies, they tear down and billing stops within a few minutes.</li>
+    <li><strong>Your API key stays on your machine.</strong> Runs driven from elsewhere use a scoped, revocable pipeline token that only works on the pipeline endpoints.</li>
+  </ul>
+
+  <h2 id="get-started">Get started</h2>
+  <p>The plugin is in the official Nextflow registry, so there is nothing to download. This is the whole config:</p>
+  <pre style="background:var(--paper-2);border:1px solid var(--rule);border-radius:var(--r);padding:14px 16px;overflow-x:auto;font:13.5px/1.55 var(--font-mono);color:var(--ink)"><code>plugins { id 'nf-ccloud@1.0.0' }
+process.executor = 'ccloud'
+
+ccloud {
+    apiKey   = secrets.CCLOUD_API_KEY
+    endpoint = 'https://console.carolinacloud.io'
+}
+
+workDir = 's3://YOUR-BUCKET-NAME/work/'
+
+aws {
+    accessKey = System.getenv('AWS_ACCESS_KEY_ID')
+    secretKey = System.getenv('AWS_SECRET_ACCESS_KEY')
+    region    = 'auto'
+    client { endpoint = System.getenv('AWS_ENDPOINT_URL') }
+}</code></pre>
+  <p>Then run, keeping <code>-plugins nf-ccloud@1.0.0</code> on the command line, because nf-core pipelines ship their own plugins block that would otherwise replace yours:</p>
+  <pre style="background:var(--paper-2);border:1px solid var(--rule);border-radius:var(--r);padding:14px 16px;overflow-x:auto;font:13.5px/1.55 var(--font-mono);color:var(--ink)"><code>NXF_SYNTAX_PARSER=v1 nextflow run nf-core/rnaseq -r 3.22.2 \
+  -plugins nf-ccloud@1.0.0 \
+  -profile test \
+  --outdir s3://YOUR-BUCKET-NAME/rnaseq-test/results/</code></pre>
+  <p><strong>Or let your AI do the setup.</strong> Paste this into Claude or another assistant: "Please read this: https://console.carolinacloud.io/static/nextflow/local-quickstart.md, and then help me run my first pipeline, starting with nf-core/rnaseq test, and then graduating to a real pipeline." The doc is written for an agent: it installs Nextflow, provisions a bucket, mints credentials, writes the config and launches the run. You supply one API key.</p>
+  <p><a href="https://docs.carolinacloud.io/nextflow/overview/">Read the nf-ccloud docs</a> · <a href="https://docs.carolinacloud.io/nextflow/quickstart/">Quickstart</a></p>
+
+  <h2 id="faq">Frequently asked questions</h2>
+  <details><summary>How much does it cost to run nf-core/rnaseq on Carolina Cloud?</summary><p>$19.26 and 4.5 hours of wall-clock time for 8 human RNA-seq samples (123.3 GiB of gzipped FASTQ), Sentieon-accelerated, using the nf-ccloud executor. The same pipeline cost $45 and took 5.5 hours on AWS HealthOmics; AWS Batch on-demand took 7 to 8 hours and about $70. <a href="https://console.carolinacloud.io/nextflow/89e4088b-bdaf-4e32-bdac-6178a1179271/">See the public run</a>.</p></details>
+  <details><summary>How do I run a Nextflow pipeline on Carolina Cloud?</summary><p>Add the nf-ccloud plugin (<code>-plugins nf-ccloud@1.0.0</code>), set <code>process.executor = 'ccloud'</code>, and provide your Carolina Cloud API key. The plugin is in the official Nextflow plugin registry, so there is nothing to download. <a href="https://docs.carolinacloud.io/nextflow/quickstart/">Quickstart</a>.</p></details>
+  <details><summary>Do I need to change my pipelines?</summary><p>No. Same pipelines, same nf-core commands. Each task runs in a container sized to that process's own cpus, memory and disk directives.</p></details>
+  <details><summary>Where does the Nextflow head run?</summary><p>Anywhere Nextflow runs: a browser-based head container in our console, your laptop, an HPC login node, or a CI runner. The head only runs the Nextflow JVM; the heavy tasks never run locally.</p></details>
+  <details><summary>What happens if my laptop dies mid-run?</summary><p>Workers are reaped by the platform, not by the orchestrator, so they still tear down and billing still stops within a few minutes.</p></details>
+  <details><summary>Are there egress fees on Nextflow buckets?</summary><p>No. Nextflow buckets have no minimum retention, consistent read and write speeds, and $0 egress. You can also bring your own S3-compatible bucket.</p></details>
+  <section class="cta">
+  <h2>Try Carolina Cloud</h2>
+  <p>Spin up a dedicated-core VM, container, or notebook in seconds and benchmark your own workload. Questions go straight to the founders who run the hardware.</p>
+  <div class="row">
+    <a class="btn" href="https://console.carolinacloud.io">Open the console</a>
+    <a class="btn ghost" href="mailto:hello@carolinacloud.io">Talk to an engineer</a>
+  </div>
+</section>
+</div>
+</main>
+<footer class="bot"><div class="wrap">
+  <span>© 2026 Carolina Cloud · Chapel Hill, North Carolina</span>
+  <span><a href="/">Home</a> · <a href="/products/">Products</a> · <a href="/pricing/">Pricing</a> · <a href="/nextflow/">Nextflow</a> · <a href="/migrate/">Migrate</a> · <a href="/compare/">All comparisons</a> · <a href="mailto:hello@carolinacloud.io">hello@carolinacloud.io</a> · <a href="tel:+19106215467">(910) 621-5467</a></span>
+</div></footer>
+</body>
+</html>

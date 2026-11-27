@@ -84,5 +84,27 @@
       gtag('config', 'G-K92N5CZZ22');
     </script>
     <div id="root"></div>
+    <!-- Plain-text summary for crawlers and LLMs that don't run JavaScript. Keep in sync with agents.md. -->
+    <noscript>
+      <h1>Carolina Cloud: the life sciences cloud</h1>
+      <p>Carolina Cloud is an owner-operated cloud in a Tier 3 datacenter in North Carolina. Dedicated AMD EPYC compute, a Nextflow executor (nf-ccloud), GPUs, and S3-compatible storage with $0 egress, for teams turning sequencing data into discoveries.</p>
+      <ul>
+        <li>Compute: $0.015 per vCPU-hour including 2 GiB RAM, on dedicated (never shared) cores. About a third of AWS, Azure and GCP on-demand prices.</li>
+        <li>GPUs: NVIDIA RTX PRO 6000 Blackwell at $1.75/hr; RTX PRO 4500 Blackwell also available.</li>
+        <li>Storage: warm S3-compatible $0.009/GiB/month, cold $1.55/TB/month. Egress is always $0.</li>
+        <li>Nextflow: nf-core/rnaseq in 4.5 hours for under $20 with nf-ccloud, versus $45 on AWS HealthOmics.</li>
+        <li>Environments: Ubuntu VMs, genomics containers (GATK, Sentieon), RStudio Server, JupyterLab, bare metal.</li>
+      </ul>
+      <p>
+        <a href="/pricing/">Pricing</a> &middot;
+        <a href="/products/">Products</a> &middot;
+        <a href="/nextflow/">Nextflow</a> &middot;
+        <a href="/migrate/">Migrate from AWS</a> &middot;
+        <a href="/compare/">Comparisons with other clouds</a> &middot;
+        <a href="/blog/">Blog</a> &middot;
+        <a href="/llms.txt">llms.txt</a> &middot;
+        <a href="mailto:hello@carolinacloud.io">hello@carolinacloud.io</a>
+      </p>
+    </noscript>
   </body>
 </html>

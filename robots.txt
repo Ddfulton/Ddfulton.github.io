@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://carolinacloud.io/sitemap-compare.xml
-Sitemap: https://carolinacloud.io/blog/sitemap.xml
+Sitemap: https://carolinacloud.io/sitemap.xml

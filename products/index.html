@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carolina Cloud Products: Dedicated VMs, Genomics Containers, RStudio, JupyterLab, S3 Storage</title>
+<meta name="description" content="Dedicated-core AMD EPYC VMs and containers, a genomics container with GATK and Sentieon, RStudio Server with Bioconductor, JupyterLab, bare metal, the nf-ccloud Nextflow executor, and S3-compatible storage with $0 egress.">
+<link rel="canonical" href="https://carolinacloud.io/products/">
+<meta name="robots" content="index, follow, max-snippet:-1">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Carolina Cloud">
+<meta property="og:title" content="Carolina Cloud Products: Dedicated VMs, Genomics Containers, RStudio, JupyterLab, S3 Storage">
+<meta property="og:description" content="Dedicated-core AMD EPYC VMs and containers, a genomics container with GATK and Sentieon, RStudio Server with Bioconductor, JupyterLab, bare metal, the nf-ccloud Nextflow executor, and S3-compatible storage with $0 egress.">
+<meta property="og:url" content="https://carolinacloud.io/products/">
+<meta property="og:image" content="https://carolinacloud.io/imessage-preview.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/cloud.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f4f5f3;--paper-2:#fff;--paper-3:#eaece8;--ink:#12171c;--graphite:#4a545c;--muted:#6f7880;--rule:#dce0db;--rule-strong:#c6ccc3;--carolina:#4b9cd3;--carolina-deep:#1f5c87;--carolina-wash:#e4eff7;--good:#0f6b4f;--good-wash:#e3f0ea;--r:7px;--r-lg:14px;
+--font-display:"Space Grotesk","Inter",system-ui,sans-serif;--font-body:"Public Sans","Inter",system-ui,sans-serif;--font-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#070b12;--paper-2:#0d1522;--paper-3:#0a1019;--ink:#eef3f8;--graphite:#a6b1be;--muted:#8693a3;--rule:rgb(255 255 255/.08);--rule-strong:rgb(255 255 255/.16);--carolina:#1a9ad6;--carolina-deep:#6cc3ee;--carolina-wash:#0b2133;--good:#5fd3a5;--good-wash:#0b2a22}}
+:root[data-theme="dark"]{--paper:#070b12;--paper-2:#0d1522;--paper-3:#0a1019;--ink:#eef3f8;--graphite:#a6b1be;--muted:#8693a3;--rule:rgb(255 255 255/.08);--rule-strong:rgb(255 255 255/.16);--carolina:#1a9ad6;--carolina-deep:#6cc3ee;--carolina-wash:#0b2133;--good:#5fd3a5;--good-wash:#0b2a22}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--graphite);font:16px/1.65 var(--font-body)}
+a{color:var(--carolina-deep)}a:hover{text-decoration-thickness:2px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+.narrow{max-width:760px}
+header.top{border-bottom:1px solid var(--rule);background:var(--paper)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:60px}
+.brand{font:700 18px var(--font-display);color:var(--ink);text-decoration:none;letter-spacing:-.01em}
+.navlinks{display:flex;gap:18px;align-items:center;font-size:14.5px}
+.navlinks a{color:var(--graphite);text-decoration:none}.navlinks a:hover{color:var(--ink)}
+.btn{display:inline-block;background:var(--carolina-deep);color:var(--paper)!important;padding:9px 16px;border-radius:var(--r);text-decoration:none;font-weight:600;font-size:14.5px}
+.btn.ghost{background:transparent;color:var(--ink)!important;border:1px solid var(--rule-strong)}
+.crumbs{font:13px var(--font-mono);color:var(--muted);padding-top:28px}.crumbs a{color:var(--muted)}
+h1,h2,h3{font-family:var(--font-display);color:var(--ink);letter-spacing:-.02em;line-height:1.15}
+h1{font-size:clamp(32px,5vw,52px);margin:14px 0 16px}
+h2{font-size:clamp(23px,3vw,30px);margin:56px 0 14px}
+h3{font-size:19px;margin:0 0 8px}
+.lede{font-size:clamp(17px,2vw,19.5px);color:var(--graphite);max-width:62ch}
+.kicker{font:500 12px var(--font-mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.verdict{background:var(--paper-2);border:1px solid var(--rule);border-left:4px solid var(--carolina);border-radius:var(--r-lg);padding:20px 22px;margin:20px 0 24px}
+.verdict h2{font-size:clamp(18px,2.2vw,21px);margin:0}
+.verdict p{margin:8px 0 0;font-size:clamp(16.5px,1.9vw,18.5px);color:var(--ink)}
+.tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:var(--r-lg);background:var(--paper-2)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:14.5px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--rule);vertical-align:top}
+tr:last-child td{border-bottom:0}
+thead th{font:600 13px var(--font-mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);background:var(--paper-3)}
+tbody th{font-weight:600;color:var(--ink);width:24%}
+td.num{font-family:var(--font-mono);font-size:13.5px}
+.note{font-size:13.5px;color:var(--muted);margin-top:10px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+@media (max-width:720px){.two{grid-template-columns:1fr}}
+.panel{background:var(--paper-2);border:1px solid var(--rule);border-radius:var(--r-lg);padding:20px 22px}
+.panel.cc{border-top:3px solid var(--carolina)}.panel.them{border-top:3px solid var(--rule-strong)}
+.panel ul{margin:8px 0 0;padding-left:20px}.panel li{margin:7px 0}
+.prose p{max-width:68ch}
+details{border-bottom:1px solid var(--rule);padding:14px 0}
+summary{cursor:pointer;font-weight:600;color:var(--ink);font-size:16.5px}
+details p{margin:10px 0 0;max-width:68ch}
+.cta{margin:64px 0 0;padding:28px;border-radius:var(--r-lg);background:var(--carolina-wash);border:1px solid var(--rule)}
+.cta h2{margin-top:0}.cta .row{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;margin-top:24px}
+.card{display:flex;flex-direction:column;gap:10px;background:var(--paper-2);border:1px solid var(--rule);border-radius:var(--r-lg);padding:20px;text-decoration:none;color:var(--graphite);transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--carolina);transform:translateY(-2px)}
+.card h3{margin:0;font-size:20px}.card .cat{font:500 11.5px var(--font-mono);text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.card p{margin:0;font-size:14.5px}.card .go{margin-top:auto;font-weight:600;color:var(--carolina-deep);font-size:14.5px}
+.rate{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:var(--r-lg);overflow:hidden;margin-top:20px}
+.rate div{background:var(--paper-2);padding:14px 16px}.rate b{display:block;font:600 18px var(--font-mono);color:var(--ink)}.rate span{font-size:13px;color:var(--muted)}
+.related{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.related a{font-size:14px;border:1px solid var(--rule-strong);border-radius:999px;padding:5px 12px;text-decoration:none;color:var(--graphite)}
+.related a:hover{border-color:var(--carolina);color:var(--ink)}
+footer.bot{margin-top:72px;border-top:1px solid var(--rule);padding:28px 0 40px;font-size:13.5px;color:var(--muted)}
+footer.bot .wrap{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between}footer.bot a{color:var(--muted)}
+@media (max-width:560px){.navlinks .hide-sm{display:none}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Carolina Cloud Products: Dedicated VMs, Genomics Containers, RStudio, JupyterLab, S3 Storage","url":"https://carolinacloud.io/products/","description":"Dedicated-core AMD EPYC VMs and containers, a genomics container with GATK and Sentieon, RStudio Server with Bioconductor, JupyterLab, bare metal, the nf-ccloud Nextflow executor, and S3-compatible storage with $0 egress.","dateModified":"2026-11-25","publisher":{"@type":"Organization","name":"Carolina Cloud","url":"https://carolinacloud.io"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://carolinacloud.io/"},{"@type":"ListItem","position":2,"name":"Products","item":"https://carolinacloud.io/products/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","name":"Carolina Cloud products","itemListElement":[{"@type":"ListItem","position":1,"name":"VM","description":"A clean Ubuntu VM with full root access on dedicated AMD EPYC cores. Bring your own stack and install whatever you need."},{"@type":"ListItem","position":2,"name":"Base Container","description":"An Ubuntu-based container, ready for remote development and compute work. Lighter than a full VM with the same dedicated cores underneath."},{"@type":"ListItem","position":3,"name":"Genomics Container","description":"A bash-shell container with samtools, bcftools, bwa, GATK, and other standard genomics CLIs preinstalled. Ideal for classical genomics pipelines."},{"@type":"ListItem","position":4,"name":"RStudio Server","description":"RStudio Server with the Bioconductor stack and common bioinformatics R packages baked in. Open the URL and start analyzing."},{"@type":"ListItem","position":5,"name":"JupyterLab","description":"Classic JupyterLab notebook environment with uv-managed Python 3.12."},{"@type":"ListItem","position":6,"name":"Bare Metal","description":"Whole-machine, single-tenant servers for the most demanding workloads. Custom configurations available; get in touch."},{"@type":"ListItem","position":7,"name":"Warm Storage","description":"Standard S3-compatible object storage for active datasets. Use the AWS CLI, boto3, rclone, or any S3 client unchanged."},{"@type":"ListItem","position":8,"name":"Cold Storage","description":"Low-cost archival tier for data you need to keep but rarely touch. Same S3 API, much lower price per terabyte."}]}</script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="/">Carolina Cloud</a>
+  <nav class="navlinks">
+    <a class="hide-sm" href="/products/">Products</a>
+    <a class="hide-sm" href="/nextflow/">Nextflow</a>
+    <a href="/pricing/">Pricing</a>
+    <a href="/compare/">Compare</a>
+    <a class="hide-sm" href="/blog/">Blog</a>
+    <a class="btn" href="https://console.carolinacloud.io">Console</a>
+  </nav>
+</div></header>
+<main>
+
+<div class="wrap narrow">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / Products</nav>
+  <h1>Compute and storage, made simple</h1>
+  <p class="lede">Carolina Cloud is built for heavy scientific computing. Most of our customers run bioinformatics pipelines, quantitative finance models, and other data-intensive workloads, and our hardware and instance design reflect that focus. We build nodes with AMD EPYC silicon and large amounts of RAM, and we preinstall the tooling needed for jobs that hammer cores, memory, and disk for hours at a time. The same plain Ubuntu VMs also work nicely for lighter loads like web hosting and small services.</p>
+  <p class="note">Prefer the interactive version? <a href="/#/products">Open it here</a>.</p>
+</div>
+
+<div class="wrap">
+  <h2 id="compute">Compute: dedicated cores, pre-built environments</h2>
+  <p class="prose" style="max-width:68ch">Every compute product runs on dedicated AMD EPYC cores. Pick a clean VM or container, or start from a ready-to-use notebook or IDE. Every instance ships with a fully persistent environment and disk that survive stops and restarts, backed by fast NVMe storage with high read and write throughput. All containers also come with mounted S3-compatible object storage buckets, live resizing of resources up or down, and live usage monitoring in the console. GPU instances with NVIDIA RTX PRO 6000 Blackwell ($1.75/hr) and RTX PRO 4500 Blackwell are also available.</p>
+  <div class="grid">
+    <div class="card">
+      <span class="cat">Standard Ubuntu virtual machine</span>
+      <h3>VM</h3>
+      <p>A clean Ubuntu VM with full root access on dedicated AMD EPYC cores. Bring your own stack and install whatever you need.</p>
+      <ul style="margin:4px 0 0;padding-left:20px;font-size:14.5px"><li>Dedicated, non-shared vCPUs</li><li>Static IP address</li><li>UI port control</li></ul>
+    </div>
+    <div class="card">
+      <span class="cat">SSH-ready Ubuntu container</span>
+      <h3>Base Container</h3>
+      <p>An Ubuntu-based container, ready for remote development and compute work. Lighter than a full VM with the same dedicated cores underneath.</p>
+      <ul style="margin:4px 0 0;padding-left:20px;font-size:14.5px"><li>Spin up and down in seconds</li><li>Live resize of resources</li><li>Live usage monitor</li><li>Ubuntu user environment</li></ul>
+    </div>
+    <div class="card">
+      <span class="cat">Bash shell preloaded with genomics tooling</span>
+      <h3>Genomics Container</h3>
+      <p>A bash-shell container with samtools, bcftools, bwa, GATK, and other standard genomics CLIs preinstalled. Ideal for classical genomics pipelines.</p>
+      <ul style="margin:4px 0 0;padding-left:20px;font-size:14.5px"><li>samtools, bcftools, bwa, GATK, Nextflow</li><li>Sentieon software licensed and available</li><li>Whole-genome variant calling: 38 min, $1.65</li></ul>
+    </div>
+    <div class="card">
+      <span class="cat">RStudio with bioinformatics packages</span>
+      <h3>RStudio Server</h3>
+      <p>RStudio Server with the Bioconductor stack and common bioinformatics R packages baked in. Open the URL and start analyzing.</p>
+      <ul style="margin:4px 0 0;padding-left:20px;font-size:14.5px"><li>Bioconductor preinstalled</li><li>DESeq2, edgeR, limma, and friends</li><li>High-RAM instances available</li></ul>
+    </div>
+    <div class="card">
+      <span class="cat">Classic notebook environment</span>
+      <h3>JupyterLab</h3>
+      <p>Classic JupyterLab notebook environment with uv-managed Python 3.12.</p>
+      <ul style="margin:4px 0 0;padding-left:20px;font-size:14.5px"><li>JupyterLab, ipykernel and ipywidgets preinstalled</li><li>uv-managed: <code>uv add &lt;pkg&gt;</code> from a notebook cell</li><li>Built-in web terminal with sudo access</li></ul>
+    </div>
+    <div class="card">
+      <span class="cat">Single-tenant, full hardware</span>
+      <h3>Bare Metal</h3>
+      <p>Whole-machine, single-tenant servers for the most demanding workloads. Custom configurations available; <a href="mailto:hello@carolinacloud.io">get in touch</a>.</p>
+      <ul style="margin:4px 0 0;padding-left:20px;font-size:14.5px"><li>Whole-machine, no neighbors</li><li>Custom CPU / RAM / NVMe configs</li><li>Long-term pricing on request</li></ul>
+    </div>
+  </div>
+
+  <h2 id="nextflow">Nextflow: our own executor</h2>
+  <p style="max-width:68ch">nf-ccloud runs your pipelines on a warm pool of workers that get resized between tasks instead of destroyed and rebuilt. Workers are sized to each process's own directives, cost is visible per task while the run is going, and the plugin is in the official Nextflow registry, so it drives runs from a head container on our console or from your own laptop, HPC login node, or CI runner.</p>
+  <div class="rate">
+    <div><b>4.5 h</b><span>nf-core/rnaseq, under $20</span></div>
+    <div><b>3.6 s</b><span>median task start</span></div>
+    <div><b>$0</b><span>egress on Nextflow buckets</span></div>
+  </div>
+  <p><a href="/nextflow/">How nf-ccloud works, and the benchmark →</a></p>
+
+  <h2 id="storage">Storage: S3-compatible, $0 egress</h2>
+  <p style="max-width:68ch">Drop-in S3-compatible storage at a fraction of AWS pricing, with $0 egress. Use the same SDKs and CLIs you already use.</p>
+  <div class="grid">
+    <div class="card">
+      <span class="cat">S3-compatible object storage</span>
+      <h3>Warm Storage</h3>
+      <p>Standard S3-compatible object storage for active datasets. Use the AWS CLI, boto3, rclone, or any S3 client unchanged.</p>
+      <ul style="margin:4px 0 0;padding-left:20px;font-size:14.5px"><li>Averaging 250 MiB/s bidirectional network speeds</li><li>$0.009/GiB/mo</li><li>$0 egress, always</li></ul>
+    </div>
+    <div class="card">
+      <span class="cat">S3-compatible archival storage</span>
+      <h3>Cold Storage</h3>
+      <p>Low-cost archival tier for data you need to keep but rarely touch. Same S3 API, much lower price per terabyte.</p>
+      <ul style="margin:4px 0 0;padding-left:20px;font-size:14.5px"><li>S3-compatible API</li><li>$1.55/TB/mo</li><li>$0 egress, always</li></ul>
+    </div>
+  </div>
+
+  <div class="narrow"><section class="cta">
+  <h2>Try Carolina Cloud</h2>
+  <p>Spin up a dedicated-core VM, container, or notebook in seconds and benchmark your own workload. Questions go straight to the founders who run the hardware.</p>
+  <div class="row">
+    <a class="btn" href="https://console.carolinacloud.io">Open the console</a>
+    <a class="btn ghost" href="mailto:hello@carolinacloud.io">Talk to an engineer</a>
+  </div>
+</section></div>
+</div>
+</main>
+<footer class="bot"><div class="wrap">
+  <span>© 2026 Carolina Cloud · Chapel Hill, North Carolina</span>
+  <span><a href="/">Home</a> · <a href="/products/">Products</a> · <a href="/pricing/">Pricing</a> · <a href="/nextflow/">Nextflow</a> · <a href="/migrate/">Migrate</a> · <a href="/compare/">All comparisons</a> · <a href="mailto:hello@carolinacloud.io">hello@carolinacloud.io</a> · <a href="tel:+19106215467">(910) 621-5467</a></span>
+</div></footer>
+</body>
+</html>
